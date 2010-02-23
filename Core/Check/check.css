@@ -1,0 +1,59 @@
+/* CSS Document */
+#choose-databases {
+	float: left;
+	width: 200px;	
+}
+#query {
+	float: left;
+}
+#results {
+	float: left;
+	width: 955px;
+	overflow: auto;
+}
+
+#list-queryhistory li:hover {
+	background: #CCCCCC;
+	cursor: pointer;
+}
+
+table {
+	font-size: 12px;
+	margin: 5px 5px 5px 5px;
+	border: 1px solid black;
+}
+
+td {
+	font-size: 12px;
+	border: 1px solid black;
+	padding: 2px 5px 2px 5px;
+}
+
+th {
+	font-size: 12px;
+	padding: 5px 5px 5px 5px;
+	color: #FFFFFF;
+	text-align: center;
+	background-color: #330065;
+	border: 1px solid black;
+
+}
+
+.row1 {
+	background: #FFFFFF;
+}
+.row2 {
+	background: #CCCCCC;
+}
+
+.Yes {
+	background-color: #00CC33;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.No {
+	background-color: #CC0000;
+	color: #FFFFFF;
+	font-weight: bold;
+}
