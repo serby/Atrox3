@@ -2,8 +2,8 @@
 /**
  * @package Core
  * @subpackage Payment
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -13,8 +13,8 @@ require_once("Atrox/Core/Data/Data.php");
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Payment
  */

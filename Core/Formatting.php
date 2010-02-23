@@ -14,8 +14,8 @@ require_once("Internet/Html.php");
  * Stack up a number of formatter so you can format a given value sequentially though them
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -54,8 +54,8 @@ class FormatterStack {
  * formating classes
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -81,8 +81,8 @@ class MultiPageControlResultsFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -94,8 +94,8 @@ class TaggedDataEncoder extends FieldFormatter {
 
 /**
  * @author Dom Udall (Clock Limited) {@link mailto:dom.udall@clock.co.uk dom.udall@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -113,8 +113,8 @@ class TaggedDataFormatter extends FieldFormatter {
 
 /**
  * @author Dom Udall (Clock Limited) {@link mailto:dom.udall@clock.co.uk dom.udall@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -127,8 +127,8 @@ class TaggedDataArrayFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -145,8 +145,8 @@ class MonthYearFieldFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -172,8 +172,8 @@ class ArrayRelationFormatter extends FieldFormatter {
 /**
  * Converts the time in seconds to the nearest day, hour, minute, or second.
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -205,8 +205,8 @@ class FuzzyTimeFormatter extends FieldFormatter {
 /**
  * Converts the time in seconds in to the hour, minute, or seconds
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -230,8 +230,8 @@ class SecondsFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -250,8 +250,8 @@ class DateFieldFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -268,8 +268,8 @@ class DateTimeFieldFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -293,8 +293,8 @@ class DateTimeFieldEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -332,8 +332,8 @@ class DecimalTimeFieldFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -346,8 +346,8 @@ class DatabaseDateEncoder {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -360,8 +360,8 @@ class DatabaseDateTimeEncoder {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -373,8 +373,8 @@ class EmailFieldFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -386,8 +386,8 @@ class UrlFieldFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -411,8 +411,8 @@ class LeftCropEncoder extends FieldFormatter {
 
 /**
  * @author Adam Forster (Clock Ltd) {@link mailto:adam.forster@clock.co.uk adam.forster@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -442,8 +442,8 @@ class LeftCropEllipsisEncoder extends FieldFormatter {
 
 /**
  * @author Adam Forster (Clock Ltd) {@link mailto:adam.forster@clock.co.uk adam.forster@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -474,8 +474,8 @@ class LeftCropBreakEllipsisEncoder extends FieldFormatter {
 /**
  * Left crops to the nearest last word with ellipsis
  * @author Elliot Coad (Clock Ltd) {@link mailto:elliot.coad@clock.co.uk elliot.coad@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -517,8 +517,8 @@ class LeftCropWordEllipsisEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -544,8 +544,8 @@ class PadFormatter extends FieldFormatter {
 /**
  * Prefixes/Postfixes the value with a given string
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -565,8 +565,8 @@ class ConCatFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -580,8 +580,8 @@ class UpperCaseFormatter extends FieldFormatter {
  * Replaces whitespace with a dash
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Data
  */
@@ -595,8 +595,8 @@ class DasherizeFormatter extends FieldFormatter {
  * Urlencode text however ignores any slashes
  *
  * @author Tom Smith {@link mailto:thomas.smith@clock.co.uk thomas.smith@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 class UrlSlashEncoder extends FieldFormatter {
@@ -609,8 +609,8 @@ class UrlSlashEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -657,8 +657,8 @@ class ImageResizeEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -670,8 +670,8 @@ class HtmlEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -683,8 +683,8 @@ class JavascriptStringEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -697,8 +697,8 @@ class SafeHtmlEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -713,8 +713,8 @@ class BooleanFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -735,8 +735,8 @@ class PercentageFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -768,8 +768,8 @@ class RealFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -791,8 +791,8 @@ class RealWithTrailingZerosFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -920,8 +920,8 @@ class CurrencyFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -934,8 +934,8 @@ class PlainCurrencyFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -948,8 +948,8 @@ class CurrencyNoUnitsFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -961,8 +961,8 @@ class CardNumberFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -998,8 +998,8 @@ class ArrayDateEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1037,8 +1037,8 @@ class ArrayDateTimeEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1060,8 +1060,8 @@ class ArrayMonthYearEncoder extends FieldFormatter {
 
 /**
  * @author Elliot Coad {@link mailto:elliot.coad@clock.co.uk elliot.coad@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1073,8 +1073,8 @@ class UrlEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1086,8 +1086,8 @@ class UrlDecoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1103,8 +1103,8 @@ class UrlFieldEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1116,8 +1116,8 @@ class StringFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1129,8 +1129,8 @@ class StringEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1142,8 +1142,8 @@ class StringUpperEncoder extends StringEncoder {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1155,8 +1155,8 @@ class StringLowerEncoder extends StringEncoder {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1172,8 +1172,8 @@ class PasswordEncoder extends StringEncoder {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1185,8 +1185,8 @@ class BooleanEncoder extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
 
@@ -1448,8 +1448,8 @@ class HtmlMultiPageControlResultsFormatter
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1600,8 +1600,8 @@ class HtmlSelectOptions {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1617,8 +1617,8 @@ class HtmlShowBinary {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1632,8 +1632,8 @@ class DocumentFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */
@@ -1646,8 +1646,8 @@ class SimpleDocumentMarkupFormatter extends FieldFormatter {
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Formatting
  */

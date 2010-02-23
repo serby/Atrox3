@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Community
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -16,8 +16,8 @@ require_once("Atrox/Core/Data/DataEntity.php");
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Community
  */
@@ -159,8 +159,8 @@ class ForumPostEntity extends DataEntity {
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Community
  */
@@ -179,8 +179,8 @@ class WorryWordCallBack {
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Community
  */
@@ -197,8 +197,8 @@ class ForumValidation extends CustomValidation {
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Community
  */

@@ -2,14 +2,14 @@
 /**
  * @package Core
  * @subpackage Internet
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision: 751 $ - $Date: 2008-09-29 17:49:53 +0100 (Mon, 29 Sep 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 751 $ - $Date: 2008-09-29 17:49:53 +0100 (Mon, 29 Sep 2008) $
  */
 
 /**
  * @author Paul Serby (Clock Ltd) {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision: 751 $ - $Date: 2008-09-29 17:49:53 +0100 (Mon, 29 Sep 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 751 $ - $Date: 2008-09-29 17:49:53 +0100 (Mon, 29 Sep 2008) $
  * @package Base
  * @subpackage Internet
  */

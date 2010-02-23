@@ -2,8 +2,8 @@
 /**
  * @package Core
  * @subpackage Data
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -15,8 +15,8 @@ require_once("Atrox/Core/Data/Data.php");
  * Handles all mod10 validation (used for Credit Card validation)
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Data
  */
@@ -44,8 +44,8 @@ class Mod10Validation extends CustomValidation {
  * Handles all validation where a User must agree to a given statement/condition
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */
@@ -73,8 +73,8 @@ class MustAgreeValidation extends CustomValidation {
  * Handles all validation where input must not contain a given phrase
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */
@@ -122,8 +122,8 @@ class NotContainValidation extends CustomValidation {
  * Handles all password validation
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */
@@ -158,8 +158,8 @@ class StrongPasswordValidation extends CustomValidation {
  * Handles all password validation
  *
  * @author Tom Smith {@link mailto:thomas.smith@clock.co.uk thomas.smith@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */
@@ -194,8 +194,8 @@ class WeakPasswordValidation extends CustomValidation {
  * Handles all ISBN validation
  *
  * @author Robert Arnold (Clock Ltd) {@link mailto:robert.arnold@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */
@@ -254,8 +254,8 @@ class IsbnValidation extends CustomValidation {
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
  * @author Robert Arnold (Clock Ltd) {@link mailto:robert.arnold@clock.co.uk robert.arnold@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */
@@ -364,8 +364,8 @@ class MobileValidation extends CustomValidation {
  * statically.
  *
  * @author Paul Serby { @link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Validation
  */

@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Campaign
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
  
 /**
@@ -19,8 +19,8 @@ define("CP_TYPE_TAG", 2);
  * @author Robert Arnold (Clock Ltd) {@link mailto:robert.arnold@clock.co.uk robert.arnold@clock.co.uk }
  * @package Base
  * @subpackage Campaign
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 class CampaignTemplateControl extends DataControl {
 

@@ -1,16 +1,16 @@
 <?php
 /**
  *
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 
 /**
  *
  * @author Edward Pearson (Clock Ltd) {@link mailto:ed.pearson@clock.co.uk ed.pearson@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 

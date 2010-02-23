@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Store
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -23,8 +23,8 @@ define("SUB_RENEWED_EMAIL_PLAIN", SITE_ADDRESS . "/includes/emailtemplate/sub_re
 /**
  *
  * @author Adam Forster (Clock Ltd) {@link mailto:adam.forster@clock.co.uk adam.forster@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Store
  */

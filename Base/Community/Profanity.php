@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Community
- * @copyright Clock Limited 2007
- * @version 3.0
+ * @copyright Clock Limited 2010
+ * @version 3.2
  */
 
 /**
@@ -21,8 +21,8 @@ define("PROF_WORRYWORD", 2);
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0
+ * @copyright Clock Limited 2010
+ * @version 3.2
  * @package Base
  * @subpackage Community
  */
@@ -85,8 +85,8 @@ class ProfanityControl extends DataControl {
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0
+ * @copyright Clock Limited 2010
+ * @version 3.2
  * @package Base
  * @subpackage Community
  */

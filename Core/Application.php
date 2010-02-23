@@ -1,8 +1,8 @@
 <?php
 /**
  * 
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 
@@ -11,8 +11,8 @@
  * in set time periods.
  *
  * @author Dom Udall (Clock Ltd) {@link mailto:dom.udall@clock.co.uk dom.udall@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 define("SECONDS_IN_MINUTE", 60);
@@ -25,8 +25,8 @@ define("SECONDS_IN_WEEK", 604800);
  * handle elements such as Errors, Session and Form submissions
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 class Application {

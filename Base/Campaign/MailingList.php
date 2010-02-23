@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Campaign
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -23,8 +23,8 @@ define("ML_TYPE_FREE", 1);
  * @author Paul Serby {@link mai lto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
  * @package Base
  * @subpackage Campaign
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 class MailingListControl extends DataControl {
 

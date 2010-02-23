@@ -2,14 +2,14 @@
 /**
  * @package Core
  * @subpackage Graphic
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision: 536 $ - $Date: 2008-03-04 11:47:00 +0100 (Thu, 03 Apr 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 536 $ - $Date: 2008-03-04 11:47:00 +0100 (Thu, 03 Apr 2008) $
  */
  
 /**
  * @author Robert Arnold {@link mailto:robert.arnold@clock.co.uk robert.arnold@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision: 536 $ - $Date: 2008-03-04 11:47:00 +0100 (Thu, 03 Apr 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 536 $ - $Date: 2008-03-04 11:47:00 +0100 (Thu, 03 Apr 2008) $
  * @package Core
  * @subpackage Graphic
  */

@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Community
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision: 508 $ - $Date: 2008-03-27 18:50:24 +0000 (Thu, 27 Mar 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 508 $ - $Date: 2008-03-27 18:50:24 +0000 (Thu, 27 Mar 2008) $
  */
 
 /**
@@ -17,8 +17,8 @@ require_once("Atrox/Core/Data/DataEntity.php");
  * Generic Comments that can be used anywhere on the site.
  *
  * @author Paul Serby (Clock Ltd) {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Community
  */

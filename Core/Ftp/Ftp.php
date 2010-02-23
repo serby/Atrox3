@@ -3,8 +3,8 @@
  * FTP Class
  *
  * @author Tom Smith (Clock Limited) {@link mailto:thomas.smith@clock.co.uk thomas.smith@clock.co.uk }
- * @copyright Clock Limited 2009
- * @version 3.0 - $Revision: 737 $ - $Date: 2008-09-08 16:09:48 +0100 (Mon, 08 Sep 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 737 $ - $Date: 2008-09-08 16:09:48 +0100 (Mon, 08 Sep 2008) $
  * @package Core
  * @subpackage Ftp
  */

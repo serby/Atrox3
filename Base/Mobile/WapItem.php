@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Mobile
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -29,8 +29,8 @@ define("WI_CHARGETYPE_300", 4);
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
  * @package Base
  * @subpackage Mobile
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 class WapItemControl extends DataControl {
 	var $table = "WapItem";

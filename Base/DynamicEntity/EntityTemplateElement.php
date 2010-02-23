@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage DynamicEntity
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -34,8 +34,8 @@ define("ENTITY_ELEMENT_TYPE_LARGEMULTILINETEXT", 17);
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage DynamicEntity
  */

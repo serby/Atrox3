@@ -3,8 +3,8 @@
  * @package Core
  * @subpackage Internet
  * @subpackage Internet
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**

@@ -1,14 +1,14 @@
 <?php
 /**
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 
 /**
- * @copyright Clock Limited 2007
+ * @copyright Clock Limited 2010
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @version 3.0 - $Revision$ - $Date$
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 class  Registry {

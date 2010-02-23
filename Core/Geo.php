@@ -1,8 +1,8 @@
 <?php
 /**
  * @package Core
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -16,8 +16,8 @@ define("GOOGLE_MAPS_HTTP_REQUEST_ADDRESS", "http://maps.google.com/maps/geo?");
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 class PostcodeLocator {
@@ -44,8 +44,8 @@ class PostcodeLocator {
 
 /**
  * @author Tom Smith (Clock Ltd) {@link mailto:thomas.smith@clock.co.uk thomas.smith@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Geo
  */
@@ -116,8 +116,8 @@ class GoogleMapsAddressFinder {
 
 /**
  * @author Michael Cronnelly (Clock Ltd) {@link mailto:mike@clock.co.uk mike@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Geo
  */

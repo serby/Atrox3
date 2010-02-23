@@ -1,8 +1,8 @@
 <?php
 /**
  *
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 
@@ -51,8 +51,8 @@ define("SMSMSG_STATE_OK", 0);
 /**
  *
  * @author Edward Pearson (Clock Ltd) {@link mailto:ed.pearson@clock.co.uk ed.pearson@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  */
 class SmsMessage {
@@ -290,8 +290,8 @@ class SmsGatewayUS extends SmsGateway {
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage News
  */

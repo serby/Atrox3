@@ -2,8 +2,8 @@
 /**
  * @package Core
  * @subpackage Internet
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision: 823 $ - $Date: 2008-12-10 13:00:57 +0000 (Wed, 10 Dec 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 823 $ - $Date: 2008-12-10 13:00:57 +0000 (Wed, 10 Dec 2008) $
  */
 
 /**
@@ -11,8 +11,8 @@
  * Generator and validator to stop bots spaming blogs forums etc.
  * 
  * @author Kapil Gohil (Clock Ltd) {@link mailto:kapil.gohil@clock.co.uk kapil.gohil@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Internet
  */ 

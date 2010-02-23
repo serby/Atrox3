@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Store
- * @copyright Clock Limited 2007
- * @version 3.0
+ * @copyright Clock Limited 2010
+ * @version 3.2
  */
 
 /**
@@ -23,8 +23,8 @@ define("PKG_IMG_MAXY", 400);
 /**
  *
  * @author Robert Arnold (Clock Ltd) {@link mailto:robert.arnold@clock.co.uk robert.arnold@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0
+ * @copyright Clock Limited 2010
+ * @version 3.2
  * @package Base
  * @subpackage Store
  */

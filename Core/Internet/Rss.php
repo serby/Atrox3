@@ -2,8 +2,8 @@
 /**
  * @package Core
  * @subpackage Internet
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -15,8 +15,8 @@ require_once("Atrox/Core/Data/Validation.php");
  * Parse XML feeds into RSS standard format
  *
  * @author Dom Udall(Clock Limited) Dom Udall {@link mailto:dom.udall@clock.co.uk dom.udall@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Internet
  */

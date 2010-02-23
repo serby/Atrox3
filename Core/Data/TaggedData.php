@@ -3,7 +3,7 @@
  * @package Core
  * @subpackage Data
  * @copyright Clock Ltd 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -15,7 +15,7 @@ require_once("Atrox/Core/Data/Data.php");
  *
  * @author Dom Udall (Clock Ltd) {@link mailto:dom.udall@clock.co.uk dom.udall@clock.co.uk }
  * @copyright Clock Ltd 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @version 3.2 - $Revision$ - $Date$
  * @package Core
  * @subpackage Data
  */

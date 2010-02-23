@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Quiz
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision: 456 $ - $Date: 2008-03-16 21:09:59 +0000 (Sun, 16 Mar 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 456 $ - $Date: 2008-03-16 21:09:59 +0000 (Sun, 16 Mar 2008) $
  */
 
 /**
@@ -16,8 +16,8 @@ require_once("Atrox/Core/Data/DataEntity.php");
 /**
  *
  * @author Tom Smith {@link mailto:thomas.smith@clock.co.uk thomas.smith@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision: 456 $ - $Date: 2008-03-16 21:09:59 +0000 (Sun, 16 Mar 2008) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 456 $ - $Date: 2008-03-16 21:09:59 +0000 (Sun, 16 Mar 2008) $
  * @package Base
  * @subpackage Quiz
  */

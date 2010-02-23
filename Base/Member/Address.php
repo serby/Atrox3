@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Member
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -14,8 +14,8 @@ require_once("Atrox/Core/Data/Data.php");
 /**
  *
  * @author Adam Forster (Clock Limited) {@link mailto:adam.forster@clock.co.uk adam.forster@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Member
  */
@@ -115,7 +115,7 @@ class AddressControl extends DataControl {
  *
  * @author Robert Arnold (Clock Ltd) {@link mailto:robert.arnold@clock.co.uk robert.arnold@clock.co.uk }
  * @copyright Clock Ltd 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Member
  */

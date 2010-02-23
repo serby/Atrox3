@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Store
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -28,8 +28,8 @@ if (!defined("TRN_DECLINED")) {
 /**
  *
  * @author Edward Pearson (Clock Ltd) {@link mailto:ed.pearson@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Store
  */

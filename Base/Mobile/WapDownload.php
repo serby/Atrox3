@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Mobile
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -19,8 +19,8 @@ require_once("Date.php");
  *
  * @author Adam Forster (Clock Ltd) {@link mailto:adam.forster@clock.co.uk
  * paul.serby@clock.co.uk }
- * @copyright Clock Limited 2007
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Mobile
  */

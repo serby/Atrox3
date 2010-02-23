@@ -2,8 +2,8 @@
 /**
  * @package Base
  * @subpackage Article
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  */
 
 /**
@@ -14,8 +14,8 @@ require_once("Atrox/Core/Data/TaggedData.php");
 /**
  *
  * @author Dom Udall (Clock Ltd) {@link mailto:dom.udall@clock.co.uk dom.udall@clock.co.uk }
- * @copyright Clock Limited 2008
- * @version 3.0 - $Revision$ - $Date$
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Article
  */

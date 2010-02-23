@@ -3,15 +3,15 @@
 /**
  * @package Core
  * @subpackage Cache
- * @copyright Clock Limited 2009
- * @version 3.0 - $Revision: 1117 $ - $Date: 2009-08-15 23:56:20 +0100 (Sat, 15 Aug 2009) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 1117 $ - $Date: 2009-08-15 23:56:20 +0100 (Sat, 15 Aug 2009) $
  */
 
 /**
  *
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2009
- * @version 3.0 - $Revision: 1117 $ - $Date: 2009-08-15 23:56:20 +0100 (Sat, 15 Aug 2009) $
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision: 1117 $ - $Date: 2009-08-15 23:56:20 +0100 (Sat, 15 Aug 2009) $
  * @package Core
  * @subpackage Cache
  */
