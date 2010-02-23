@@ -9,7 +9,7 @@
 /**
  * Include Data.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
+require_once("Atrox/Core/Data/Data.php");
 
 define("RECOMMENDATION_EMAIL", "emailtemplate/recommendation.tpl");
 define("RECOMMENDATION_EMAIL_PLAIN", "emailtemplate/recommendationplain.tpl");

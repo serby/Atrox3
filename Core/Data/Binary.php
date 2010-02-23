@@ -5,7 +5,7 @@
  * @copyright Clock Limited 2007
  * @version 3.0 - $Revision$ - $Date$
  */
-	require_once("Atrox/3.0/Core/Data/Data.php");
+	require_once("Atrox/Core/Data/Data.php");
 
 /**
  * Controls the input and output of binary large objects to the database.

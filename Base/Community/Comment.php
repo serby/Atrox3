@@ -10,8 +10,8 @@
  * Include Data.php so that DataControl can be extended.
  * Include DataEntity.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
-require_once("Atrox/3.0/Core/Data/DataEntity.php");
+require_once("Atrox/Core/Data/Data.php");
+require_once("Atrox/Core/Data/DataEntity.php");
 
 /**
  * Generic Comments that can be used anywhere on the site.

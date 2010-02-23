@@ -9,7 +9,7 @@
 /**
  * Include Data.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
+require_once("Atrox/Core/Data/Data.php");
 
 /**
  * @author Robert Arnold (Clock Ltd) {@link mailto:robert.arnold@clock.co.uk robert.arnold@clock.co.uk }

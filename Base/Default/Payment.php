@@ -10,8 +10,8 @@
  * Include Data.php so that DataControl can be extended.
  * Include Xpay.php so that PaymentControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
-require_once("Atrox/3.0/Core/Payment/Xpay.php");
+require_once("Atrox/Core/Data/Data.php");
+require_once("Atrox/Core/Payment/Xpay.php");
 
 define("PYM_FAILED", 0);
 define("PYM_SUCCESSFUL", 1);

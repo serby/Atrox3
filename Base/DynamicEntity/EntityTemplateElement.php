@@ -10,8 +10,8 @@
  * Include Data.php so that DataControl can be extended.
  * Include DataEntity.php so that DataEntity can be extended
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
-require_once("Atrox/3.0/Core/Data/DataEntity.php");
+require_once("Atrox/Core/Data/Data.php");
+require_once("Atrox/Core/Data/DataEntity.php");
 
 define("ENTITY_ELEMENT_TYPE_NUMBER", 1);
 define("ENTITY_ELEMENT_TYPE_CURRENCY", 2);

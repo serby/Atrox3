@@ -7,7 +7,7 @@
  * @version 3.0 - $Revision$ - $Date$
  */
 
-	require_once("Atrox/3.0/Core/Exception/DataEntityException.php");
+	require_once("Atrox/Core/Exception/DataEntityException.php");
 
 /**
  * Data Entity Class

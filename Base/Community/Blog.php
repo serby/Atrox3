@@ -9,7 +9,7 @@
 /**
  * Include TaggedData.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/TaggedData.php");
+require_once("Atrox/Core/Data/TaggedData.php");
 
 /**
  *

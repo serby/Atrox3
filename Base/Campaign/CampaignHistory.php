@@ -10,8 +10,8 @@
  * Include Data.php so that DataControl can be extended.
  * Include Formatting.php so that Formatting can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
-require_once("Atrox/3.0/Core/Formatting.php");
+require_once("Atrox/Core/Data/Data.php");
+require_once("Atrox/Core/Formatting.php");
 
 define("CPH_SEND",-1);
 define("CPH_NOTSENT",0);

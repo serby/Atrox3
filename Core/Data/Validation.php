@@ -9,7 +9,7 @@
 /**
  * Include Data.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
+require_once("Atrox/Core/Data/Data.php");
 
 /**
  * Handles all mod10 validation (used for Credit Card validation)

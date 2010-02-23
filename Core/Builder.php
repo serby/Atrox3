@@ -8,7 +8,7 @@
 /**
  * Include Data.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
+require_once("Atrox/Core/Data/Data.php");
 
 /**
  * Generates the required SQL schema to for a data entity using the data control.

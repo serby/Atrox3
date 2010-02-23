@@ -10,8 +10,8 @@
  * Include Data.php so that DataControl can be extended.
  * Include Html.php so that HtmlControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Validation.php");
-require_once("Atrox/3.0/Core/Internet/Html.php");
+require_once("Atrox/Core/Data/Validation.php");
+require_once("Atrox/Core/Internet/Html.php");
 
 /**
  * Generate and send MIME Multipart and plain E-mails

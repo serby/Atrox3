@@ -7,7 +7,7 @@
 /**
  * Include Data.php so that DataControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
+require_once("Atrox/Core/Data/Data.php");
 
 define("FBK_NEW", 1);
 define("FBK_READ", 2);

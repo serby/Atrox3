@@ -10,7 +10,7 @@
  * Include Data.php so that DataControl can be extended.
  * Include DeliveryMethod.php so that DeleiveryMethod can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Data.php");
+require_once("Atrox/Core/Data/Data.php");
 
 require_once("DeliveryMethod.php");	
 

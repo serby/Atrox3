@@ -9,7 +9,7 @@
 /**
  * Include Validation.php so that ValidationControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/Validation.php");
+require_once("Atrox/Core/Data/Validation.php");
 
 /**
  * Parse XML feeds into RSS standard format

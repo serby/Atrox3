@@ -9,8 +9,8 @@
 /**
  * Include DataConnection.php so that DataConnectionControl can be extended.
  */
-require_once("Atrox/3.0/Core/Data/DataConnection.php");
-require_once("Atrox/3.0/Service/Service.php");
+require_once("Atrox/Core/Data/DataConnection.php");
+require_once("Atrox/Service/Service.php");
 
 /**
  * Provides a Authentication Service to be consumed by AuthenticationClient

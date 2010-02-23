@@ -6,7 +6,7 @@
  * @version 3.0 - $Revision: 765 $ - $Date: 2008-10-13 18:15:31 +0100 (Mon, 13 Oct 2008) $
  */
 
-require_once("Atrox/3.0/Service/Service.php");
+require_once("Atrox/Service/Service.php");
 
 /**
  * Provides a Authentication Service to be consumed by AuthenticationClient
