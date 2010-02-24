@@ -23,9 +23,9 @@ class DatabaseControl {
 
 	/**
 	 * @var DatabaseConnection
-	 */	
+	 */
 	var $dbConnection;
-	
+
 	/**
 	 * We ensure that we only ever have one instances of this object.
 	 */
@@ -37,11 +37,11 @@ class DatabaseControl {
 		$application = &CoreFactory::getApplication();
 		$this->dbConnection = pg_pconnect($application->getConnectionString());
 	}
-	
+
 	function close() {
 		pg_close($this->dbConnection);
-	}		
-	
+	}
+
 	function parseTable($tableName) {
 		return "\"$tableName\"";
 	}
@@ -63,11 +63,11 @@ class DatabaseControl {
 	}
 
 	function query($sql) {
-		
+
 		$application = &CoreFactory::getApplication();
 		$application->log(": " . $sql . "\n\n", $type = "sql");
 		$result = @pg_query($this->dbConnection, $sql);
-		
+
 		if ($error = pg_last_error($this->dbConnection)) {
 			$application->log(":\n\t" . $error . "\n\n", $type = "sql");
 			$application->errorControl->addError("Certain constraints have prevented your operation: $error");
@@ -97,7 +97,7 @@ class DatabaseControl {
 	function getLastError() {
 		return pg_last_error($this->dbConnection);
 	}
-	
+
 	function removeBinary($oid) {
 		pg_query($this->dbConnection, "BEGIN");
 		@pg_lo_unlink($this->dbConnection, $oid);
@@ -144,16 +144,16 @@ class DatabaseControl {
 	function getCurrentDateTime() {
 		return gmdate("Y-m-d H:i:s");
 	}
-	
+
 	function generateCsv(&$controlObject, $fields, $sql = null) {
 		$output = "";
-		
+
 		$length = count($fields);
 		for ($i = 0; $i < $length - 1; $i++) {
 			$output .= $fields[$i] . ", ";
 		}
 		$output .= $fields[$length - 1] . "\n";
-		
+
 		if ($sql != null) {
 			$controlObject->runQuery($sql);
 			while ($data = $this->fetchRow($controlObject->results)) {
@@ -163,14 +163,14 @@ class DatabaseControl {
 				$output .= $data[$fields[$length - 1]] . "\n";
 			}
 		}
-		
+
 		while ($data = $controlObject->getNext()) {
 			for ($i = 0; $i < $length - 1; $i++) {
 			$output .= $data->get($fields[$i]) . ", ";
 			}
 			$output .= $data->get($fields[$length - 1]) . "\n";
 		}
-		
+
 		return $output;
 	}
 }
