@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *
  * @copyright Clock Limited 2010
  * @version 3.2 - $Revision$ - $Date$
  * @package Core
