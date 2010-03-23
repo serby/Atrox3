@@ -34,12 +34,12 @@ class MemberControl extends DataControl {
 	var $fullTextIndex = "TextIndex";
 	var $shortTitleFields = array("FirstName", "LastName");
 	var $shortTitleFormat = "%s %s";
-	
+
 	var $genders = array(
 		MEMBER_GENDER_MALE => "Male",
 		MEMBER_GENDER_FEMALE => "Female"
 	);
-	
+
 	var $imageSize = array(
 		"MinWidth" => 50,
 		"MinHeight" => 50,
@@ -58,7 +58,7 @@ class MemberControl extends DataControl {
 
 		$this->fieldMeta["Alias"] = new FieldMeta(
 			"User Name", "", FM_TYPE_STRING, 20, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
-			
+
 		$this->fieldMeta["Alias"]->setFormatter(CoreFactory::getLeftCropEllipsisEncoder(20, true));
 
 		$this->fieldMeta["Password"] = new FieldMeta(
@@ -145,7 +145,7 @@ class MemberControl extends DataControl {
 			$this->imageSize["MinHeight"],
 			$this->imageSize["MaxWidth"],
 			$this->imageSize["MaxHeight"]));
-				
+
 		$this->fieldMeta["AutoLogonId"] = new FieldMeta(
 			"Auto Logon Id", "", FM_TYPE_GUID, 1, FM_STORE_NEVER, false);
 
@@ -171,7 +171,7 @@ class MemberControl extends DataControl {
 
 		$this->fieldMeta["Gender"] = new FieldMeta(
 			"Gender", "", FM_TYPE_INTEGER, null, FM_STORE_ALWAYS, true);
-			
+
 		$this->fieldMeta["Gender"]->setFormatter(
 			CoreFactory::getArrayRelationFormatter($lists->getGenders(true), GEN_UNSPECIFIED));
 
@@ -195,7 +195,7 @@ class MemberControl extends DataControl {
 
 		$this->fieldMeta["ReceiveRelatedPromotions"] = new FieldMeta(
 			"Receive Related Promotions", "f", FM_TYPE_BOOLEAN, 1, FM_STORE_ALWAYS, true);
-			
+
 		$this->fieldMeta["TermsAgreed"] = new FieldMeta(
 			"Terms Agreed", "", FM_TYPE_BOOLEAN, null, FM_STORE_ALWAYS, false);
 	}
@@ -209,19 +209,19 @@ class MemberControl extends DataControl {
 		$noteControl = BaseFactory::getNoteControl();
 		$noteControl->addNote("Member: Edited (Id:" . $dataEntity->get("Id") . ")", "Member", $dataEntity->get("Id"), 2);
 	}
-		
+
 	function afterDelete(&$dataEntity) {
 		$noteControl = BaseFactory::getNoteControl();
 		$noteControl->addNote("Member: Deleted (Id:" . $dataEntity->get("Id") . ")", "Member", $dataEntity->get("Id"), 3);
 	}
-	
+
 	function validateRegistration(&$member, $confirmPassword) {
 		if ($member->get("Password") != $confirmPassword) {
 			$this->errorControl->addError("Your passwords do not match. Both passwords must be exacly the same",
 				"ConfirmPassword");
 			return false;
 		}
-		
+
 		if ($member->get("TermsAgreed") != "t") {
 			$this->errorControl->addError("You must agree to the terms and conditions and make sure all required fields are valid",
 				"Terms");
@@ -255,14 +255,14 @@ class MemberControl extends DataControl {
 	    	// Add the new member to the basic group
 	    	$member->addManyRelation("SecurityGroup", $securityGroup->get("Id"));
 	    }
-		
+
 		// Send Registration E-mail
 		$welcomeEmailTemplate = CoreFactory::getTemplate();
 		$welcomeEmailTemplate->setTemplateFile(
 			$this->application->registry->get("Template/Path", "/resource/template") .
 			$this->application->registry->get("Template/Email/Registration/Html", "/account/html/registration.php")
 		);
-		
+
 		$welcomeEmailTemplate->setData($member);
 		$welcomeEmailTemplate->set("SITE_NAME", $this->application->registry->get("Name"));
 		$welcomeEmailTemplate->set("SITE_ADDRESS", $this->application->registry->get("Site/Address"));
@@ -280,7 +280,7 @@ class MemberControl extends DataControl {
 		$email->setSubject("Welcome to " . $this->application->registry->get("Name"));
 		$email->setBody($welcomeEmailTemplate->parseTemplate());
 		$email->sendMail();
-		
+
 		// TODO: Rob: Take this out of the default registration method and extend it on a per site basis
 		//$recommendationsControl = BaseFactory::getRecommendationControl();
 		//$recommendationsControl->updateRecommendation($member->get("EmailAddress"), $member->get("Id"));
@@ -327,7 +327,7 @@ class MemberControl extends DataControl {
 			return false;
 		}
 	}
-	
+
 	function adminSave($member, $newPassword, $confirmPassword) {
 		if ($newPassword != $confirmPassword) {
 			$this->errorControl->addError("Your passwords do not match. Both passwords must be exactly the same");
@@ -385,7 +385,7 @@ class MemberControl extends DataControl {
 		$this->retrieveAll();
 		return $this->getNext();
 	}
-	
+
 	function retrieveByUpdateStatus($type) {
 		if ($type == "Email") {
 			$filter = $this->getFilter();
@@ -400,7 +400,7 @@ class MemberControl extends DataControl {
 			$this->setFilter($filter);
 		}
 	}
-	
+
 	function getGenderFromTitle(&$member) {
 		switch ($member->get("NamePrefix")) {
 			case "Mr":
@@ -423,7 +423,7 @@ class MemberControl extends DataControl {
 				break;
 		}
 	}
-	
+
 	function getGender($gender) {
 		return isset($this->genders[$gender]) ? $this->genders[$gender] : null;
 	}
@@ -439,11 +439,11 @@ class MemberControl extends DataControl {
 		}
 		$this->setFilter($filter);
 	}
-	
+
 	function getDataEntity() {
 		return new MemberDataEntity($this);
 	}
-	
+
 	function getMembersWithSiteUpdates() {
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "ReceiveEmailUpdates", "t");
@@ -451,7 +451,7 @@ class MemberControl extends DataControl {
 		$this->setFilter($filter);
 		return $this->retrieveAll();
 	}
-	
+
 	function getMembersWithRelatedPromotions() {
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "ReceiveRelatedPromotions", "t");
@@ -459,12 +459,12 @@ class MemberControl extends DataControl {
 		$this->setFilter($filter);
 		return $this->retrieveAll();
 	}
-	
+
 	function getAge($member) {
 		$mathControl = CoreFactory::getMathControl();
 		return $mathControl->getAge($member->get("DateOfBirth"));
 	}
-	
+
 		/**
 	 * Sends a new password to the user's e-mail address.
 	 *
@@ -478,11 +478,11 @@ class MemberControl extends DataControl {
 			$this->updateField($member, "PasswordRequestTime", time());
 
 			$emailTemplate = CoreFactory::getTemplate();
-			
+
 			$emailTemplate->setTemplateFile(
 				$this->application->registry->get("Template/Path", "/resource/template") .
 				$this->application->registry->get("Template/Email/PasswordRequest/Html", "/account/html/password.tpl"));
-			
+
 			$emailTemplate->set("EMAIL", $emailAddress);
 			$emailTemplate->set("ID", $member->get("PasswordRequestId"));
 			$emailTemplate->set("SITE_NAME", $this->application->registry->get("Name"));
@@ -490,17 +490,17 @@ class MemberControl extends DataControl {
 			$emailTemplate->set("SITE_SUPPORT_EMAIL", $this->application->registry->get("EmailAddress/Support"));
 
 			$plainEmailTemplate = CoreFactory::getTemplate();
-			
+
 			$plainEmailTemplate->setTemplateFile(
 				$this->application->registry->get("Template/Path", "/resource/template") .
 				$this->application->registry->get("Template/Email/PasswordRequest/Plain", "/account/plain/password.tpl"));
-			
+
 			$plainEmailTemplate->set("EMAIL", $emailAddress);
 			$plainEmailTemplate->set("ID", $member->get("PasswordRequestId"));
 			$plainEmailTemplate->set("SITE_NAME", $this->application->registry->get("Name"));
 			$plainEmailTemplate->set("SITE_ADDRESS", $this->application->registry->get("Site/Address"));
 			$plainEmailTemplate->set("SITE_SUPPORT_EMAIL", $this->application->registry->get("EmailAddress/Support"));
-			
+
 			$email = CoreFactory::getEmail();
 			$email->setTo($emailAddress);
 			$email->setFrom($this->application->registry->get("EmailAddress/Support"));
@@ -514,7 +514,7 @@ class MemberControl extends DataControl {
 		}
 	}
 }
-	
+
 class MemberDataEntity extends DataEntity {
 	function getName() {
 		$output = "";
@@ -522,7 +522,7 @@ class MemberDataEntity extends DataEntity {
 			$output .= $this->getFormatted("NamePrefix") . " ";
 		}
 		$output .= $this->getFormatted("FirstName") . " " . $this->getFormatted("LastName");
-		
+
 		return $output;
 	}
 }
