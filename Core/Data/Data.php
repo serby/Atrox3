@@ -421,8 +421,8 @@ class DataControl {
 		return isset($this->fieldMeta[$fieldName]);
 	}
 
-	/** 
-	 * 
+	/**
+	 *
 	 * @param DataEntity $dataEntity
 	 * @return unknown_type
 	 */
@@ -1486,7 +1486,7 @@ class DataControl {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return DataEntity
 	 */
 	function makeNew() {
