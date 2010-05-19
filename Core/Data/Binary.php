@@ -136,7 +136,7 @@ class BinaryControl extends DataControl {
 	}
 
 	function getBinaryFullPath(&$binary) {
-		return $application->registry->get("Binary/Path") . "/" . $binary->get("HashValue") . "/" . $binary->get("Filename");
+		return $this->application->registry->get("Binary/Path") . "/" . $binary->get("HashValue") . "/" . $binary->get("Filename");
 	}
 
 	function isImage($binary) {
@@ -145,6 +145,19 @@ class BinaryControl extends DataControl {
 			case "image/pjpeg":
 			case "image/gif":
 			case "image/png":
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	function isAudio($binary) {
+
+		//TODO: List is incomplete
+
+		switch ($binary->get("MimeType")) {
+			case "audio/mpeg3":
+			case "audio/mpeg":
 				return true;
 			default:
 				return false;
