@@ -43,7 +43,7 @@ class VideoControl {
 		$application = CoreFactory::getApplication();	
 		$htmlControl = CoreFactory::getHtmlControl();
 		$inputVideoFileName = $application->registry->get("Path") . $htmlControl->getBinaryLocation($video->getRelation("BinaryId"));
-		$filename = md5(uniqid(rand(), true)) . ".jpg";
+		$filename = md5(uniqid(rand(), true)) . ".jpg?v=@VERSION-NUMBER@";
 		$outputImageFileName = "/tmp/" . $filename;
 		
 		$this->createThumbnail($inputVideoFileName, $outputImageFileName, $offsetSeconds, $outputImageWidth, $outputImageHeight);

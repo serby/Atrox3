@@ -1615,7 +1615,7 @@ class HtmlControl {
 		$font == null && $font = $application->registry->get("Site/Titles/Font/Path", "") . "/" . $application->registry->get("Site/Titles/Font/Default", "arial.ttf");
 
 		$fileHash = md5($text . $size . $backgroundColor . $foregroundColor . $font);
-		$cacheFile = "title-{$fileHash}.gif";
+		$cacheFile = "title-{$fileHash}.gif?v=@VERSION-NUMBER@";
 		$sitePath = $application->registry->get("Site/Cache/Public/WebPath", "/resource/cache") . "/" . $cacheFile;
 		$cacheFile = $application->registry->get("Site/Cache/Private/Path", $application->registry->get("Path") . "/resource/cache") . "/" . $cacheFile;
 

@@ -245,8 +245,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<title>Clock Framework | Check</title>
-		<link href="main.css" rel="stylesheet" type="text/css" />
-		<link href="check.css" rel="stylesheet" type="text/css" />
+		<link href="main.css?v=@VERSION-NUMBER@" rel="stylesheet" type="text/css" />
+		<link href="check.css?v=@VERSION-NUMBER@" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div id="container">

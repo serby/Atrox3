@@ -1,6 +1,6 @@
 body {
 	background-color: #EFEBEF;
-	background-image: url("/image/backgrounds/background-static.gif");	
+	background-image: url("/image/backgrounds/background-static.gif?v=@VERSION-NUMBER@");	
 	background-position: top;
 	font-family: Arial, Helvetica, sans-serif;
 	vertical-align: top;
@@ -252,7 +252,7 @@ label strong {
 	margin: 0px 0px 0px 0px;
 	color: #000000;
 	background: #FFFFFF;
-	background-image: url("/image/headers/logo.gif");
+	background-image: url("/image/headers/logo.gif?v=@VERSION-NUMBER@");
 	background-repeat: no-repeat;
 	background-position: left;
 	border-bottom: 2px solid #330066;	
@@ -266,7 +266,7 @@ label strong {
 	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
 	height: 64px;
-	background-image: url("/image/headers/right.gif");
+	background-image: url("/image/headers/right.gif?v=@VERSION-NUMBER@");
 	background-repeat: no-repeat;
 	background-position: right;
 }
@@ -632,11 +632,11 @@ label, .label {
   }
 
 .bold_selection {
-	background: url("/image/icon/bold.gif");
+	background: url("/image/icon/bold.gif?v=@VERSION-NUMBER@");
 }
 
 .italic_selection {
-	background: url("/image/icon/italic.gif");
+	background: url("/image/icon/italic.gif?v=@VERSION-NUMBER@");
 }
 .img_selection {
 
@@ -648,19 +648,19 @@ label, .label {
 }
 
 .contact_selection {
-	background: url("/image/icon/contact.gif");
+	background: url("/image/icon/contact.gif?v=@VERSION-NUMBER@");
 }
 
 .document_selection {
-	background: url("/image/icon/document.gif");
+	background: url("/image/icon/document.gif?v=@VERSION-NUMBER@");
 }
 
 .heading2_selection {
-	background: url("/image/icon/h2.gif");
+	background: url("/image/icon/h2.gif?v=@VERSION-NUMBER@");
 }
 
 .heading3_selection {
-	background: url("/image/icon/h3.gif");
+	background: url("/image/icon/h3.gif?v=@VERSION-NUMBER@");
 }
 
 .format_toolbar a.link {

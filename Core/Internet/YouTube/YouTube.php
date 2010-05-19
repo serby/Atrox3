@@ -158,6 +158,6 @@ XML;
 	}
 	
 	function makeThumbUrl($videoId) {		
-		return "http://i1.ytimg.com/vi/{$videoId}/default.jpg";
+		return "http://i1.ytimg.com/vi/{$videoId}/default.jpg?v=@VERSION-NUMBER@";
 	}	
 }

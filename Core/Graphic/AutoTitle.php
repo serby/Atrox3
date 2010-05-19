@@ -104,7 +104,7 @@ class AutoTitleControl {
 			mkdir($cachePath);
 		}
 		
-		$outputFile = $cachePath . "/" . preg_replace("'[^\w\d-_]'", "", $text) . ".png";			 
+		$outputFile = $cachePath . "/" . preg_replace("'[^\w\d-_]'", "", $text) . ".png?v=@VERSION-NUMBER@";			 
 		
 		return $this->createTitle($text, $outputFile, $options);			
 	}
