@@ -640,11 +640,11 @@ label, .label {
 }
 .img_selection {
 
-	background: url("/image/icon/image.png");
+	background: url("/image/icon/image.png?v=@VERSION-NUMBER@");
 }
 
 .link_selection {
-	background: url("/image/icon/hyperlink.png");
+	background: url("/image/icon/hyperlink.png?v=@VERSION-NUMBER@");
 }
 
 .contact_selection {
