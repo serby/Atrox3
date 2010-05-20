@@ -199,7 +199,7 @@ class DataEntity {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param String $fieldName
 	 * @param Boolean $cached
 	 * @return DataEntity|false
@@ -354,15 +354,15 @@ class DataEntity {
 
 		$removeOldFile = $fileInfo["Remove"];
 		$isNewFile = false;
-		if ($fileInfo["Size"] > 0){		
-			$isNewFile = true; 
+		if ($fileInfo["Size"] > 0){
+			$isNewFile = true;
 		}
-		
+
 		$binaryControl = CoreFactory::getBinaryControl();
 		if ($removeOldFile && !$isNewFile){
 
 			$binaryControl->delete($binaryControl->item($fieldValue));
-			
+
 			$this->binaries[$fieldName] = null;
 			$this->data[$fieldName] = null;
 			return true;
