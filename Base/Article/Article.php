@@ -166,7 +166,7 @@ class ArticleControl extends TaggedDataControl {
 		$cacheControl = CoreFactory::getCacheControl();
 		$cacheControl->deleteWebPageCache($this->type);
 	}
-	/*
+	/**
 	 * Sets the control's filter to the latest articles with tag Announcement
 	 * @param Integer $limit Maximum number of results returned
 	 * @return void
@@ -197,7 +197,7 @@ class ArticleControl extends TaggedDataControl {
 		$this->setFilter($filter);
 	}
 
-	/*
+	/**
 	 * Sets the control's filter to the latest articles
 	 * @param Integer $limit Maximum number of results returned
 	 * @param Mixed $excludeIds All items to be excluded in the filter
@@ -252,7 +252,7 @@ class ArticleControl extends TaggedDataControl {
 	}
 
 
-	/*
+	/**
 	 * Get live and active articles
 	 * @param Mixed $includeTags All tags to be included in the filter
 	 * @return void
