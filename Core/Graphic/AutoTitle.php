@@ -111,7 +111,9 @@ class AutoTitleControl {
 
 	function createTitle($text, $outputFile, $options) {
 		$application = &CoreFactory::getApplication();
-		$localFilename = mb_substr($outputFile, mb_strlen($application->registry->get("Cache/AutoTitle/LocalPath", $application->registry->get("Path"))));
+		$localFilename = $application->registry->get("Cache/AutoTitle/LocalPath") ?
+			strstr($outputFile, $application->registry->get("Cache/AutoTitle/LocalPath"))
+			: mb_substr($outputFile, mb_strlen($application->registry->get("Path")));
 
 		if ((!$options->recreate) && (is_file($outputFile))) {
 			$size = getimagesize($outputFile);
