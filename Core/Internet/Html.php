@@ -815,12 +815,12 @@ class HtmlControl {
 			return "";
 		} else if ($step > 0) {
 			for ($i = $start; $i <= $stop; $i += $step) {
-				$returnValue .= "<option " . (($default == $i)?"selected=\"selected\"":"")
+				$returnValue .= "<option value=\"$i\" " . (($default == $i)?"selected=\"selected\"":"")
 						. ">$i</option>\n";
 			}
 		} else {
 			for ($i = $start; $i >= $stop; $i += $step) {
-				$returnValue .= "<option " . (($default == $i)?"selected=\"selected\"":"")
+				$returnValue .= "<option value=\"$i\" " . (($default == $i)?"selected=\"selected\"":"")
 						. ">$i</option>\n";
 			}
 		}
