@@ -75,10 +75,10 @@ class DataEntity {
 		* @param String $fieldName Name of the field from which to return the value
 		* @return String Formatted value contained in $fieldName
 		*/
-	function getFormatted($fieldName) {
+	function getFormatted($fieldName, $extra = false) {
 		if (array_key_exists($fieldName, $this->data)) {
 			return $this->control->fieldMeta[$fieldName]->outputFormatter->format(
-			$this->data[$fieldName]);
+			$this->data[$fieldName], $extra);
 		} else {
 			trigger_error("Bad Field Name '$fieldName'\n / " . $this->toString(), E_USER_ERROR);
 		}
