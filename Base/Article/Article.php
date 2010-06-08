@@ -55,13 +55,14 @@ class ArticleControl extends TaggedDataControl {
 			"Live Date", $this->application->getCurrentUtcDateTime(), FM_TYPE_DATE, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["LiveDate"]->setFormatter(CoreFactory::getDateFieldFormatter());
-		$this->fieldMeta["LiveDate"]->setEncoder(CoreFactory::getArrayDateTimeEncoder());
+		// Date encoder removed for BST problems - Luke
+//		$this->fieldMeta["LiveDate"]->setEncoder(CoreFactory::getArrayDateTimeEncoder());
 
 		$this->fieldMeta["ExpiryDate"] = new FieldMeta(
 			"Expiry Date", "", FM_TYPE_DATE, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["ExpiryDate"]->setFormatter(CoreFactory::getDateFieldFormatter());
-		$this->fieldMeta["ExpiryDate"]->setEncoder(CoreFactory::getArrayDateTimeEncoder());
+//		$this->fieldMeta["ExpiryDate"]->setEncoder(CoreFactory::getArrayDateTimeEncoder());
 
 		$this->fieldMeta["AuthorId"] = new FieldMeta(
 			"Author", "", FM_TYPE_RELATION, null, FM_STORE_ALWAYS, false);

@@ -832,7 +832,7 @@ class RealEncoder extends FieldFormatter {
 }
 
 /**
- * Ensures that input produces a valid JSON string 
+ * Ensures that input produces a valid JSON string
  * @package Core
  * @subpackage Formatting
  */
@@ -1020,7 +1020,6 @@ class ArrayDateTimeEncoder extends FieldFormatter {
 			return null;
 		}
 		$application = &CoreFactory::getApplication();
-
 
 		//TODO: Add TimeZone to date $value[GmtOffset]";
 		//TODO: Daylight saving on timezones
@@ -1269,7 +1268,7 @@ class PreviousNextHtmlMultiPageControlResultsFormatter
 		$start = max($end - 4, 1);
 
 		$out .= "<a href=\"?$queryString&amp;CurrentPage=" . (($cp - 1) ? ($cp - 1) : 1) . "\" title=\"Goto the previous page of results\" class=\"previous\"><strong><< Previous</strong></a>";
-		
+
 		if (!$hidePageNumbers) {
 			$out .= "<div class=\"numeration\">";
 			for ($i = $start; $i <= $end; $i++) {
