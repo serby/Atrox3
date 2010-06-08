@@ -77,12 +77,12 @@ class SimpleDocumentMarkupParser {
 			"<a href=\"$1\" class=\"link-internal\">$1</a>",
 			"<span class=\"$1\">$3</span>"
 		);
-		
+
 		$text = preg_replace($searchArray, $replaceArray, $text);
 
 		return trim($text);
 	}
-	
+
 	/**
 	 * The dynamic image markup will generate html source by providing binary IDs with a specified width and height.
 	 * @param array $matches
@@ -94,12 +94,12 @@ class SimpleDocumentMarkupParser {
 		$height = ($matches[3] ? $matches[3] : null);
 		$float = ($matches[4] != "None") ? "class=\"image-type-" . strtolower($matches[4]) : "";
 		$alt = $matches[5];
-		
+
 		$binaryControl = CoreFactory::getBinaryControl();
 		if ($binary = $binaryControl->item($binaryId)) {
 			$htmlControl = CoreFactory::getHtmlControl();
 			$binaryLocation = $htmlControl->getImageBinaryLocation($binary, $width, $height);
-	
+
 			return $replaceString = "<img src=\"" . $binaryLocation . "\" " . $float . "\" title=\"" . $alt . "\" alt=\"" . $alt . "\" />";
 		}
 	}
