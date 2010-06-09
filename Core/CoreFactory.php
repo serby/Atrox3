@@ -118,6 +118,30 @@ class CoreFactory {
 	}
 
 	/**
+	 * Returns a CssCollector
+	 *
+	 * @return CssCollector
+	 */
+	static function getCssCollector($sitePath, $cachePath, $cacheUrl = null) {
+		static $singleton;
+		require_once("Internet/CssCollector.php");
+		isset($singleton) || $singleton = new CssCollector($sitePath, $cachePath, $cacheUrl);
+		return $singleton;
+	}
+
+	/**
+	 * Returns a JsCollector
+	 *
+	 * @return JsCollector
+	 */
+	static function getJsCollector($sitePath, $cachePath, $cacheUrl = null) {
+		static $singleton;
+		require_once("Internet/JsCollector.php");
+		isset($singleton) || $singleton = new JsCollector($sitePath, $cachePath, $cacheUrl);
+		return $singleton;
+	}
+
+	/**
 	 * Returns a MathControl
 	 * @return MathControl
 	 */
