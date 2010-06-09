@@ -60,13 +60,20 @@ class MemcachedControl {
 	 *
 	 * @see Core/Cache/Atrox_Core_Cache_ICache#set($key, $data, $tag, $expire)
 	 */
-	function set($key, $data, $tag = false, $expire = false) {
+	function set($key, $data, $tags = false, $expire = false) {
 		$this->memcache->set($this->keyPrefix . $key, $data, false, $expire);
-		if ($tag) {
+		if ($tags) {
+			if (!is_array($tags)) {
+				$tags = array($tags);
+			}
+
 			if (!$tagIndex = $this->memcache->get($this->keyPrefix . "__AtroxTagIndex")) {
 				$tagIndex = array();
 			}
-			$tagIndex[$tag][] = $key;
+
+			foreach ($tags as $tag) {
+				$tagIndex[$tag][] = $key;
+			}
 			$this->memcache->set($this->keyPrefix . "__AtroxTagIndex", $tagIndex);
 		}
 	}
