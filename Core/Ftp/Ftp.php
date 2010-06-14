@@ -3,8 +3,8 @@
  * FTP Class
  *
  * @author Tom Smith (Clock Limited) {@link mailto:thomas.smith@clock.co.uk thomas.smith@clock.co.uk }
- * @copyright Clock Limited 2010
- * @version 3.2 - $Revision: 737 $ - $Date: 2008-09-08 16:09:48 +0100 (Mon, 08 Sep 2008) $
+ * @copyright Clock Limited 2009
+ * @version 3.0 - $Revision: 737 $ - $Date: 2008-09-08 16:09:48 +0100 (Mon, 08 Sep 2008) $
  * @package Core
  * @subpackage Ftp
  */
@@ -14,7 +14,7 @@ class Ftp {
 	var $password;
 	var $passive;
 	var $ftpHandle;
-	
+
 	/**
 	 * Make connection and login to ftp host
 	 *
@@ -25,12 +25,12 @@ class Ftp {
 	 * @return boolean If connection was made.
 	 */
 	function __construct($host, $username, $password, $passive = true) {
-			
+
 		$this->host = $host;
 		$this->username = $username;
 		$this->password = $password;
 		$this->passive = $passive;
-		
+
 		try {
 			if (!$this->ftpHandle = @ftp_connect($this->host)) {
 				throw new Exception("Unable to connect to ftp host: " . $this->host);
@@ -38,23 +38,23 @@ class Ftp {
 		} catch (Exception $e) {
 			trigger_error($e->getMessage());
 		}
-		
+
 		try {
 			$loginResult = @ftp_login($this->ftpHandle, $this->username, $this->password);
-		
+
 			if (!$loginResult) {
 				throw new Exception("Unable to connect to ftp host, or Username and password are incorrect.");
 			}
 		} catch (Exception $e) {
 			trigger_error($e->getMessage());
 		}
-		
+
 		if ($this->passive) {
 			ftp_pasv($this->ftpHandle, true);
 		}
    	return true;
 	}
-	
+
 	/**
 	 * Close ftp connection.
 	 *
@@ -63,7 +63,7 @@ class Ftp {
 	function closeConnection() {
 		return ftp_close($this->ftpHandle);
 	}
-	
+
 	/**
 	 * Is path a directory
 	 *
@@ -75,7 +75,7 @@ class Ftp {
 		$this->changeToRootDirector();
 		return $isDir;
 	}
-	
+
 	/**
 	 * Change to root directory
 	 *
@@ -84,7 +84,7 @@ class Ftp {
 	function changeToRootDirector() {
 		return @ftp_cdup($this->ftpHandle);
 	}
-	
+
 	/**
 	 * Change directory
 	 *
@@ -94,7 +94,7 @@ class Ftp {
 	function changeDirectory($directory) {
 		return @ftp_chdir($this->ftpHandle, $directory);
 	}
-	
+
 	/**
 	 * Upload file
 	 *
@@ -105,7 +105,7 @@ class Ftp {
 	function uploadFile($source, $destination) {
 		return ftp_put($this->ftpHandle, $destination, $source, FTP_BINARY);
 	}
-	
+
 	/**
 	 * Make directory
 	 *
@@ -115,7 +115,7 @@ class Ftp {
 	function makeDirectory($directory) {
 		return @ftp_mkdir($this->ftpHandle, $directory);
 	}
-	
+
 	/**
 	 * Check whether the file exists on the remote host
 	 *
@@ -124,12 +124,12 @@ class Ftp {
 	 */
 	function doesFileExist($file) {
 		if (ftp_mdtm($this->ftpHandle, $file) != -1) {
-			return true; 
+			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Download file from ftp server
 	 *
@@ -139,5 +139,16 @@ class Ftp {
 	 */
 	function downloadFile($remoteFile, $localFile) {
 		return ftp_get($this->ftpHandle, $localFile, $remoteFile, FTP_BINARY);
+	}
+
+	/**
+	 * Rename a file
+	 *
+	 * @param string $oldName the old name of the file
+	 * @param string $newName the new name of the remote file
+	 * @return boolean True if successful.
+	 */
+	function renameFile($oldName, $newName) {
+		return ftp_rename($this->ftpHandle, $oldName, $newName);
 	}
 }
