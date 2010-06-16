@@ -497,6 +497,18 @@ class Application {
 		}
 	}
 
+	function isRequestFromSelf() {
+		if ((isset($_SERVER["HTTP_HOST"])) && (isset($_SERVER["HTTP_REFERER"]))) {
+			$urlParts = parse_url($_SERVER["HTTP_REFERER"]);
+			$host = $_SERVER["HTTP_HOST"];
+			if ($pos = strpos($_SERVER["HTTP_HOST"], ":")) {
+				$host = substr($host, 0, $pos);
+			}
+			return $host == $urlParts["host"];
+		}
+	return false;
+}
+
 	/**
 	 * Used on non returnable pages
 	 */
