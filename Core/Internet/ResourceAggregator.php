@@ -110,15 +110,11 @@ class ResourceAggregator {
 	}
 
 	public function start($group = "default") {
-		ob_start(array($this, "writeContent"));
+		ob_start();
 	}
 
 	public function end() {
-		throw new Exception();
+		$this->resources["default"]->items[] = $this->createItem("content", ob_get_contents());
 		ob_end_clean();
-	}
-
-	public function writeContent($buffer) {
-		$this->resources["default"]->items[] = createItem("content", $buffer);
 	}
 }
