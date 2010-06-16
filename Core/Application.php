@@ -506,8 +506,8 @@ class Application {
 			}
 			return $host == $urlParts["host"];
 		}
-	return false;
-}
+		return false;
+	}
 
 	/**
 	 * Used on non returnable pages
