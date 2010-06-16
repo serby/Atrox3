@@ -38,7 +38,9 @@ class AutoTitleControl {
 			"backgroundHexColor" => "000000",
 			"foregroundHexColor" => "FFFFFF",
 			"transparent" => false,
-			"recreate" => false
+			"recreate" => false,
+			"url" => ""
+
 		);
 
 		if (is_object($options)) {
@@ -112,7 +114,8 @@ class AutoTitleControl {
 	function createTitle($text, $outputFile, $options) {
 		$application = &CoreFactory::getApplication();
 		$localFilename = $application->registry->get("Cache/AutoTitle/LocalPath") ?
-			strstr($outputFile, $application->registry->get("Cache/AutoTitle/LocalPath"))
+			$application->registry->get("Cache/AutoTitle/LocalPath") .
+			mb_substr($outputFile, mb_strlen($application->registry->get("Cache/AutoTitle/Path")))
 			: mb_substr($outputFile, mb_strlen($application->registry->get("Path")));
 
 		if ((!$options->recreate) && (is_file($outputFile))) {
