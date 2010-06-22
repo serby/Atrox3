@@ -23,7 +23,7 @@ class Service {
 		if ($customPath) {
 			$path = $customPath . "/" . $serverName . ".php";
 		} else {
-			$path = "Atrox/3.0/{$serverName}.php";			
+			$path = "Application/Atrox/{$serverName}.php";			
 		}
 
 		try {
