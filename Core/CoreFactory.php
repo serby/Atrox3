@@ -61,6 +61,16 @@ class CoreFactory {
 	}
 
 	/**
+	 * Returns a Layout
+	 * @return Layout
+	 */
+	static function getLayout($template) {
+		require_once("Layout.php");
+		$obj = new Layout($template);
+		return $obj;
+	}
+
+	/**
 	 * @return FileSystem
 	 */
 	static function getFileSystem() {
