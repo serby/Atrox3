@@ -59,7 +59,7 @@ class WapItemControl extends DataControl {
 
 		$this->fieldMeta["Code"] = new FieldMeta(
 			"Code", "", FM_TYPE_STRING_LOWER, 50, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
-			
+
 		$this->fieldMeta["Code"]->setValidation(CoreFactory::getNotContainValidation(" "));
 
 		$this->fieldMeta["Name"] = new FieldMeta(
@@ -91,7 +91,7 @@ class WapItemControl extends DataControl {
 			"Charge Type", "", FM_TYPE_INTEGER, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["ChargeType"]->setFormatter(CoreFactory::getArrayRelationFormatter($this->chargeTypes, WI_TYPE_TRUETONE));
-		
+
 		$this->fieldMeta["DateCreated"] = new FieldMeta(
 			"DateCreated", "", FM_TYPE_DATE, 1, FM_STORE_NEVER, true);
 
@@ -106,43 +106,43 @@ class WapItemControl extends DataControl {
 		return $this->chargeTypes;
 	}
 
-	function retrieveForType($type) {				
-		$filter = CoreFactory::getFilter();			
+	function retrieveForType($type) {
+		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "Type", $type);
 		$this->setFilter($filter);
 		return $this->retrieveAll();
 	}
-	
-	function giftWapItem(&$member, $wapItem, 
-		$sendEmail = false, $sendSMS = false) {	
+
+	function giftWapItem(&$member, $wapItem,
+		$sendEmail = false, $sendSMS = false) {
 		$wapDownloadControl = BaseFactory::getWapDownloadControl();
 		$wapDownload = $wapDownloadControl->makeNew();
 		$wapDownload->set("WapItemId", $wapItem->get("Id"));
 		$wapDownload->set("MobileNumber", $member->get("MobileNumber"));
-		$wapDownload->set("UniqueId", mb_substr(md5(time() + rand(0,1000)),0, 6));			
+		$wapDownload->set("UniqueId", mb_substr(md5(time() + rand(0,1000)),0, 6));
 		if ($wapDownload->save()) {
-			if ($sendEmail) {				
+			if ($sendEmail) {
 				$message = "You have been gifted a ringtone, this may be due to a technical issue we are trying to resolve or just to be kind!.Please try pointing your mobile phone to this address: " . $this->application->registry->get("Site/Address") . "/mobile/download.php?Id=" . $wapDownload->get("UniqueId") . " Regards " . $this->application->registry->get("EmailAddress/Support");
 				// Send E-mail
-				$emailTemplate = CoreFactory::getTemplate();					
+				$emailTemplate = CoreFactory::getTemplate();
 				$emailTemplate->setTemplateFile(
-					$this->application->registry->get("Template/Path", "/resource/template") . 
+					$this->application->registry->get("Template/Path", "/Site/resource/template") .
 					$this->application->registry->get("Template/Email/Default/Html", "/emails/default.tpl"));
-				
+
 				$emailTemplate->set("BODY", nl2br($message));
 				$emailTemplate->set("SITE_NAME", $this->application->registry->get("Name"));
 				$emailTemplate->set("SITE_ADDRESS", $this->application->registry->get("Site/Address"));
 				$emailTemplate->set("SITE_SUPPORT_EMAIL", $this->application->registry->get("EmailAddress/Support"));
-						
+
 				$email = CoreFactory::getEmail();
 				$email->setTo($member->get("EmailAddress"));
 				$email->setFrom($this->application->registry->get("EmailAddress/Support"));
-				$email->setSubject($this->application->registry->get("Name"));	
-				
+				$email->setSubject($this->application->registry->get("Name"));
+
 				$email->setBody($emailTemplate->parseTemplate());
 				$email->sendMail();
-			}				
-			if ($sendSMS) {				
+			}
+			if ($sendSMS) {
 				$smsControl = CoreFactory::getSmsControl();
 				$smsMessage = $smsControl->makeNew();
 				$smsMessage->setRecipients($member->get("MobileNumber"));
@@ -156,5 +156,5 @@ class WapItemControl extends DataControl {
 			return true;
 		}
 		return false;
-	} 		
+	}
 }

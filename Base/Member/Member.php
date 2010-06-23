@@ -259,7 +259,7 @@ class MemberControl extends DataControl {
 		// Send Registration E-mail
 		$welcomeEmailTemplate = CoreFactory::getTemplate();
 		$welcomeEmailTemplate->setTemplateFile(
-			$this->application->registry->get("Template/Path", "/resource/template") .
+			$this->application->registry->get("Template/Path", "/Site/resource/template") .
 			$this->application->registry->get("Template/Email/Registration/Html", "/account/html/registration.php")
 		);
 
@@ -480,7 +480,7 @@ class MemberControl extends DataControl {
 			$emailTemplate = CoreFactory::getTemplate();
 
 			$emailTemplate->setTemplateFile(
-				$this->application->registry->get("Template/Path", "/resource/template") .
+				$this->application->registry->get("Template/Path", "/Site/resource/template") .
 				$this->application->registry->get("Template/Email/PasswordRequest/Html", "/account/html/password.tpl"));
 
 			$emailTemplate->set("EMAIL", $emailAddress);
@@ -492,7 +492,7 @@ class MemberControl extends DataControl {
 			$plainEmailTemplate = CoreFactory::getTemplate();
 
 			$plainEmailTemplate->setTemplateFile(
-				$this->application->registry->get("Template/Path", "/resource/template") .
+				$this->application->registry->get("Template/Path", "/Site/resource/template") .
 				$this->application->registry->get("Template/Email/PasswordRequest/Plain", "/account/plain/password.tpl"));
 
 			$plainEmailTemplate->set("EMAIL", $emailAddress);
