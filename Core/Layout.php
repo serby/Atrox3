@@ -47,6 +47,19 @@ class Layout {
 	}
 
 	/**
+	 * Returns the content from $section
+	 *
+	 * @param string $section
+	 */
+	public function get($section) {
+		if (isset($this->content[$section])) {
+			return $this->content[$section];
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Adds $content to $section
 	 *
 	 * @param string $section
@@ -87,16 +100,6 @@ class Layout {
 	 */
 	public function render() {
 		$this->end();
-
-		ob_start();
 		include($this->templateFilename);
-		$templateContent = ob_get_contents();
-		ob_end_clean();
-
-		foreach ($this->content as $key => $content) {
-			$templateContent = str_replace("\${" . $key. "}", $content, $templateContent);
-		}
-
-		echo $templateContent;
 	}
 }

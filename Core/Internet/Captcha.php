@@ -9,22 +9,22 @@
 /**
  * CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart)
  * Generator and validator to stop bots spaming blogs forums etc.
- * 
+ *
  * @author Kapil Gohil (Clock Ltd) {@link mailto:kapil.gohil@clock.co.uk kapil.gohil@clock.co.uk }
  * @copyright Clock Limited 2010
  * @version 3.2 - $Revision$ - $Date$
  * @package Base
  * @subpackage Internet
- */ 
+ */
 class Captcha {
-	
+
 	/**
 	 * This function randomly generates a code to check aganst
 	 * @param int $length Length of the code to generate.
 	 */
 	function generateCode($length = 5) {
 		$character = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
-		
+
 		$characterLength = strlen($character) - 1;
 		$captcha = "";
 		for ($i = 0 ; $i < $length ; $i++){
@@ -32,19 +32,19 @@ class Captcha {
 		}
 		return $_SESSION["CaptchaCode"] = $captcha;
 	}
-	
+
 	/**
-	 * Checks that $code is the last generated CAPTCHA 
+	 * Checks that $code is the last generated CAPTCHA
 	 *
 	 * @param string $code Code to check generated code aganst
 	 * @return boolean True if the codes match
 	 */
-	function check($code) { 
+	function check($code) {
 		return isset($_SESSION["CaptchaCode"]) && $_SESSION["CaptchaCode"] == $code;
 	}
-	
+
 	/**
-	 * Generate a CAPTCHA image 
+	 * Generate a CAPTCHA image
 	 *
 	 * @param int $width
 	 * @param int $height
@@ -56,45 +56,45 @@ class Captcha {
 			$this->generateCode();
 			$code = $_SESSION["CaptchaCode"];
 		}
-		
+
 		$application = &CoreFactory::getApplication();
-		$font = $application->registry->get("Path") . "/resource/font/arial.ttf";
+		$font = "resource/font/arial.ttf";
 
 		$fontSize = $height * 0.60;
 		$image = imagecreatetruecolor($width, $height);
-	
+
 		$rgb->red = rand(100, 255);
 		$rgb->green = rand(100, 255);
 		$rgb->blue = rand(100, 255);
-	
+
 		// Define colours
 		$backgroundColor = imagecolorallocate($image, $rgb->red, $rgb->green, $rgb->blue);
-		
+
 		imagefilledrectangle($image, 0, 0, $width, $height, $backgroundColor);
-		
-		$textColor = imagecolorallocate($image, 
-			$rgb->red - 50, 
+
+		$textColor = imagecolorallocate($image,
+			$rgb->red - 50,
 			$rgb->green - 50,
 			$rgb->blue - 50);
 
 		$noiseColor = $textColor;
 
-				
+
 		$textbox = imagettfbbox($fontSize, 0, $font, "m");
 		// Add the text
 		$x = $textbox[4];
 		$wWidth = $textbox[4];
 		$y = ($height - $textbox[5]) / 2;
-	
+
 		for ($i = 0; $i < strlen($code); $i++) {
 			imagettftext($image, $fontSize + rand(-2, 2), rand(-15, 15), 10 + ($wWidth * $i), $y + rand(-5, 5), $textColor, $font, $code[$i]);
 		}
-	
+
 		// Add more noise
 		for($i = 0; $i < ($width * $height) * 0.20; $i++ ) {
 			imageline($image, $lineX = mt_rand(0, $width), $lineY = mt_rand(0, $height), $lineX, $lineY, $noiseColor);
 		}
-		
+
 		// Output captcha image to browser
 		header("Content-Type: image/gif");
 		imagegif($image);
