@@ -9,6 +9,7 @@
  * @subpackage Internet
  */
 interface IResourceAggregatorDelegate {
+
 	/**
 	 *
 	 * @author Dom Udall <dom.udall@clock.co.uk>

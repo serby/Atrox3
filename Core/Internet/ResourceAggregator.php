@@ -26,7 +26,9 @@ class ResourceAggregator {
 
 	protected $resources = array();
 
-	public function __construct($sitePath, $cachePath, $cacheUrl = null, IResourceAggregatorDelegate $delegate, IProcessor $processor) {
+	public function __construct($sitePath, $cachePath, $cacheUrl = null, IResourceAggregatorDelegate $delegate,
+		IProcessor $processor) {
+
 		$this->sitePath = $sitePath;
 		$this->cachePath = $cachePath;
 		$this->cacheUrl = $cacheUrl;
