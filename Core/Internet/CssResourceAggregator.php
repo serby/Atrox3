@@ -12,10 +12,29 @@ require_once "IResourceAggregatorDelegate.php";
  */
 class CssResourceAggregator implements IResourceAggregatorDelegate {
 
+	/**
+	 * Generates the HTML to include the resources on page.
+	 *
+	 * @author Dom Udall <dom.udall@clock.co.uk>
+	 *
+	 * @return string The file extension
+	 */
 	public function getFileExtension() {
 		return "css";
 	}
 
+	/**
+	 * Validates the options object passed to it, against an optional current group.
+	 *
+	 * @author Dom Udall <dom.udall@clock.co.uk>
+	 *
+	 * @param stdClass $options
+	 * @param stdClass $currentGroup
+	 *
+	 * @throws Exception When trying to change a media type of an existing group.
+	 *
+	 * @return stdClass The original options combined with the mapped defaults.
+	 */
 	public function validateOptions(stdClass $options = null, stdClass $currentGroup = null) {
 		if (!$options) {
 			$options = new stdClass();
@@ -38,6 +57,16 @@ class CssResourceAggregator implements IResourceAggregatorDelegate {
 		return $options;
 	}
 
+	/**
+	 * Generates the HTML to include the resources on page.
+	 *
+	 * @author Dom Udall <dom.udall@clock.co.uk>
+	 *
+	 * @param string $filename The name of the file to include
+	 * @param stdClass $options An object of options, specific to the aggregator
+	 *
+	 * @return string The HTML to include the resources on page.
+	 */
 	public function makeHtml($filename, stdClass $options) {
 		return <<<TEXT
 <link rel="stylesheet" type="text/css" href="{$filename}" media="{$options->media}" />

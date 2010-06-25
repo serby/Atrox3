@@ -12,10 +12,27 @@ require_once "IResourceAggregatorDelegate.php";
  */
 class JsResourceAggregator implements IResourceAggregatorDelegate {
 
+	/**
+	 * Generates the HTML to include the resources on page.
+	 *
+	 * @author Dom Udall <dom.udall@clock.co.uk>
+	 *
+	 * @return string The file extension
+	 */
 	public function getFileExtension() {
 		return "js";
 	}
 
+	/**
+	 * Validates the options object passed to it, against an optional current group.
+	 *
+	 * @author Dom Udall <dom.udall@clock.co.uk>
+	 *
+	 * @param stdClass $options
+	 * @param stdClass $currentGroup
+	 *
+	 * @return stdClass The original options combined with the mapped defaults.
+	 */
 	public function validateOptions(stdClass $options = null, stdClass $currentGroup = null) {
 		if (!$options) {
 			$options = new stdClass();
@@ -33,6 +50,16 @@ class JsResourceAggregator implements IResourceAggregatorDelegate {
 		return $options;
 	}
 
+	/**
+	 * Generates the HTML to include the resources on page.
+	 *
+	 * @author Dom Udall <dom.udall@clock.co.uk>
+	 *
+	 * @param string $filename The name of the file to include
+	 * @param stdClass $options An object of options, specific to the aggregator
+	 *
+	 * @return string The HTML to include the resources on page.
+	 */
 	public function makeHtml($filename, stdClass $options) {
 		return <<<TEXT
 <script src="{$filename}" type="text/javascript"></script>
