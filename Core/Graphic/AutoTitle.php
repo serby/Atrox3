@@ -29,7 +29,7 @@ class AutoTitleControl {
 			"language" => "en",
 			"maxWidth" => -1,
 			"fontSize" => 12,
-			"fontFile" => "arial.ttf",
+			"fontFile" => "arial.ttf?v=@VERSION-NUMBER@",
 			"paddingTop" => 0,
 			"paddingRight" => 0,
 			"paddingBottom" => 0,
@@ -106,7 +106,7 @@ class AutoTitleControl {
 			mkdir($cachePath);
 		}
 
-		$outputFile = $cachePath . "/" . preg_replace("'[^\w\d-_]'", "", $text) . ".png";
+		$outputFile = $cachePath . "/" . preg_replace("'[^\w\d-_]'", "", $text) . ".png?v=@VERSION-NUMBER@";
 
 		return $this->createTitle($text, $outputFile, $options);
 	}

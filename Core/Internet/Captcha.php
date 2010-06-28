@@ -58,7 +58,7 @@ class Captcha {
 		}
 
 		$application = &CoreFactory::getApplication();
-		$font = "resource/font/arial.ttf";
+		$font = "resource/font/arial.ttf?v=@VERSION-NUMBER@";
 
 		$fontSize = $height * 0.60;
 		$image = imagecreatetruecolor($width, $height);

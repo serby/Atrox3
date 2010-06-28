@@ -1612,7 +1612,7 @@ class HtmlControl {
 		$size == null && $size = $application->registry->get("Site/Titles/Size", 20);
 		$backgroundColor == null && $backgroundColor = $application->registry->get("Site/Titles/BackgroundColor", "FFFFFF");
 		$foregroundColor == null && $foregroundColor = $application->registry->get("Site/Titles/ForegroundColor", "000000");
-		$font == null && $font = $application->registry->get("Site/Titles/Font/Path", "") . "/" . $application->registry->get("Site/Titles/Font/Default", "arial.ttf");
+		$font == null && $font = $application->registry->get("Site/Titles/Font/Path", "") . "/" . $application->registry->get("Site/Titles/Font/Default", "arial.ttf?v=@VERSION-NUMBER@");
 
 		$fileHash = md5($text . $size . $backgroundColor . $foregroundColor . $font);
 		$cacheFile = "title-{$fileHash}.gif?v=@VERSION-NUMBER@";
