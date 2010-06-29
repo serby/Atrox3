@@ -363,6 +363,9 @@ class HtmlControl {
 			case "mpeg":
 				$mimeInfo = "MPEG Video File";
 				break;
+			case "flv":
+				$mimeInfo = "FLV Video File";
+				break;
 			case "mp3":
 				$mimeInfo = "MP3 Audio File";
 				break;
