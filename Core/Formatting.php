@@ -88,6 +88,7 @@ class MultiPageControlResultsFormatter {
  */
 class TaggedDataEncoder extends FieldFormatter {
 	function format($value) {
+		$value = preg_replace("/\s\s+/", " ", $value);
 		return implode("\n", array_unique(explode("\n", str_replace("\r", "", $value))));
 	}
 }
