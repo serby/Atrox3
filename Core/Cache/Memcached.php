@@ -213,11 +213,11 @@ class MemcachedControl {
 	public function getFileContents($filename, $expire = false, $context = null) {
 		$key = $this->keyPrefix . "__File:" . md5($filename);
 		if ($data = $this->memcache->get($key)) {
- 			return $data;
+			return $data;
 		} else {
 			try {
- 				$data = @file_get_contents($filename, 0, $context);
- 				$this->memcache->set($key, $data, false, $expire);
+				$data = @file_get_contents($filename, 0, $context);
+				$this->memcache->set($key, $data, false, $expire);
 			} catch(Exception $e) {
 				echo $e->getMessage();
 				throw new Atrox_Core_Exception_NoSuchFileException("'{$filename}' does not exist");
@@ -236,22 +236,22 @@ class MemcachedControl {
 	}
 
 	public function listContents($filter = null) {
-    $list = array();
-    $allSlabs = $this->memcache->getExtendedStats("slabs");
-    $items = $this->memcache->getExtendedStats("items");
-    foreach ($allSlabs as $server => $slabs) {
-    	foreach ($slabs as $slabId => $slabMeta) {
-    		$cdump = $this->memcache->getExtendedStats("cachedump", (int)$slabId);
-    		foreach ($cdump as $server => $entries) {
-    			if ($entries) {
-    				foreach ($entries as $eName => $eData) {
-    					$list[] = $eName;
-    				}
-    			}
-    		}
-    	}
-    }
-    sort($list);
-    return $list;
+		$list = array();
+		$allSlabs = $this->memcache->getExtendedStats("slabs");
+		$items = $this->memcache->getExtendedStats("items");
+		foreach ($allSlabs as $server => $slabs) {
+			foreach ($slabs as $slabId => $slabMeta) {
+				$cdump = $this->memcache->getExtendedStats("cachedump", (int)$slabId);
+				foreach ($cdump as $server => $entries) {
+					if ($entries) {
+						foreach ($entries as $eName => $eData) {
+							$list[] = $eName;
+						}
+					}
+				}
+			}
+		}
+		sort($list);
+		return $list;
 	}
 }
