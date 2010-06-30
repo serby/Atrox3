@@ -21,7 +21,7 @@ require_once("Atrox/Core/Data/Data.php");
  */
 
 class TaggedDataControl extends DataControl {
-	
+
 	/**
 	 * The tag type which will appear in the 'Type' column of the 'TagToData' table
 	 * If this is left as null it will become the table name.
@@ -29,7 +29,9 @@ class TaggedDataControl extends DataControl {
 	 * @var string
 	 */
 	var $type = null;
-	
+
+	protected $delimiter = "\n";
+
 	function TaggedDataControl($type = null) {
 		parent::DataControl();
 		if ($type != null) {
@@ -38,14 +40,14 @@ class TaggedDataControl extends DataControl {
 			$this->type = $this->table;
 		}
 	}
-	
+
 	function retrieveByTag($tags = null, $tagLogicOperator = "AND", $excludeTags = null, $excludeTagLogicOperator = "AND", $orderByField = null, $orderByDescending = false) {
 		$this->clearFilter();
 		$filter = CoreFactory::getFilter();
-		
+
 		if ($tags || $excludeTags) {
 			$tagsToDataControl = BaseFactory::getTagToDataControl();
-			
+
 			if ($excludeTags) {
 				$excludeFilter = CoreFactory::getFilter();
 				if (!is_array($excludeTags)) {
@@ -57,14 +59,14 @@ class TaggedDataControl extends DataControl {
 				}
 				$excludeFilter->setDistinct(true);
 				$this->setFilter($excludeFilter);
-				
+
 				while ($dataEntity = $this->getNext()) {
 					$filter->addConditional($this->table, "Id", $dataEntity->get("Id"), "!=");
 				}
-				
+
 				$this->clearFilter();
 			}
-			
+
 			switch ($tagLogicOperator) {
 				default:
 				case "AND":
@@ -78,12 +80,12 @@ class TaggedDataControl extends DataControl {
 						}
 						$filter->addConditional("TagToData0", "Type", $this->type);
 					}
-					
+
 					$filter->setDistinct(true);
 					break;
 				case "OR":
 					$filter->addJoin($this->table, $this->key, "TagToData", "DataId", "TagToData");
-					
+
 					if ($tags) {
 						if (!is_array($tags)) {
 							$tags = array($tags);
@@ -93,18 +95,18 @@ class TaggedDataControl extends DataControl {
 						}
 						$filter->addConditionalGroup($includeConditions);
 					}
-	
+
 					$filter->addConditional("TagToData" , "Type", $this->type);
 					$filter->setDistinct(true);
 					break;
 			}
 		}
-		if ($orderByField) {	
+		if ($orderByField) {
 			$filter->addOrder($orderByField, $orderByDescending);
 		}
 		$this->setFilter($filter);
 	}
-	
+
 	function hasTag(&$dataEntity, $tags = null) {
 		if (!$tags) {
 			return false;
@@ -120,18 +122,26 @@ class TaggedDataControl extends DataControl {
 		}
 		return false;
 	}
-	
+
 	function saveTags($dataEntity) {
-		$tagArray = explode("\n", $dataEntity->get("Tags"));
+		$tagArray = explode($this->getDelimiter(), $dataEntity->get("Tags"));
 		$tagToDataControl = BaseFactory::getTagToDataControl();
 		$tagToDataControl->saveTags($dataEntity, $tagArray, $this->type);
 	}
-	
+
 	function afterUpdate(&$dataEntity) {
 		$this->saveTags($dataEntity);
 	}
-	
+
 	function afterInsert(&$dataEntity) {
 		$this->saveTags($dataEntity);
+	}
+
+	public function setDelimiter($delimiter) {
+		$this->delimiter = $delimiter;
+	}
+
+	public function getDelimiter() {
+		return $this->delimiter;
 	}
 }
