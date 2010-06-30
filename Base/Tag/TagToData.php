@@ -32,13 +32,13 @@ class TagToDataControl extends DataControl {
 
 		$this->fieldMeta["Id"] = new  FieldMeta(
 				"Id", "", FM_TYPE_INTEGER, null, FM_STORE_NEVER, false);
-			
+
 		$this->fieldMeta["Tag"] = new FieldMeta(
 				"Tag", "", FM_TYPE_STRING, 5000, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Type"] = new FieldMeta(
 				"Data type", "", FM_TYPE_STRING, 5000, FM_STORE_ALWAYS, false);
-			
+
 		$this->fieldMeta["DataId"] = new  FieldMeta(
 				"DataId", "", FM_TYPE_INTEGER, null, FM_STORE_ALWAYS, false);
 	}
@@ -67,7 +67,7 @@ class TagToDataControl extends DataControl {
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "Tag", $oldTag . "%", "ILIKE");
 		$this->setFilter($filter);
-			
+
 		while ($tagToData = $this->getNext()) {
 			if ($dataEntity = $tagTypeController->getDataEntity($tagToData->get("Type"), $tagToData->get("DataId"))) {
 				$tags = $dataEntity->get($tagTypeController->tagField[$tagToData->get("Type")]);
@@ -106,10 +106,11 @@ class TagToDataControl extends DataControl {
 			$tagIds = mb_substr($tagIds, 0, -1);
 			$this->delete($tagIds);
 		}
-			
+
 		//For each tag add a new record to tagToData
 		foreach ($tags as $tag) {
 			if ($tag != "") {
+				$tag = trim($tag);
 				$tagControl->addTag($tag);
 				$tagToData = $this->makeNew();
 				$tagToData->set("Type", $type);
@@ -140,7 +141,7 @@ class TagToDataControl extends DataControl {
 		}
 		$this->setFilter($filter);
 	}
-		
+
 	function retrieveTagsForEntities($entityId, $entityType) {
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "DataId", $entityId);
@@ -159,15 +160,15 @@ class TagToDataControl extends DataControl {
 		$tagToData = $this->getNext();
 		$tagControl->addTag($tagToData->get("Tag"));
 	}
-	
+
 	/**
 	 * Returns the most popular tags
 	 * @param $limit Integer
 	 */
 	function getMostPopularTags($limit = -1) {
-		$sql = "SELECT \"Tag\", count(*) FROM \"{$this->table}\" GROUP BY \"Tag\" ORDER BY count(*) DESC " .  
+		$sql = "SELECT \"Tag\", count(*) FROM \"{$this->table}\" GROUP BY \"Tag\" ORDER BY count(*) DESC " .
 			(($limit != -1) ? "LIMIT " . $limit: "");
-			
+
 		$this->runQuery($sql);
 	}
 }
