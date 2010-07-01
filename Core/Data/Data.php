@@ -411,6 +411,10 @@ class DataControl {
 		$this->filter = $filter;
 	}
 
+	/**
+	 *
+	 * @return Filter
+	 */
 	function getFilter() {
 		$this->initTable();
 		return $this->filter;
