@@ -237,6 +237,16 @@ class CoreFactory {
 	}
 
 	/**
+	 * @return NoCacheControl
+	 */
+	static function &getNoCacheControl($keyPrefix = null) {
+		static $singleton;
+		require_once("Cache/NoCache.php");
+		isset($singleton) || $singleton = new NoCacheControl($keyPrefix);
+		return $singleton;
+	}
+
+	/**
 	 * Returns a HtmlControl
 	 * @return HtmlControl
 	 */
