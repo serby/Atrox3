@@ -578,6 +578,18 @@ class Application {
 
 	function log($string, $type) {
 		if ($this->isDebug() && $this->registry->get("Log/Path")) {
+			if (strpos(php_sapi_name(), "cli") === false) {
+				try {
+					include_once("FirePHPCore/FirePHP.class.php");
+				} catch (Exception $e) {
+				}
+				if (class_exists("FirePHP", false)) {
+					$firephp = FirePHP::getInstance(true);
+					$firephp->log($type, $string);
+					return true;
+				}
+			}
+
 			if (!(file_exists($this->registry->get("Log/Path")))) {
 				mkdir($this->registry->get("Log/Path"), null, true);
 			}
