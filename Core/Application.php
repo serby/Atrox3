@@ -579,10 +579,7 @@ class Application {
 	function log($string, $type) {
 		if ($this->isDebug() && $this->registry->get("Log/Path")) {
 			if (strpos(php_sapi_name(), "cli") === false) {
-				try {
-					include_once("FirePHPCore/FirePHP.class.php");
-				} catch (Exception $e) {
-				}
+				@include_once("FirePHPCore/FirePHP.class.php");
 				if (class_exists("FirePHP", false)) {
 					$firephp = FirePHP::getInstance(true);
 					$firephp->log($type, $string);
