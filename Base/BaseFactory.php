@@ -94,7 +94,7 @@ class BaseFactory {
 	 */
 	function getForumControl() {
 		require_once("Community/Forum.php");
-		$obj = new CustomForumControl();
+		$obj = new ForumControl();
 		return $obj;
 	}
 	/**
@@ -110,7 +110,7 @@ class BaseFactory {
 	 */
 	function getForumPostControl() {
 		require_once("Community/ForumPost.php");
-		$obj = new CustomForumPostControl();
+		$obj = new ForumPostControl();
 		return $obj;
 	}
 	/**
