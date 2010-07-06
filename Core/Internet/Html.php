@@ -244,7 +244,7 @@ class HtmlControl {
 			$path = "/get-binary.php?Binary=" . $binary->get("HashValue") . "{$imageName}";
 
 			if ($binary->get("IsPublic") == "t") {
-				$path = "/resource/binary/cache/" . $binary->get("HashValue") . "/{$siteFriendlyImageName}";
+				$path = $application->registry->get("Cache/Binary/Path/Web", "/resource/binary/cache/") . $binary->get("HashValue") . "/{$siteFriendlyImageName}";
 			}
 
 			if ($withSiteAdress) {
