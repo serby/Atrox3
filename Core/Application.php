@@ -583,7 +583,6 @@ class Application {
 				if (class_exists("FirePHP", false)) {
 					$firephp = FirePHP::getInstance(true);
 					$firephp->log($type, $string);
-					return true;
 				}
 			}
 
