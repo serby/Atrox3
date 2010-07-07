@@ -77,8 +77,8 @@ class TaggedDataControl extends DataControl {
 						for ($i = 0; $i < count($tags); $i++) {
 							$filter->addJoin($this->table, $this->key, "TagToData", "DataId", "TagToData{$i}");
 							$filter->addConditional("TagToData{$i}", "Tag", $tags[$i] . "%", "ILIKE", $tagLogicOperator);
+							$filter->addConditional("TagToData{$i}", "Type", $this->type);
 						}
-						$filter->addConditional("TagToData0", "Type", $this->type);
 					}
 
 					$filter->setDistinct(true);
