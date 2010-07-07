@@ -1264,18 +1264,6 @@ class DataControl {
 	}
 
 	/**
-	 * Moves the internal record pointer. -1 will go to a random postition
-	 */
-	function goTo($row = -1) {
-		if ($row == -1) {
-			$row = rand(1, $this->numRows - 1);
-		}
-		$row = min($row, $this->numRows);
-		$row = max($row, 1);
-		$this->recordPointer = $row;
-	}
-
-	/**
 	 * Returns the first item with the field with the name $field name
 	 * equal to $value
 	 * @param $value The value to match $fieldName
