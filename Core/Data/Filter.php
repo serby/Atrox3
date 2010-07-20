@@ -31,6 +31,13 @@ class Filter {
 	 * @var String
 	 */
 	var $conditions = null;
+	
+	/**
+	 * The Sql for the filters 'GROUP BY' clause
+	 * @access private
+	 * @var String
+	 */
+	var $groupBy = array();
 
 	/**
 	 * The Sql for the filters 'ORDER BY' clause
@@ -70,9 +77,39 @@ class Filter {
 	function Filter() {
 		$this->databaseControl = &CoreFactory::getDatabaseControl();
 	}
+	
+	/**
+	 * Adds a group by clause to the filter.
+	 * @param String|Array $group The field(s) to group by
+	 * @return void
+	 */
+	function addGroupBy($group) {
+		if(!is_array($group)){
+			$group = array($group);
+		}
+		$this->groupBy = array_merge($this->groupBy, $group);
+	}
+	
+	function getGroupBySql(){
+		if (!is_array($this->groupBy)) {
+			return false;
+		}
+		$groupArray = array();
+		foreach($this->groupBy as $group){
+			$groupArray[] = $this->databaseControl->parseField($group);
+		}
+		
+		$groupBySql = implode(", ", $groupArray);
+	
+		if ($groupBySql == null) {
+			return false;
+		} else {
+			return "GROUP BY " . $groupBySql;
+		}
+	}
 
 	/**
-	 * Adds and order by clause to the filter.
+	 * Adds an order by clause to the filter.
 	 * <b>If this is invoked twice specifing the same field then the first
 	 * order will be overriden.</b>
 	 * @param String $order The field to order by

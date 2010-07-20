@@ -333,6 +333,10 @@ class DataControl {
 	var $fullTable = null;
 	var $fullKey = null;
 	var $relationControls = null;
+	
+	/**
+	 * @var Filter
+	 */
 	var $filter = null;
 	var $numRows = null;
 	var $recordPointer = null;
@@ -926,70 +930,67 @@ class DataControl {
 		$this->numRows = $this->databaseControl->numRows($this->results);
 		return $this->numRows;
 	}
+	
+	
+	/**
+	 * Abstraction of the logic from the various different aggregate function methods as they were all identical.
+	 * Takes in the field name and the type of aggreagate function and returns the corresponding result (SUM, AVG etc).
+	 * @author Adam Duncan <adam.duncan@clock.co.uk>
+	 * @param String $fieldName
+	 * @param String $type
+	 * @return Mixed
+	 */
+	protected function aggregateFunctionGenerator($fieldName, $type) {
+		$this->initTable();
+		if ($this->filter != null) {
+			$joins = $this->filter->getJoinSql();
+			$conditions = $this->filter->getConditionSql();
+			
+			$sql = "SELECT " . $type . "(" . $this->databaseControl->parseField($fieldName)
+			. ") FROM $this->fullTable $joins $conditions";
+		} else {
+			$sql = "SELECT " . $type . "(" . $this->databaseControl->parseField($fieldName)
+			. ") FROM $this->fullTable $joins $conditions";
+		}
+
+		$data = $this->databaseControl->fetchRow($this->databaseControl->query($sql));
+		return $data[0] == null ? 0 : $data[0];
+	}
 
 	/**
 	 * Returns the max of the column '$field' from the table defined
 	 * for this class, except thoses filtered out by the '$filter' object.
 	 * @return The max of the column returned by the query.
 	 */
-	function maxField($fieldName) {
-		$this->initTable();
-		if ($this->filter != null) {
-			$joins = $this->filter->getJoinSql();
-			$conditions = $this->filter->getConditionSql();
-			$order = $this->filter->getOrderSql();
-			$sql = "SELECT MAX(" . $this->databaseControl->parseField($fieldName)
-			. ") FROM $this->fullTable $joins $conditions $order";
-		} else {
-			$sql = "SELECT MAX(" . $this->databaseControl->parseField($fieldName)
-			. ") FROM $this->fullTable $joins $conditions $order";
-		}
-
-		$data = $this->databaseControl->fetchRow($this->databaseControl->query($sql));
-		return $data[0] == null ? 0 : $data[0];
+	public function maxField($fieldName) {
+		return $this->aggregateFunctionGenerator($fieldName, "MAX");
 	}
-
+	
 	/**
-	 * Returns the sum of the column '$field' from the table defined
+	 * Returns the min of the column '$field' from the table defined
 	 * for this class, except thoses filtered out by the '$filter' object.
-	 * @return The sum of the column returned by the query.
+	 * @return The max of the column returned by the query.
 	 */
-	function sumField($fieldName) {
-		$this->initTable();
-		if ($this->filter != null) {
-			$joins = $this->filter->getJoinSql();
-			$conditions = $this->filter->getConditionSql();
-			$sql = "SELECT SUM(" . $this->databaseControl->parseField($fieldName)
-					. ") FROM $this->fullTable $joins $conditions";
-		} else {
-			$sql = "SELECT SUM(" . $this->databaseControl->parseField($fieldName)
-					. ") FROM $this->fullTable $joins $conditions";
-		}
-
-		$data = $this->databaseControl->fetchRow($this->databaseControl->query($sql));
-		return $data[0] == null ? 0 : $data[0];
+	public function minField($fieldName) {
+		return $this->aggregateFunctionGenerator($fieldName, "MIN");
 	}
-
+	
 	/**
 	 * Returns the average of the column '$field' from the table defined
 	 * for this class, except thoses filtered out by the '$filter' object.
 	 * @return The sum of the column returned by the query.
 	 */
-	function averageField($fieldName) {
-		$this->initTable();
-		if ($this->filter != null) {
-			$joins = $this->filter->getJoinSql();
-			$conditions = $this->filter->getConditionSql();
-			$order = $this->filter->getOrderSql();
-			$sql = "SELECT AVG(" . $this->databaseControl->parseField($fieldName)
-			. ") FROM $this->fullTable $joins $conditions $order";
-		} else {
-			$sql = "SELECT AVG(" . $this->databaseControl->parseField($fieldName)
-			. ") FROM $this->fullTable $joins $conditions $order";
-		}
-
-		$data = $this->databaseControl->fetchRow($this->databaseControl->query($sql));
-		return $data[0] == null ? 0 : $data[0];
+	public function avgField($fieldName) {
+		return $this->aggregateFunctionGenerator($fieldName, "AVG");
+	}
+	
+	/**
+	 * Returns the sum of the column '$field' from the table defined
+	 * for this class, except thoses filtered out by the '$filter' object.
+	 * @return The sum of the column returned by the query.
+	 */
+	public function sumField($fieldName) {
+		return $this->aggregateFunctionGenerator($fieldName, "SUM");
 	}
 
 	/**
