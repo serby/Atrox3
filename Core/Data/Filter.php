@@ -95,6 +95,20 @@ class Filter {
 
 	/**
 	 * Adds and order by clause to the filter.
+	 *
+	 *
+	 * If you need this to work in postgres < 8.3 then please run this sql on the database.
+	 *
+CREATE OR REPLACE FUNCTION ts_rank(tsvector, tsquery)
+  RETURNS real AS
+'$libdir/tsearch2', 'rank_def'
+  LANGUAGE 'c' IMMUTABLE STRICT;
+ALTER FUNCTION ts_rank(tsvector, tsquery) OWNER TO postgres;
+
+GRANT EXECUTE ON FUNCTION ts_rank(tsvector, tsquery) TO postgres;
+GRANT EXECUTE ON FUNCTION ts_rank(tsvector, tsquery) TO "WebUserGroup";
+GRANT EXECUTE ON FUNCTION ts_rank(tsvector, tsquery) TO public;
+	 *
 	 * @param String $field The full text search field
 	 * @param String $value The Expression to search for
 	 */
@@ -102,18 +116,20 @@ class Filter {
 		if ($value != "") {
 			$value = preg_replace(array("/\s+\or\s+/", "/[^\d\w\s\|\']/", "/\b\s\s*\b/", "/\'/"), array("|","", "&", "&"), mb_strtolower(trim($value)));
 			// Stop if word is too short
-			if (($operator == "ILIKE") || ($operator == "NOT ILIKE")) {
+			if (($logicalOperator == "ILIKE") || ($logicalOperator == "NOT ILIKE")) {
 				$newCondition["FullField"] = $this->databaseControl->parseField($field) . "::text";
 			} else {
-				$newCondition["FullField"] = $this->databaseControl->parseField($field) . "l";
+				$newCondition["FullField"] = $this->databaseControl->parseField($field);
 			}
-			$newCondition["FullField"] = $this->databaseControl->parseField($field);
+
+			$newCondition["FullTable"] = $this->databaseControl->parseTable($table);
+
 			$newCondition["Value"] = "'$value'::tsquery";
 			$newCondition["Operator"] = "@@";
 			$newCondition["LogicalOperator"] = $logicalOperator;
 			$newCondition["Type"] = 0;
 			$this->conditions[] = $newCondition;
-			$newOrder["FullOrder"] = "RANK({$newCondition["FullTable"]}.{$newCondition["FullField"]}, '$value')";
+			$newOrder["FullOrder"] = "ts_rank({$newCondition["FullTable"]}.{$newCondition["FullField"]}, '$value')";
 			$newOrder["Descending"] = true;
 			$this->orders[$newOrder["FullOrder"]] = $newOrder;
 		}
@@ -127,7 +143,7 @@ class Filter {
 	function clearOrder() {
 		$this->orders = array();
 	}
-	
+
 	function makeConditional($table, $field, $value, $operator = " = ", $logicalOperator = "AND") {
 		$newCondition["FullTable"] = $this->databaseControl->parseTable($table);
 		if (($operator == "ILIKE") || ($operator == "NOT ILIKE")) {
