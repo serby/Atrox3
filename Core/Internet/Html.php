@@ -219,7 +219,20 @@ class HtmlControl {
 	}
 
 	//All binary functions need to be redone to work with hash value
-	function getImageBinaryLocation($binary, $width = null, $height = null, $withSiteAdress = false, $crop = true, $watermark = false) {
+
+/**
+ * Function to perform various operations to binary images
+ * Adds extra functionaility to existing function
+ * @param unknown_type $binary
+ * @param int $width
+ * @param int $height
+ * @param boolean $withSiteAdress
+ * @param boolean $crop
+ * @param boolean $watermark
+ * @return string
+ */
+	function getImageBinaryLocation($binary, $width = null, $height = null, $withSiteAdress = false, $crop = true,
+		$watermark = false, $wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null) {
 		if ($binary) {
 			$application = CoreFactory::getApplication();
 			$dimensions = $width . "x" . $height . "_";
@@ -229,17 +242,22 @@ class HtmlControl {
 			$siteFriendlyImageName = htmlentities($imageName);
 
 			$imagePath = $application->registry->get("Cache/Binary/Path") . "/" . $binary->get("HashValue") . "/" . $imageName;
-
 			if (!is_file($imagePath)) {
 				@mkdir($application->registry->get("Cache/Binary/Path") . "/" . $binary->get("HashValue"));
  				$binaryControl = CoreFactory::getBinaryControl();
  				$imageControl = CoreFactory::getImageControl();
- 				if ($binaryControl->outputToFile($binary, $imagePath)) {
+				if ($wOffset != 0 || $hOffset != 0) {
+					if ($binaryControl->outputToFile($binary, $imagePath)) {
+						$imageControl->cropXY($imagePath, $imagePath, $width, $height, $wOffset, $hOffset, $srcWidth, $srcHeight);
+					}
+				}
+				else if ($binaryControl->outputToFile($binary, $imagePath)) {
 					$imageControl->resizeAndCrop($imagePath, $imagePath, $width, $height, false, !$crop);
 				}
 				if ($watermark) {
 					$imageControl->watermark($imagePath, $imagePath);
 				}
+
 			}
 			$path = "/get-binary.php?Binary=" . $binary->get("HashValue") . "{$imageName}";
 
@@ -255,19 +273,59 @@ class HtmlControl {
 		}
 	}
 
-	function showImageBinary($binary, $alt = null, $width = null, $height = null, $class = null, $crop = true, $watermark = false) {
+	/**
+	 * Used to get the image dimensions of a specified image input
+	 * @author Tom Gallacher <tom.gallacher@clock.co.uk>
+	 * @param unknown_type $binary
+	 * @return Array <width, height>
+	 */
+	public function getImageDimensions($binary) {
 
-		if ($binary) {
+		$application = CoreFactory::getApplication();
+		$imageName = $binary->get("Filename");
+		$imagePath = $application->registry->get("Binary/Path") . "/" . $binary->get("HashValue") . "/" . $imageName;
+		$size = getimagesize($imagePath);
+		$imageDimension = array("width" => $size[0],"height" => $size[1]);
 
-			$imageLocation = $this->getImageBinaryLocation($binary, $width, $height, false, $crop, $watermark);
+		return $imageDimension;
+	}
 
-			return "<img" . ($class!=null?" class=\"$class\"":"") . ($width!=null?" width=\"$width\"":"") .
-			($height!=null?" height=\"$height\"":"") . " src=\"" . $imageLocation . "\" alt=\"$alt\" title=\"$alt\" />";
+	function showImageBinary($binary, $alt = null, $width = null, $height = null, $class = null, $crop = true, $watermark = false,
+														$wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null) {
+			if ($binary) {
+
+				$imageLocation = $this->getImageBinaryLocation($binary, $width, $height, false, $crop, $watermark, $wOffset,
+				$hOffset, $srcWidth, $srcHeight);
+
+				return "<img" . ($class != null ? " class=\"$class\"":"") . ($width != null ? " width=\"$width\"":"") .
+				($height != null ? " height=\"$height\"":"") . " src=\"" . $imageLocation . "\" alt=\"$alt\" title=\"$alt\" />";
+			}
 		}
+
+	/**
+	 * Used to clear the binary image cache, this is needed to allow images that are being cropped
+	 * to be updated in the cache.
+	 * @author Tom Gallacher <tom.gallacher@clock.co.uk>
+	 * @param unknown_type $binary
+	 * @param int $height
+	 * @param int $width
+	 * @return null
+	 */
+	public function clearImageBinaryCache($binary, $height, $width)	{
+
+			$application = CoreFactory::getApplication();
+			$dimensions = $width . "x" . $height . "_";
+			$imageName = $dimensions . $binary->get("Filename");
+
+			$siteFriendlyImageName = htmlentities($imageName);
+			$imagePath = $application->registry->get("Cache/Binary/Path") . "/" . $binary->get("HashValue") . "/" . $imageName;
+			if (is_file($imagePath)) {
+				unlink($imagePath);
+			}
 	}
 
 	/**
-	 * Take a Binary DataEntity and returns the site path of the fie
+	 * Take a Binary DataEntity and returns the site path of the file
 	 *
 	 * @param DataEntity $binary
 	 * @return string The site path of the file
@@ -1709,5 +1767,43 @@ class HtmlControl {
 		}
 		$output .= "</table>\n";
 		return $output;
+	}
+
+		/**
+		 * This generates a time dropdown, with specified start and end times being optional
+		 * @author Tom Gallacher {tom.gallacher@clock.co.uk
+		 * @param unknown_type $name
+		 * @param unknown_type $value
+		 * @param unknown_type $tabIndex
+		 * @param unknown_type $class
+		 * @param unknown_type $id
+		 * @param unknown_type $onChangeEvent
+		 * @param unknown_type $startHour
+		 * @param unknown_type $endHour
+		 * @return string
+		 */
+		public function generateTimeDropdown($name, $value, $tabIndex = null, $class = null, $id = null, $onChangeEvent = null, $startHour = null, $endHour = null) {
+
+		$startHour = (is_null($startHour)) ? 1 : $startHour;
+		$endHour = (is_null($endHour)) ? 23 : $endHour;
+		$hours = range($startHour, $endHour);
+
+		$minutes = array("00", "15", "30", "45");
+
+		$select = "<select name=\"$name\" id=\"$id\" class=\"$class\" tabindex=\"$tabIndex\" onChange=\"$onChangeEvent\">\n";
+		foreach ($hours as $hour) {
+			$hour = $hour < 10 ? "0" . $hour : $hour;
+			foreach ($minutes as $min) {
+				$time = $hour . ":" .$min;
+				$select .= <<<HTML
+<option value="{$time}"
+HTML;
+        $select .= ($time==$value) ? ' selected="selected"' : '';
+        $select .= ">".$time."</option>\n";
+			}
+		}
+		$select .= '</select>';
+		return $select;
+
 	}
 }

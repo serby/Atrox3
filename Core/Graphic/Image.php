@@ -105,6 +105,93 @@ class ImageValidation extends CustomValidation {
 class ImageControl {
 
 	/**
+	 * Runs input validation on an Image file input
+	 * @author Tom Gallacher <tom.gallacher@clock.co.uk>
+	 * @param unknown_type $inputPath
+	 * @param unknown_type $outputFile
+	 * @return boolean|string
+	 */
+	public function inputFileValidation($inputPath, $outputFile) {
+
+		if ($inputPath == "") {
+			trigger_error("Input filename must not be blank");
+			return false;
+		}
+		if (!is_file($inputPath)) {
+			trigger_error("Input file '$inputPath' does not exist or it not a file");
+			return false;
+		}
+		if ($outputFile == "") {
+			trigger_error("Output filename must not be blank");
+			return false;
+		}
+
+		clearstatcache();
+	}
+
+
+	/**
+	 * @author Tom Gallacher {tom.gallacher@clock.co.uk}
+	 * This method is a modification of resizeAndCrop to give the functionaility of a custom crop
+	 * @param unknown_type $inputPath
+	 * @param unknown_type $outputFile
+	 * @param int $width
+	 * @param int $height
+	 * @param int $wOffset
+	 * @param int $hOffset
+	 * @return Array (Width, Height)
+	 */
+	public function cropXY($inputFile, $outputFile, &$width, &$height, $wOffset, $hOffset, $srcWidth, $srcHeight) {
+
+		$imageValidation = $this->inputFileValidation($inputFile, $outputFile);
+
+		$size = getimagesize($inputFile);
+
+		if ((($width == null && $height == null)) || (($size[0] == $width) && ($size[1] == $height))) {
+			if ($inputFile != $outputFile) {
+				copy($inputFile, $outputFile);
+			}
+			return true;
+		}
+
+		switch($size[2]) {
+			case 1:
+				$imageSrc = imagecreatefromgif($inputFile);
+				break;
+			case 2:
+				$imageSrc = imagecreatefromjpeg($inputFile);
+				break;
+			case 3:
+				$imageSrc = imagecreatefrompng($inputFile);
+				break;
+			default:
+				$application = &CoreFactory::getApplication();
+				$application->errorControl->addError(
+					"'$inputFile' is not a valid image. Image must be a Jpeg, Gif or Png");
+				return false;
+		}
+
+		$imageDst = imagecreatetruecolor($width, $height);
+		imagecopyresampled($imageDst, $imageSrc, 0, 0, $wOffset, $hOffset, $width, $height, $srcWidth, $srcHeight);
+
+		clearstatcache();
+		$size = getimagesize($inputFile);
+		switch($size[2]) {
+			case 1:
+				imagegif ($imageDst, $outputFile, IMG_QUALITY);
+				break;
+			case 2:
+				imagejpeg($imageDst, $outputFile, IMG_QUALITY);
+				break;
+			case 3:
+				imagepng($imageDst, $outputFile);
+				break;
+		}
+		return array($width, $height);
+
+	}
+
+	/**
 	 * Return an RGB from a HEX value
 	 */
 	function colorFromHex(&$image, $colorHex) {
