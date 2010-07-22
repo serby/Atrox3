@@ -31,7 +31,7 @@ class Filter {
 	 * @var String
 	 */
 	var $conditions = null;
-	
+
 	/**
 	 * The Sql for the filters 'GROUP BY' clause
 	 * @access private
@@ -77,7 +77,7 @@ class Filter {
 	function Filter() {
 		$this->databaseControl = &CoreFactory::getDatabaseControl();
 	}
-	
+
 	/**
 	 * Adds a group by clause to the filter.
 	 * @param String|Array $group The field(s) to group by
@@ -89,7 +89,7 @@ class Filter {
 		}
 		$this->groupBy = array_merge($this->groupBy, $group);
 	}
-	
+
 	function getGroupBySql(){
 		if (!is_array($this->groupBy)) {
 			return false;
@@ -98,9 +98,9 @@ class Filter {
 		foreach($this->groupBy as $group){
 			$groupArray[] = $this->databaseControl->parseField($group);
 		}
-		
+
 		$groupBySql = implode(", ", $groupArray);
-	
+
 		if ($groupBySql == null) {
 			return false;
 		} else {
