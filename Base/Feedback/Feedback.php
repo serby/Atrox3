@@ -59,7 +59,7 @@ class FeedbackControl extends DataControl {
 			"Full Name", "", FM_TYPE_STRING, 255, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["EmailAddress"] = new FieldMeta(
-			"E-mail Address", "", FM_TYPE_EMAILADDRESS, 255, FM_STORE_ALWAYS, false);
+			"Email Address", "", FM_TYPE_EMAILADDRESS, 255, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Reference"] = new FieldMeta(
 			"Reference", "", FM_TYPE_STRING, 255, FM_STORE_ALWAYS, true);
@@ -83,7 +83,7 @@ class FeedbackControl extends DataControl {
 
 		$this->fieldMeta["Parent"] = new FieldMeta(
 			"Parent", "", FM_TYPE_BOOLEAN, 1, FM_STORE_ALWAYS, true);
-			
+
 		$this->fieldMeta["Status"] = new FieldMeta(
 			"Status", FBK_NEW, FM_TYPE_INTEGER, null, FM_STORE_ALWAYS, false);
 
@@ -93,7 +93,7 @@ class FeedbackControl extends DataControl {
 
 	function delete($ids) {
 		$idsArray = explode(",", $ids);
-		
+
 		$feedbackChildControl = $this;
 
 		foreach ($idsArray as $id) {
@@ -103,7 +103,7 @@ class FeedbackControl extends DataControl {
 				$feedbackChildFilter->addConditional($feedbackChildControl->table, "Reference", $reference);
 				$feedbackChildControl->clearFilter();
 				$feedbackChildControl->setFilter($feedbackChildFilter);
-				
+
 				$feedbackNoteControl = BaseFactory::getFeedbackNoteControl();
 				if ($this->hasNotes) {
 					while ($feedbackChild = $feedbackChildControl->getNext()) {
@@ -113,11 +113,11 @@ class FeedbackControl extends DataControl {
 				}
 				$feedbackNoteControl->delete($id, "FeedbackId");
 			}
-			
+
 			parent::delete($ids);
 		}
 	}
-	
+
 	function getStatusArray(){
 		return $this->status;
 	}
