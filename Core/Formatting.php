@@ -850,6 +850,11 @@ class JsonEncoder extends FieldFormatter {
  */
 class JsonDecoder extends FieldFormatter {
 	function format($value) {
+
+		if (trim($value) == "") {
+			return null;
+		}
+
 		if (json_decode($value)) {
 			return json_decode($value);
 		} else {
