@@ -850,13 +850,13 @@ class JsonEncoder extends FieldFormatter {
  */
 class JsonDecoder extends FieldFormatter {
 	function format($value) {
-
 		if (trim($value) == "") {
 			return null;
 		}
+		$json = json_decode($value);
 
-		if (json_decode($value)) {
-			return json_decode($value);
+		if (($json !== null) || ($value == '""')) {
+			return $json;
 		} else {
 			trigger_error("Malformed JSON string being decoded: {$value}",E_USER_ERROR);
 		}
