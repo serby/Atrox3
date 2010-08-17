@@ -458,6 +458,14 @@ class Application {
 		exit;
 	}
 
+	function displayErrorPage($path, $code = 404) {
+		header("HTTP/1.1 {$code}");
+		header("Status: {$code}");
+		$application = $this;
+		include $path;
+		exit;
+	}
+
 	/**
 	 * Reloads the current page
 	 */
