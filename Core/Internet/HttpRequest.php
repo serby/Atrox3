@@ -13,230 +13,176 @@
  */
 class HttpRequest {
 	
-	private $method = "GET";
-	private $postData = null;
+/**
+	 *
+	 * @var string
+	 */
+	private $url;
+
+	/**
+	 *
+	 * @var array
+	 */
+	private $headers = array("Expect: ");
+
+	/**
+	 *
+	 * @var string
+	 */
+	private $username;
+
+	/**
+	 *
+	 * @var string
+	 */
+	private $password;
+
+	/**
+	 *
+	 * @var int
+	 */
 	private $timeout = 30;
-	private $headers = array();
-	private $cookies = array();
-	
-	function __construct() {
-		
-	}
-	
+
 	/**
-	 * Sets the method of the next HTTP requests
 	 *
-	 * @param string $method
-	 * @return void
+	 * @var string
 	 */
-	function setMethod($method) {
-		$this->method = $method;
-	}
-	
+	private $userAgent = "Atrox";
+
 	/**
-	 * Sets the method of the next request
 	 *
-	 * @param string $method
-	 * @return void
+	 *
+	 * @var string
 	 */
-	function setPostData($data) {
+	private $referer = "";
+
+	/**
+	 *
+	 * @var string
+	 */
+	private $postData;
+
+	/**
+	 *
+	 * @var resource
+	 */
+	private $curl;
+
+	function __construct($url = null) {
+		if ($url) {
+			$this->url = $url;
+		}
+	}
+
+	function reset() {
+		$this->headers = array("Expect: ");
+		$this->postData = null;
+		$this->referer = null;
+	}
+
+	function send() {
+		$curl = curl_init();
+
+		curl_setopt($curl, CURLOPT_URL, $this->url);
+		curl_setopt($curl, CURLOPT_TIMEOUT, $this->timeout);
+		curl_setopt($curl, CURLOPT_HEADER, true);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+
+
+		if ($this->username) {
+			curl_setopt($curl, CURLOPT_USERPWD, $this->username . ":" . $this->password);
+		}
+
+		if ($this->postData) {
+			curl_setopt($curl, CURLOPT_POST, true);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $this->postData);
+		}
+
+		if ($this->userAgent) {
+			curl_setopt($curl, CURLOPT_USERAGENT, $this->userAgent);
+		}
+
+		if ($this->referer) {
+			curl_setopt($curl, CURLOPT_REFERER, $this->referer);
+		}
+
+		curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
+
+		$response = new stdClass();
+		if ($responseText = curl_exec($curl)) {
+			list($response->header,
+			$response->body) =
+			explode("\r\n\r\n", $responseText);
+
+			$response->status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		}
+		curl_close($curl);
+		return $response;
+	}
+
+	/**
+	 *
+	 * @param array $data
+	 */
+	function setPostData(array $data) {
+		$this->postData = http_build_query($data);
+	}
+
+	/**
+	 *
+	 * @param string $data
+	 */
+	function setRawPostData($data) {
 		$this->postData = $data;
 	}
-	
+
 	/**
-	 * Sets the timeout to wait for a connect 
 	 *
-	 * @param string $timeout
-	 * @return void
+	 * @param string $header
+	 * @param strign $value
+	 * @return HttpRequest
 	 */
-	function setTimeout(int $timeout) {
+	function addHeader($header, $value) {
+		$this->headers[] = "$header: $value";
+		return $this;
+	}
+	
+	function addOAuthHeaders($oauthHeaders) {
+		$urlParts = parse_url($this->url);
+    $oauth = 'Authorization: OAuth realm="' . $urlParts['path'] . '",';
+    foreach($oauthHeaders as $name => $value)
+    {
+      $oauth .= "{$name}=\"{$value}\",";
+    }
+    $this->headers[] = substr($oauth, 0, -1);
+	}
+
+	function addCookie($name, $value, $expire = 0, $path = false, $domain = false, $secure = false) {
+		throw new Exception("Not yet implemented");
+	}
+
+	/**
+	 *
+	 * @param string $username
+	 * @param string $password
+	 */
+	function setAuthenticationDetails($username, $password) {
+		$this->username = $username;
+		$this->password = $password;
+	} 
+
+	function setTimeout($timeout) {
 		$this->timeout = $timeout;
 	}
 
-	/**
-	 * Sets the cookies to be sent with the next request 
-	 *
-	 * @param string $method
-	 * @return void
-	 */
-	function setCookies(array $cookies) {
-		$this->cookies = $cookies;
+	function getUrl() {
+		return $this->url;
 	}
-		
-	/**
-	 * Adds custom header to the next request
-	 *
-	 * @param string $method
-	 * @return void
-	 */
-	function addHeader($header) {
-		$this->headers[] = $header;
-	}
-	
-	/**
-	 * Clears all the set headers
-	 * @retrun void
-	 */
-	function clearHeaders() {
-		$this->headers = array();
-	}
-	
-	/**
-	 * Makes a requests 
-	 *
-	 * @param string $url
-	 * @return Object { headers: [], body: string } 
-	 */
-	function send($url) {
-		
-		$urlParts = parse_url($url);
-		$host = $urlParts["host"];
-		$port = isset($urlParts["post"]) ? $urlParts["post"] : 80;
-		$path = isset($urlParts["path"]) ? $urlParts["path"] : "/"; 
-		$queryString = isset($urlParts["query"]) ? "?" . $urlParts["query"] : "";
-		
-		// Store whether this is a https connection 
-		$secure = false;
-		
-		switch ($urlParts["scheme"]) {
-			case "https":
-				$secure = true;
-				$transport = "ssl://";
-				if (!isset($urlParts["post"])) {
-					$port = 443;
-				}
-				break;		
-			default: 
-				$transport = "tcp://";
-		}
-		
-		$errorNumber = "";
-		$errorMessage = "";
-	
-		$socket = fsockopen($transport . $host, $port, $errorNumber, $errorMessage, $this->timeout);
-		
-		if (!$socket) {
-			throw new Exception("$errorMessage ($errorNumber)");
-			return false;
-		} else {
-			$request = "{$this->method} {$path}{$queryString} HTTP/1.1\r\n";
-			$request .= "Host: $host\r\n";			
-		
-			if (sizeof($this->cookies) > 0) {
-				$cookies = ""; 
-				foreach($this->cookies as $cookie) {
-					if ($this->isCookieValid($cookie, $host, $path, $secure)) {
-						$cookies .= "{$cookie->name}={$cookie->value}; ";
-					}
-				}
-				$request .= "Cookie: {$cookies}\r\n";
-			}
 
-			// Add headers
-			foreach($this->headers as $header) {
-				$request .= $header . "\r\n";
-			}
-			
-			$request .= "Content-length: " . mb_strlen($this->postData) . "\r\n";
-			
-			$request .= "\r\n";
-			if (mb_strlen($this->postData) > 0) {
-				$request .= "{$this->postData}\r\n";
-			}
-			
-			$request .= "\r\n";
-			
-			// Send Request
-			fwrite($socket, $request);
-			
-			$response->request = $request;
-			$response->headers = array();
-			$response->cookies = array();
-			$chunked = false;
-			while ($header = trim(fgets($socket))) {
-				$response->headers[] = $header;
-				if (strtolower(substr($header, 0, 11)) == "set-cookie:") {
-					$response->cookies[] = $this->parseCookies(substr($header, 11));					
-				} else if ($header == "Transfer-Encoding: chunked") {
-					$chunked = true;
-				}
-			}
-			
-			stream_set_blocking($socket, false);
-			if ($chunked) {
-				while (!feof($socket)) {
-					$chunkSize = hexdec($a = trim(fgets($socket)));
-					if ($chunkSize > 0) {
-						$body = fgets($socket, $chunkSize + 1);
-						$response->body .= $body;
-					}
-				}
-			} else {
-				while (!feof($socket) && ($body = fgets($socket))) {				
-					$response->body .= $body;
-				}
-			}			
-			fclose($socket);
-		}
-		return $response;
-	}
-	
-	private function parseCookies($cookie) {
-		$cookieParts = explode(";", $cookie);
-		$returnCookies = array();
-		$cookiePart = current($cookieParts);
-		$cookiePart = explode("=", $cookiePart);
-		
-		$newCookie->name = trim($cookiePart[0]);
-		$newCookie->value = trim($cookiePart[1]);
-		$newCookie->secure = false;
-		//$newCookie->httpOnly = false;
-		
-		
-		foreach($cookieParts as $cookiePart) {
-			$cookiePart = explode("=", $cookiePart);
-			
-			switch(trim($cookiePart[0])) {
-				case "expires":
-					$newCookie->expires = trim($cookiePart[1]);
-					break;
-				case "path":
-					$newCookie->path = trim($cookiePart[1]);
-					break;
-				case "domain":
-					$newCookie->domain = trim($cookiePart[1]);
-					break;
-				case "secure":
-					$newCookie->secure = true;
-					break;
-			}
-		}
-		return $newCookie;
-	}
-	
-	 function isCookieValid($cookie, $domain, $path, $secure) {
-	 	$domainValid = true;
-	 	if (isset($cookie->domain)) {
-	 		$cookie->domain = trim($cookie->domain, ".");
-		 	$domainParts = explode(".", $domain);
-		 	$cookieDomainParts = explode(".", $cookie->domain);
-		 	$domainParts = array_slice($domainParts, sizeof($domainParts) - sizeof($cookieDomainParts)); 	
-		 	$domainValid = $domainParts == $cookieDomainParts;
-	 	}
-	 	$pathValid = true;
-	 	if (isset($cookie->path)) {
-		 	$cookie->path = "/" . $cookie->path . "/";
-		 	$path = "/" . $path . "/";
-		 	$cookie->path = preg_replace("/\/+/", "/", $cookie->path);
-		 	$path = preg_replace("/\/+/", "/", $path);
-		 	$pathValid = substr($path, 0, strlen($cookie->path)) == $cookie->path;
-	 	}	 	
-	 	$timeValid = true;
-	 	if (isset($cookie->expires)) {
-	 		$timeValid = strtotime($cookie->expires) > time();
-	 	}
-		return 
-			(!isset($cookie->secure) || $cookie->secure ? $secure : true) && 
-			$domainValid && $pathValid && $timeValid;
+	function setUrl($url) {
+		$this->url = $url;
 	}
 }
