@@ -22,10 +22,10 @@ class GData {
 		
 		$httpRequest = CoreFactory::getHttpRequest();
 		
-		$httpRequest->setMethod("POST");
-		$httpRequest->addHeader("Content-type: application/x-www-form-urlencoded");
+		$httpRequest->setUrl("https://www.google.com/youtube/accounts/ClientLogin");
+		$httpRequest->addHeader("Content-type:", "application/x-www-form-urlencoded");
 		
-		$httpRequest->setPostData(http_build_query(
+		$httpRequest->setRawPostData(http_build_query(
 		   array(
 	     	"Email" => $username,
 	     	"Passwd" => $password,
@@ -33,7 +33,7 @@ class GData {
 		   	"source" => "Clock"
 		   )
 	   ));
-		$response = $httpRequest->send("https://www.google.com/youtube/accounts/ClientLogin");
+		$response = $httpRequest->send();
 		$token = explode("\n", $response->body);
 		$token = explode("=", $token[0]);
 		if (strlen($token[1]) == 162) {
