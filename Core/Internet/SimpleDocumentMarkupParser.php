@@ -241,7 +241,7 @@ class SimpleDocumentMarkupParser {
 		if ($matches[2] == "#") {
 			$text = $anchor . ". " . $matches[3];
 		}
-		return "<h$i>$text<a name=\"Heading-$anchor-{$this->uid}\"></a></h$i>";
+		return "<h$i>$text</h$i>";
 	}
 }
 
