@@ -80,6 +80,10 @@ class SimpleDocumentMarkupParser {
 
 		$text = preg_replace($searchArray, $replaceArray, $text);
 
+		// This could go in to make html valid. But needs testing.
+//		if ($text === "") {
+//			$text = "&nbsp;";
+//		}
 		return trim($text);
 	}
 
