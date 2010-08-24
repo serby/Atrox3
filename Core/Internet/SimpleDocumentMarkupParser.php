@@ -153,15 +153,6 @@ class SimpleDocumentMarkupParser {
 						$output .= $this->popEntireStack($stack);
 						$output .= "<p>&nbsp;&nbsp;" . $this->parseMarkup(mb_substr($lines[$i], 1)) . "</p>\n";
 						break;
-					case " " :
-						if ($this->checkStack($stack) != MRK_PLAIN) {
-							$currentListLevel = 0;
-							$output .= $this->popEntireStack($stack);
-							$output .= "<pre>\n";
-							$this->pushStack($stack, MRK_PLAIN);
-						}
-						$output .= mb_substr($lines[$i], 1) . "\n";
-						break;
 					case "*":
 					case "#":
 						$level = 1;
