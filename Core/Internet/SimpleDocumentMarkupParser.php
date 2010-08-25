@@ -234,7 +234,7 @@ class SimpleDocumentMarkupParser {
 
 		foreach ($level as $l) {
 			if ($l["Count"] > 0) {
-				$anchor .= $l["Count"].".";
+				$anchor .= $l["Count"] . ".";
 			}
 		}
 		$text = $matches[3];
