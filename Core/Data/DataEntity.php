@@ -441,7 +441,6 @@ class DataEntity {
 				return $result;
 			}
 		} else {
-
 			if ($this->control->validate($this, FM_STORE_ADD)) {
 				if ($this->binaries != null) {
 					foreach ($this->binaries as $k => $v) {
