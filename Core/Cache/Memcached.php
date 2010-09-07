@@ -73,6 +73,16 @@ class MemcachedControl {
 	}
 
 	/**
+	 * Increments the given key by 1 using memcache.
+	 *
+	 * @param string $key The key to increment
+	 */
+	public function increment($key) {
+		$this->memcache->add($this->keyPrefix . $key, 0);
+		$this->memcache->increment($this->keyPrefix . $key);
+	}
+
+	/**
 	 *
 	 * @param string $server
 	 * @param int $port
