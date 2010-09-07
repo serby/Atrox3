@@ -290,17 +290,18 @@ class HtmlControl {
 		return $imageDimension;
 	}
 
-	function showImageBinary($binary, $alt = null, $width = null, $height = null, $class = null, $crop = true, $watermark = false,
-														$wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null) {
-			if ($binary) {
+	function showImageBinary($binary, $alt = null, $width = null, $height = null, $class = null, $crop = true,
+		$watermark = false, $wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null) {
 
-				$imageLocation = $this->getImageBinaryLocation($binary, $width, $height, false, $crop, $watermark, $wOffset,
-				$hOffset, $srcWidth, $srcHeight);
+		if ($binary) {
 
-				return "<img" . ($class != null ? " class=\"$class\"":"") . ($width != null ? " width=\"$width\"":"") .
-				($height != null ? " height=\"$height\"":"") . " src=\"" . $imageLocation . "\" alt=\"$alt\" title=\"$alt\" />";
-			}
+			$imageLocation = $this->getImageBinaryLocation($binary, $width, $height, false, $crop, $watermark, $wOffset,
+			$hOffset, $srcWidth, $srcHeight);
+
+			return "<img" . ($class != null ? " class=\"$class\"":"") . ($width != null ? " width=\"$width\"":"") .
+			($height != null ? " height=\"$height\"":"") . " src=\"" . $imageLocation . "\" alt=\"$alt\" title=\"$alt\" />";
 		}
+	}
 
 	/**
 	 * Used to clear the binary image cache, this is needed to allow images that are being cropped
