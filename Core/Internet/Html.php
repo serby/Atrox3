@@ -314,15 +314,15 @@ class HtmlControl {
 	 */
 	public function clearImageBinaryCache($binary, $height, $width)	{
 
-			$application = CoreFactory::getApplication();
-			$dimensions = $width . "x" . $height . "_";
-			$imageName = $dimensions . $binary->get("Filename");
+		$application = CoreFactory::getApplication();
+		$dimensions = $width . "x" . $height . "_";
+		$imageName = $dimensions . $binary->get("Filename");
 
-			$siteFriendlyImageName = htmlentities($imageName);
-			$imagePath = $application->registry->get("Cache/Binary/Path") . "/" . $binary->get("HashValue") . "/" . $imageName;
-			if (is_file($imagePath)) {
-				unlink($imagePath);
-			}
+		$siteFriendlyImageName = htmlentities($imageName);
+		$imagePath = $application->registry->get("Cache/Binary/Path") . "/" . $binary->get("HashValue") . "/" . $imageName;
+		if (is_file($imagePath)) {
+			unlink($imagePath);
+		}
 	}
 
 	/**
