@@ -20,7 +20,7 @@ class BinaryControl extends DataControl {
 	var $table = "Binary";
 	var $key = "Id";
 	var $sequence = "Binary_Id_seq";
-	var $defaultOrder = "DateCreated";
+	var $defaultOrder = "Created";
 
 	function init() {
 
@@ -36,8 +36,8 @@ class BinaryControl extends DataControl {
 		$this->fieldMeta["MimeType"] = new FieldMeta(
 			"Mime Type", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
 
-		$this->fieldMeta["DateCreated"] = new FieldMeta(
-			"Date Created", "", FM_TYPE_DATE, null, FM_STORE_NEVER, false);
+		$this->fieldMeta["Created"] = new FieldMeta(
+			"Created", "", FM_TYPE_DATE, null, FM_STORE_NEVER, false);
 
 		$this->fieldMeta["HashValue"] = new FieldMeta(
 			"Hash Value", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
