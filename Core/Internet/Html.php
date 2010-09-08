@@ -232,7 +232,7 @@ class HtmlControl {
  * @return string
  */
 	function getImageBinaryLocation($binary, $width = null, $height = null, $withSiteAdress = false, $crop = true,
-		$watermark = false, $wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null) {
+		$watermark = false, $wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null, $includeModTime = false) {
 		if ($binary) {
 			$application = CoreFactory::getApplication();
 			$dimensions = $width . "x" . $height . "_";
@@ -263,6 +263,10 @@ class HtmlControl {
 
 			if ($binary->get("IsPublic") == "t") {
 				$path = $application->registry->get("Cache/Binary/Path/Web", "/resource/binary/cache/") . $binary->get("HashValue") . "/{$siteFriendlyImageName}";
+			}
+
+			if ($includeModTime) {
+				$path .= "?m=" . filemtime($imagePath);
 			}
 
 			if ($withSiteAdress) {
@@ -296,7 +300,7 @@ class HtmlControl {
 		if ($binary) {
 
 			$imageLocation = $this->getImageBinaryLocation($binary, $width, $height, false, $crop, $watermark, $wOffset,
-			$hOffset, $srcWidth, $srcHeight);
+			$hOffset, $srcWidth, $srcHeight, true);
 
 			return "<img" . ($class != null ? " class=\"$class\"":"") . ($width != null ? " width=\"$width\"":"") .
 			($height != null ? " height=\"$height\"":"") . " src=\"" . $imageLocation . "\" alt=\"$alt\" title=\"$alt\" />";
