@@ -134,7 +134,7 @@ class ResourceAggregator {
 	 *
 	 * @return string The generated HTML include.
 	 */
-	public function output() {
+	public function output($postfix = "") {
 
 		$response = "";
 		$files = "";
@@ -158,7 +158,7 @@ class ResourceAggregator {
 				}
 				file_put_contents($cachedFilePath, $processed);
 			//}
-			$response .= $this->delegate->makeHtml($this->cacheUrl . "/" . $filename, $resourceGroup);
+			$response .= $this->delegate->makeHtml($this->cacheUrl . "/" . $filename . $postfix, $resourceGroup);
 		}
 
 		unset($this->resources);
