@@ -246,7 +246,7 @@ class HtmlControl {
 				@mkdir($application->registry->get("Cache/Binary/Path") . "/" . $binary->get("HashValue"));
  				$binaryControl = CoreFactory::getBinaryControl();
  				$imageControl = CoreFactory::getImageControl();
-				if ($wOffset != null || $hOffset != null) {
+				if ($wOffset !== null || $hOffset !== null) {
 					if ($binaryControl->outputToFile($binary, $imagePath)) {
 						$imageControl->cropXY($imagePath, $imagePath, $width, $height, $wOffset, $hOffset, $srcWidth, $srcHeight);
 					}
