@@ -25,7 +25,7 @@ require_once("Atrox/Core/Internet/Html.php");
  */
 
 class HtmlFormControl {
-	
+
 	/**
 	 * Maps the file parameters into the post variables and return the
 	 * updated post variables
@@ -34,6 +34,7 @@ class HtmlFormControl {
 	 * @return unknown
 	 */
 	function mapFormSubmission($post, $files = false) {
+
 		if ($files) {
 			foreach($files as $filename => $file) {
 				if (!is_array($file["error"])) {
