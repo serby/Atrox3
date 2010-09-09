@@ -265,7 +265,7 @@ class HtmlControl {
 				$path = $application->registry->get("Cache/Binary/Path/Web", "/resource/binary/cache/") . $binary->get("HashValue") . "/{$siteFriendlyImageName}";
 			}
 
-			if ($includeModTime) {
+			if (($includeModTime) && (is_file($includeModTime))) {
 				$path .= "?m=" . filemtime($imagePath);
 			}
 
