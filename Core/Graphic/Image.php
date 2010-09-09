@@ -141,8 +141,7 @@ class ImageControl {
 	 * @param int $hOffset
 	 * @return Array (Width, Height)
 	 */
-	public function cropXY($inputFile, $outputFile, &$width, &$height, $wOffset, $hOffset, $srcWidth, $srcHeight) {
-
+	public function cropXY($inputFile, $outputFile, $width, $height, $wOffset, $hOffset, $srcWidth, $srcHeight) {
 		$imageValidation = $this->inputFileValidation($inputFile, $outputFile);
 
 		$size = getimagesize($inputFile);
