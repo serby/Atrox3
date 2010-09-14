@@ -19,16 +19,32 @@
 class Captcha {
 
 	/**
+	 * Characters that are used in a Captcha phrase
+	 * @var String
+	 */
+	protected $availableCharacters = "ABDEFGHJLMNQRTYabdefghijmnqrty23456789";
+
+	/**
+	 * Set the available characters to be used in a Captcha phrase
+	 * @param string $availableCharacters
+	 */
+	public function setAvailableCharacters($availableCharacters) {
+		if (!ctype_alnum($availableCharacters)) {
+			throw Exception("Only alpha numeric characters are to be used with the Captcha");
+		}
+
+		$this->availableCharacters = $availableCharacters;
+	}
+
+	/**
 	 * This function randomly generates a code to check aganst
 	 * @param int $length Length of the code to generate.
 	 */
 	function generateCode($length = 5) {
-		$character = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
-
-		$characterLength = strlen($character) - 1;
+		$characterLength = strlen($this->availableCharacters) - 1;
 		$captcha = "";
 		for ($i = 0 ; $i < $length ; $i++){
-			$captcha .= $character[rand(0, $characterLength)];
+			$captcha .= $this->availableCharacters[rand(0, $characterLength)];
 		}
 		return $_SESSION["CaptchaCode"] = $captcha;
 	}
