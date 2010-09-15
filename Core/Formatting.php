@@ -1128,7 +1128,7 @@ class StringFormatter extends FieldFormatter {
  */
 class StringEncoder extends FieldFormatter {
 	function format($value) {
-		return stripslashes(trim($value));
+		return trim($value);
 	}
 }
 

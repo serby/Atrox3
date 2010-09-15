@@ -333,7 +333,7 @@ class DataControl {
 	var $fullTable = null;
 	var $fullKey = null;
 	var $relationControls = null;
-	
+
 	/**
 	 * @var Filter
 	 */
@@ -930,8 +930,8 @@ class DataControl {
 		$this->numRows = $this->databaseControl->numRows($this->results);
 		return $this->numRows;
 	}
-	
-	
+
+
 	/**
 	 * Abstraction of the logic from the various different aggregate function methods as they were all identical.
 	 * Takes in the field name and the type of aggreagate function and returns the corresponding result (SUM, AVG etc).
@@ -945,7 +945,7 @@ class DataControl {
 		if ($this->filter != null) {
 			$joins = $this->filter->getJoinSql();
 			$conditions = $this->filter->getConditionSql();
-			
+
 			$sql = "SELECT " . $type . "(" . $this->databaseControl->parseField($fieldName)
 			. ") FROM $this->fullTable $joins $conditions";
 		} else {
@@ -965,7 +965,7 @@ class DataControl {
 	public function maxField($fieldName) {
 		return $this->aggregateFunctionGenerator($fieldName, "MAX");
 	}
-	
+
 	/**
 	 * Returns the min of the column '$field' from the table defined
 	 * for this class, except thoses filtered out by the '$filter' object.
@@ -974,7 +974,7 @@ class DataControl {
 	public function minField($fieldName) {
 		return $this->aggregateFunctionGenerator($fieldName, "MIN");
 	}
-	
+
 	/**
 	 * Returns the average of the column '$field' from the table defined
 	 * for this class, except thoses filtered out by the '$filter' object.
@@ -983,7 +983,7 @@ class DataControl {
 	public function avgField($fieldName) {
 		return $this->aggregateFunctionGenerator($fieldName, "AVG");
 	}
-	
+
 	/**
 	 * Returns the sum of the column '$field' from the table defined
 	 * for this class, except thoses filtered out by the '$filter' object.
@@ -1429,7 +1429,7 @@ class DataControl {
 
 			// Formatting
 			if ($this->fieldMeta[$k]->type != FM_TYPE_BINARY) {
-				$value = $this->fieldMeta[$k]->inputFormatter->format($value);
+				$value = $this->fieldMeta[$k]->inputFormatter->format(stripslashes($value));
 			}
 			$d->add($k, $value);
 		}
