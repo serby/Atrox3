@@ -56,7 +56,7 @@ class TransactionControl extends DataControl {
 
 		$this->fieldMeta["AddressId"] = new FieldMeta(
 			"Address", "", FM_TYPE_RELATION, null, FM_STORE_ALWAYS, false);
-		
+
 		$this->fieldMeta["AddressId"]->setRelationControl(BaseFactory::getAddressControl());
 
 		$this->fieldMeta["CardType"] = new FieldMeta(
@@ -144,7 +144,7 @@ class TransactionControl extends DataControl {
 			}
 
 			$this->xPayControl->commit($transaction);
-			
+
 			if ($transaction->get("Result") == TRN_DECLINED) {
 				$this->errorControl->addError("Transaction Declined. Check details and try again.");
 				$transaction->save();
@@ -165,10 +165,10 @@ class TransactionControl extends DataControl {
 						break;
 					case "(3100) Invalid StartDate":
 						$this->errorControl->addError("Invalid Start Date");
-						break;	
+						break;
 					case "(3100) Invalid Issue Number":
 						$this->errorControl->addError("Invalid Issue Number");
-						break;														
+						break;
 					default:
 						$this->errorControl->addError("Transaction Failed. '" . $transaction->get("Message") . "'");
 						break;
@@ -176,7 +176,12 @@ class TransactionControl extends DataControl {
 				$transaction->save();
 				return false;
 			} else {
-				return $transaction->save();
+				if ($id = $transaction->save()) {
+					$cardNumber = substr_replace($transaction->get("CardNumber"), "**** **** **** ", 0, 12);
+					$this->updateField($transaction, "CardNumber", $cardNumber);
+				}
+
+				return $id;
 			}
 		}
 		return false;
