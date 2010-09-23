@@ -316,6 +316,16 @@ class CoreFactory {
 	}
 
 	/**
+	 * Returns a PrettyUrlFormatter
+	 * @return PrettyUrlFormatter
+	 */
+	static function getPrettyUrlFormatter($formatter = null) {
+		require_once("Formatting.php");
+		$obj = new PrettyUrlFormatter();
+		return $obj;
+	}
+
+	/**
 	 * Returns a FormatterStack
 	 * @return FormatterStack
 	 */

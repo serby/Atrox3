@@ -606,7 +606,30 @@ class UrlSlashEncoder extends FieldFormatter {
 	}
 }
 
-
+/**
+ * Formats a string into a pretty url.
+ *
+ * @author Tom Gallacher {@link mailto:tom.gallacher@clock.co.uk tom.gallacher@clock.co.uk }
+ * @copyright Clock Limited 2010
+ * @version 3.2 - $Revision$ - $Date$
+ * @package Core
+ * @subpackage Data
+ */
+class PrettyUrlFormatter extends FieldFormatter {
+	function format($value) {
+		$formatterStack = CoreFactory::getFormatterStack();
+		$formatterStack->addFormatter(CoreFactory::getDasherizeFormatter());
+		$formatterStack->addFormatter(CoreFactory::getStringLowerEncoder());
+		$value = $formatterStack->format(html_entity_decode($value));
+		// Reserved and Unsafe Characters from:
+		// http://www.blooberry.com/indexdot/html/topics/urlencoding.htm
+		$unsafeCharacters = array("&", "%", "'", "\"", ";", ":", "=", "$", "\\", "+", ",", "?", "@", "<", ">", "#", "{",
+			"}", "|", "^", "~", "[", "]", "`");
+		$safeCharacters = array("and", "percent");
+		$value = str_replace($unsafeCharacters, $safeCharacters, trim($value));
+		return $value;
+	}
+}
 
 /**
  * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
