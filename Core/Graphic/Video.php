@@ -64,5 +64,4 @@ class VideoControl {
 		$video->setBinary("ThumbnailId", null, $thumbnailInfo);
 		$video->save();
 	}
-
 }
