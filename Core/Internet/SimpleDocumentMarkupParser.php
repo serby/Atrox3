@@ -43,23 +43,29 @@ class SimpleDocumentMarkupParser {
 
 		$text = preg_replace_callback("'\[\[dynamic-image:([^|]*)(?:\|([0-9]+)\|([0-9]+))(?:\|(left|right|centre|none))(?:\|([^]]*))?\]\]'is",
 			array($this, 'parseDynamicImageMarkup'), $text);
-
 		$searchArray = array (
 			"'\'\'\'\'\'(.*?)\'\'\'\'\''is",
 			"'\'\'\'(.*?)\'\'\''is",
 			"'\'\'(.*?)\'\''is",
 			"'\[\[image:([^|]*?)((\|(frame))|(\|(left|right))){0,2}\]\]'is",
 			"'\[\[image:([^|]*?)((\|(frame))|(\|(left|right))){0,2}(\|(.*?))?\]\]'is",
-			"'\[\[(http(s?)://.*?)(\|)(.*?)\]\]'i",
+
+			"'\[\[\[(http(s?)://.*?)(\s)(.*?)\]\]\]'i",
+			"'\[\[\[(http(s?)://\S*?)\]\]\]'i",
+			"'\[\[\[(.*?)(\s)(.*?)\]\]\]'i",
+			"'\[\[\[(.*?)\]\]\]'i",
+
+			"'\[\[(http(s?)://.*?)(\s)(.*?)\]\]'i",
 			"'\[\[(http(s?)://\S*?)\]\]'i",
-			"'\[(http(s?)://.*?)(\|)(.*?)\]'i",
-			"'\[(http(s?)://\S*?)\]'i",
-			"'\[\[(mailto:.*?)(\|)(.*?)\]\]'i",
+			"'\[\[(.*?)(\s)(.*?)\]\]'i",
+			"'\[\[(.*?)\]\]'i",
+
+			"'\[\[(mailto:.*?)(\s)(.*?)\]\]'i",
 			"'\[\[(mailto:(\S*?))\]\]'i",
-			"'\[(.*?)(\|)(.*?)\]'i",
-			"'\[(\S*?)\]'i",
 			"'\{\{(.*?)(\|)(.*?)\}\}'i"
 		);
+
+
 
 		$replaceArray = array (
 			"<em><strong>$1</strong></em>",
@@ -67,14 +73,18 @@ class SimpleDocumentMarkupParser {
 			"<strong>$1</strong>",
 			"<img src=\"$1\" class=\"image-type$4$6\" title=\"Linked Image (\"$1\")\" alt=\"Linked Image (\"$1\")\" />",
 			"<img src=\"$1\" class=\"image-type$4$6\" title=\"$8\" alt=\"$8\" />",
+
 			"<a href=\"$1\" target=\"_blank\" class=\"link-external\">$4</a>",
 			"<a href=\"$1\" target=\"_blank\" class=\"link-external\">$1</a>",
+			"<a href=\"$1\" target=\"_blank\" class=\"link-external\">$3</a>",
+			"<a href=\"$1\" target=\"_blank\" class=\"link-external\">$1</a>",
+
 			"<a href=\"$1\" class=\"link-internal\">$4</a>",
+			"<a href=\"$1\" class=\"link-internal\">$1</a>",
+			"<a href=\"$1\" class=\"link-internal\">$3</a>",
 			"<a href=\"$1\" class=\"link-internal\">$1</a>",
 			"<a href=\"$1\" class=\"link-mail\">$3</a>",
 			"<a href=\"$1\" class=\"link-mail\">$2</a>",
-			"<a href=\"$1\" class=\"link-internal\">$3</a>",
-			"<a href=\"$1\" class=\"link-internal\">$1</a>",
 			"<span class=\"$1\">$3</span>"
 		);
 
