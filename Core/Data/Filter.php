@@ -161,12 +161,12 @@ GRANT EXECUTE ON FUNCTION ts_rank(tsvector, tsquery) TO public;
 
 			$newCondition["FullTable"] = $this->databaseControl->parseTable($table);
 
-			$newCondition["Value"] = "'$value'::tsquery";
+			$newCondition["Value"] = "to_tsquery('$value')";
 			$newCondition["Operator"] = "@@";
 			$newCondition["LogicalOperator"] = $logicalOperator;
 			$newCondition["Type"] = 0;
 			$this->conditions[] = $newCondition;
-			$newOrder["FullOrder"] = "ts_rank({$newCondition["FullTable"]}.{$newCondition["FullField"]}, '$value')";
+			$newOrder["FullOrder"] = "ts_rank({$newCondition["FullTable"]}.{$newCondition["FullField"]}, to_tsquery('$value'))";
 			$newOrder["Descending"] = true;
 			$this->orders[$newOrder["FullOrder"]] = $newOrder;
 		}
