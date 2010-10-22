@@ -146,7 +146,7 @@ class ImageControl {
 
 		$size = getimagesize($inputFile);
 
-		if ((($width == null && $height == null)) || (($size[0] == $width) && ($size[1] == $height))) {
+		if ($width == null && $height == null) {
 			if ($inputFile != $outputFile) {
 				copy($inputFile, $outputFile);
 			}
