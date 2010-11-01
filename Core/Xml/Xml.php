@@ -37,13 +37,18 @@ class XmlParser {
 			if (count($xmlObject) == 0) return (string) $originalXmlObject; // for CDATA
 			foreach($xmlObject as $key => $value) {
 				$xmlArray[$key] = $this->simplexmlToArray($value);
+				if (($xmlObject[$key] instanceof SimpleXMLElement) && (count($xmlObject[$key]->attributes())) > 0) {
+					foreach($xmlObject[$key]->attributes() as $attributeKey => $value) {
+						$xmlArray[$key]["attributes"][$attributeKey] = (string)$value;
+					}
+				}
 			}
 		} else {
 			$xmlArray = (string) $xmlObject;
 		}
 		return $xmlArray;
 	}
-	
+
 	/**
 	 * Parses a XML file into an Array
 	 * @param String $path The path of the file to parse
@@ -80,7 +85,7 @@ class XmlParser {
 		xml_parser_free($this->resParser);
 		return $this->object;
 	}
-  
+
 	/**
 	 * Internal Callback used by the XML parser when a tag is opened
 	 */
