@@ -867,9 +867,9 @@ class HtmlControl {
 		return $returnValue;
 	}
 
-	function createRppListValues($default) {
+	function createRppListValues($default, $resultsPerPageBaseValue = 4, $maximumResultsPerPage = 64) {
 		$returnValue = "";
-		for ($i = 4; $i <= 64; $i *= 2) {
+		for ($i = $resultsPerPageBaseValue; $i <= $maximumResultsPerPage; $i *= 2) {
 			$returnValue .= "<option " . (($default==$i)?"selected=\"selected\"":"")
 					. ">$i</option>\n";
 		}
