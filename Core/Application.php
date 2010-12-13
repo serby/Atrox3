@@ -293,12 +293,36 @@ class Application {
 
 	/**
 	 * Gets the Ip address of the current connection
+	 *
+	 * @return string IP Address
 	 */
 	function getRemoteIpAddress() {
 		if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-			return $_SERVER["HTTP_X_FORWARDED_FOR"];
+			$ipAddress = $_SERVER["HTTP_X_FORWARDED_FOR"];
+		} else {
+			$ipAddress = $_SERVER["REMOTE_ADDR"];
 		}
-		return $_SERVER["REMOTE_ADDR"];
+
+		$ipAddress = $this->trimIpPrimaryAddress($ipAddress);
+
+		return $ipAddress;
+	}
+
+	/**
+	 * Trims IP Address to only return the primary IP address and not include any others, such as from a load balancer
+	 * @example "192.168.50.1, 45.56.3.12" returns "192.168.50.1"
+	 *
+	 * @param string IP Address
+	 *
+	 * @return string IP Address
+	 */
+	protected function trimIpPrimaryAddress($ipAddress) {
+		$position = mb_strpos($ipAddress, ",");
+		if ($position !== false) {
+			return mb_substr($ipAddress, 0, $position);
+		}
+
+		return $ipAddress;
 	}
 
 	function required(&$value) {
