@@ -12,7 +12,7 @@
  * @package Internet
  */
 class HttpRequest {
-	
+
 /**
 	 *
 	 * @var string
@@ -149,7 +149,7 @@ class HttpRequest {
 		$this->headers[] = "$header: $value";
 		return $this;
 	}
-	
+
 	function addOAuthHeaders($oauthHeaders) {
 		$urlParts = parse_url($this->url);
     $oauth = 'Authorization: OAuth realm="' . $urlParts['path'] . '",';
@@ -172,7 +172,7 @@ class HttpRequest {
 	function setAuthenticationDetails($username, $password) {
 		$this->username = $username;
 		$this->password = $password;
-	} 
+	}
 
 	function setTimeout($timeout) {
 		$this->timeout = $timeout;
