@@ -41,7 +41,7 @@ class IpAddress extends AutoData {
 
 class Guid extends AutoData {
 	function get() {
-		return sha1(mt_rand());
+		return sha1(uniqid(rand(), true));
 	}
 }
 
