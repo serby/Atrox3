@@ -1,142 +1,175 @@
 <?php
 /**
- * @package Internet
- * @copyright Clock Limited 2010
- * @version 3.2 - $Revision: 777 $ - $Date: 2008-10-30 12:49:04 +0000 (Thu, 30 Oct 2008) $
- */
-
-/**
- * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
- * @copyright Clock Limited 2010
+ * @author Paul Serby <paul.serby@clock.co.uk>
+ * @copyright Clock Limited 2011
  * @version 3.2 - $Revision: 777 $ - $Date: 2008-10-30 12:49:04 +0000 (Thu, 30 Oct 2008) $
  * @package Internet
  */
 class HttpRequest {
 
-/**
+	/**
 	 *
 	 * @var string
 	 */
-	private $url;
+	protected $url;
 
 	/**
 	 *
 	 * @var array
 	 */
-	private $headers = array("Expect: ");
+	protected $headers = array("Expect: ");
 
 	/**
 	 *
 	 * @var string
 	 */
-	private $username;
+	protected $username;
 
 	/**
 	 *
 	 * @var string
 	 */
-	private $password;
+	protected $password;
 
 	/**
 	 *
 	 * @var int
 	 */
-	private $timeout = 30;
+	protected $timeout = 30;
 
 	/**
 	 *
 	 * @var string
 	 */
-	private $userAgent = "Atrox";
+	protected $userAgent = "Atrox";
 
 	/**
 	 *
 	 *
 	 * @var string
 	 */
-	private $referer = "";
+	protected $referer = "";
 
 	/**
 	 *
 	 * @var string
 	 */
-	private $postData;
+	protected $postData;
 
 	/**
 	 *
 	 * @var resource
 	 */
-	private $curl;
+	protected $curl;
 
-	function __construct($url = null) {
+	/**
+	 * @var boolean Should recieved cookies be sent back with subsequent requests.
+	 */
+	protected $cookiesEnabled = false;
+
+	/**
+	 * @var string Where to store cookies. This is set when enbleCookies is called.
+	 */
+	protected $cookieJarFile = "";
+
+	public function __construct($url = null) {
 		if ($url) {
 			$this->url = $url;
 		}
 	}
 
-	function reset() {
+	/**
+	 * 
+	 * @return HttpRequest
+	 */
+	public function reset() {
 		$this->headers = array("Expect: ");
 		$this->postData = null;
 		$this->referer = null;
+		$this->enableCookies(false);
+		return $this;
 	}
 
-	function send() {
-		$curl = curl_init();
+	/**
+	 * 
+	 * @return unknown_type
+	 */
+	public function send() {
+		if (!$this->curl) {
+			$this->curl = curl_init();
+		}
 
-		curl_setopt($curl, CURLOPT_URL, $this->url);
-		curl_setopt($curl, CURLOPT_TIMEOUT, $this->timeout);
-		curl_setopt($curl, CURLOPT_HEADER, true);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($this->curl, CURLOPT_URL, $this->url);
+		curl_setopt($this->curl, CURLOPT_TIMEOUT, $this->timeout);
+		curl_setopt($this->curl, CURLOPT_HEADER, true);
+		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, false);
+		curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
 
 
 		if ($this->username) {
-			curl_setopt($curl, CURLOPT_USERPWD, $this->username . ":" . $this->password);
+			curl_setopt($this->curl, CURLOPT_USERPWD, $this->username . ":" . $this->password);
 		}
 
 		if ($this->postData) {
-			curl_setopt($curl, CURLOPT_POST, true);
-			curl_setopt($curl, CURLOPT_POSTFIELDS, $this->postData);
+			curl_setopt($this->curl, CURLOPT_POST, true);
+			curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->postData);
 		}
 
 		if ($this->userAgent) {
-			curl_setopt($curl, CURLOPT_USERAGENT, $this->userAgent);
+			curl_setopt($this->curl, CURLOPT_USERAGENT, $this->userAgent);
 		}
 
 		if ($this->referer) {
-			curl_setopt($curl, CURLOPT_REFERER, $this->referer);
+			curl_setopt($this->curl, CURLOPT_REFERER, $this->referer);
 		}
 
-		curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
+		curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->headers);
+
+		if ($this->cookiesEnabled) {
+			curl_setopt ($this->curl, CURLOPT_COOKIEJAR, $this->cookieJarFile);
+		}
 
 		$response = new stdClass();
-		if ($responseText = curl_exec($curl)) {
+		if ($responseText = curl_exec($this->curl)) {
 			list($response->header,
 			$response->body) =
 			explode("\r\n\r\n", $responseText);
 
-			$response->status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+			$response->status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 		}
-		curl_close($curl);
+
 		return $response;
+	}
+
+	/**
+	 * 
+	 * @return HttpRequest
+	 */
+	public function close() {
+		curl_close($this->curl);
+		return $this;
 	}
 
 	/**
 	 *
 	 * @param array $data
+	 * @return HttpRequest
 	 */
-	function setPostData(array $data) {
+	public function setPostData(array $data) {
 		$this->postData = http_build_query($data);
+		return $this;
 	}
 
 	/**
 	 *
 	 * @param string $data
+	 * @return HttpRequest
 	 */
-	function setRawPostData($data) {
+	public function setRawPostData($data) {
 		$this->postData = $data;
+		return $this;
 	}
 
 	/**
@@ -145,22 +178,28 @@ class HttpRequest {
 	 * @param strign $value
 	 * @return HttpRequest
 	 */
-	function addHeader($header, $value) {
+	public function addHeader($header, $value) {
 		$this->headers[] = "$header: $value";
 		return $this;
 	}
 
-	function addOAuthHeaders($oauthHeaders) {
+	/**
+	 * 
+	 * @param $oauthHeaders
+	 * @return HttpRequest
+	 */
+	public function addOAuthHeaders($oauthHeaders) {
 		$urlParts = parse_url($this->url);
-    $oauth = 'Authorization: OAuth realm="' . $urlParts['path'] . '",';
-    foreach($oauthHeaders as $name => $value)
-    {
-      $oauth .= "{$name}=\"{$value}\",";
-    }
-    $this->headers[] = substr($oauth, 0, -1);
+		$oauth = "Authorization: OAuth realm=\"" . $urlParts["path"] . "\",";
+		foreach($oauthHeaders as $name => $value)
+		{
+			$oauth .= "{$name}=\"{$value}\",";
+		}
+		$this->headers[] = substr($oauth, 0, -1);
+		return $this;
 	}
 
-	function addCookie($name, $value, $expire = 0, $path = false, $domain = false, $secure = false) {
+	public function addCookie($name, $value, $expire = 0, $path = false, $domain = false, $secure = false) {
 		throw new Exception("Not yet implemented");
 	}
 
@@ -168,21 +207,51 @@ class HttpRequest {
 	 *
 	 * @param string $username
 	 * @param string $password
+	 * @return HttpRequest
 	 */
-	function setAuthenticationDetails($username, $password) {
+	public function setAuthenticationDetails($username, $password) {
 		$this->username = $username;
 		$this->password = $password;
+		return $this;
 	}
 
-	function setTimeout($timeout) {
+	/**
+	 * 
+	 * @param int $timeout
+	 * @return HttpRequest
+	 */
+	public function setTimeout($timeout) {
 		$this->timeout = $timeout;
+		return $this;
 	}
 
-	function getUrl() {
+	/**
+	 * 
+	 * @return string The current URL
+	 */
+	public function getUrl() {
 		return $this->url;
 	}
 
-	function setUrl($url) {
+	/**
+	 * 
+	 * @param $url
+	 * @return HttpRequest
+	 */
+	public function setUrl($url) {
 		$this->url = $url;
+		return $this;
+	}
+
+	/**
+	 * 
+	 * @param $value
+	 * @return HttpRequest
+	 */
+	public function enableCookies($value = true) {
+		if ($this->cookiesEnabled = $value) {
+			$this->cookieJarFile = tempnam("/tmp", "AtroxCookies");
+		}
+		return $this;
 	}
 }
