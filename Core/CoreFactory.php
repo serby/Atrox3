@@ -277,6 +277,15 @@ class CoreFactory {
 	}
 
 	/**
+	 * @return UrlBuilder
+	 */
+	static function getUrlBuilder($url) {
+		require_once("Internet/UrlBuilder.php");
+		$obj = new UrlBuilder($url);
+		return $obj;
+	}
+
+	/**
 	 * Returns a GData
 	 * @return GData
 	 */
