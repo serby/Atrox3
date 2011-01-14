@@ -7,7 +7,7 @@
 
 /**
  * Global Error Handler
- * @author Paul Serby {@link mailto:paul.serby@clock.co.uk paul.serby@clock.co.uk }
+ * @author Paul Serby <paul.serby@clock.co.uk>
  * @copyright Clock Limited 2010
  * @version 3.2 - $Revision$ - $Date$
  * @package Core
@@ -52,9 +52,9 @@ class ErrorControl {
 	function addError($value, $key = null) {
 		$this->hasErrors = true;
 		if ($key) {
-			$this->errorList[$key] = $value;	
+			$this->errorList[$key] = $value;
 		} else {
-			$this->errorList[] = $value;				
+			$this->errorList[] = $value;
 		}
 	}
 
@@ -77,8 +77,8 @@ class ErrorControl {
 	}
 
 	/**
-	 * Returns an array filled with errors that have been set 
-	 * and clears the list of errors. 
+	 * Returns an array filled with errors that have been set
+	 * and clears the list of errors.
 	 * @return Array Error Descriptions
 	 */
 	function getErrors($reset = true) {
