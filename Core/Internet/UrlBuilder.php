@@ -16,7 +16,7 @@ class UrlBuilder {
 	/**
 	 * @var array
 	 */
-	protected $queryStringParameters;
+	protected $queryStringParameters = array();
 
 	/**
 	 * @var string
@@ -65,11 +65,11 @@ class UrlBuilder {
 	public function __toString() {
 
 		$queryString = "";
-		if (count($this->queryStringParameter) > 1) {
-			$queryString = "?" . http_build_query($this->queryStringParameter);
+		if (count($this->queryStringParameters) > 0) {
+			$queryString = "?" . http_build_query($this->queryStringParameters);
 		}
 
-		return $protocol . "://" .
+		return $this->protocol . "://" .
 			($this->username ? $this->username . ($this->password ? ":{$this->password}" : "") . "@" : "") .
 			$this->hostname .
 			$this->path .
@@ -82,11 +82,13 @@ class UrlBuilder {
 		$urlParts = parse_url($url);
 		$this->protocol = $urlParts["scheme"];
 		$this->hostname = $urlParts["host"];
-		$this->port = $urlParts["port"];
-		$this->user = $urlParts["user"];
-		$this->password = $urlParts["pass"];
-		$this->path = $urlParts["path"];
-		$this->queryStringParameters = parse_str($urlParts["query"]);
+		$this->port = isset($urlParts["port"]) ? $urlParts["port"] : "";
+		$this->user = isset($urlParts["user"]) ? $urlParts["user"] : "";
+		$this->password = isset($urlParts["password"]) ? $urlParts["password"] : "";
+		$this->path = isset($urlParts["path"]) ? $urlParts["path"] : "";
+		if (isset($urlParts["query"])) {
+			$this->queryStringParameters = parse_str($urlParts["query"]);
+		}
 	}
 
 	/**
