@@ -10,10 +10,30 @@
 class CheetahmailAdaptor {
 
 	protected $autheticationCookie;
+
+	/**
+	 * @var string Username
+	 */
 	protected $userName;
+
+	/**
+	 * @var string Password
+	 */
 	protected $password;
+
+	/**
+	 * @var unknown_type
+	 */
 	protected $affiliateId;
+
+	/**
+	 * @var string Hostname
+	 */
 	protected $host;
+
+	/**
+	 * @var integer Port number
+	 */
 	protected $port;
 
 	/**
@@ -22,6 +42,13 @@ class CheetahmailAdaptor {
 	 */
 	protected $httpRequest;
 
+	/**
+	 * @param string $userName
+	 * @param string $password
+	 * @param unknown_type $affiliateId
+	 * @param string $host
+	 * @param integer $port
+	 */
 	public function __construct($userName, $password, $affiliateId = null, $host = "ebm.cheetahmail.com", $port = 80) {
 		$this->userName = $userName;
 		$this->password = $password;
@@ -33,13 +60,27 @@ class CheetahmailAdaptor {
 		$this->httpRequest->enableCookies(true);
 	}
 
+	/**
+	 * Authenticate with the provided credentials
+	 *
+	 * @return CheetahmailAdaptor
+	 */
 	public function authenticate() {
 		$this->httpRequest->setUrl($this->host . "/api/login1?name={$this->userName}&amp;cleartext={$this->password}");
 		$this->parseResponse($this->httpRequest->send()->body);
 		return $this;
 	}
 
-	public function setUser($subscriberListId, $emailAddress, $data = array()) {
+	/**
+	 * The primary function to insert and update a User
+	 *
+	 * @param integer $subscriberListId
+	 * @param string $emailAddress
+	 * @param array $data
+	 *
+	 * @return CheetahmailAdaptor
+	 */
+	public function setUser($subscriberListId, $emailAddress, array $data = array()) {
 
 		$url = "/api/setuser1";
 		$postData = array("email" => $emailAddress, "sub" => $subscriberListId);
@@ -53,26 +94,55 @@ class CheetahmailAdaptor {
 		return $this;
 	}
 
-	function changeEmail($oldemail, $newemail) {
-		if (strlen($this->cookie) < 1) {
-			$this->login();
-		}
-		$response = $this->networkControl->getData($this->host, "/api/setuser1?email={$oldemail}&newemail={$newemail}&aid={$this->aid}&sub={$this->livesub}", 80, "Cookie: " . $this->cookie);
-		return $response;
-	}
+	/**
+	 * A special function is used to change the email address on a pre-registered User
+	 *
+	 * @param integer $subscriberListId
+	 * @param string $currentEmailAddress
+	 * @param string $newEmailAddress
+	 *
+	 * @return CheetahmailAdaptor
+	 */
+	function updateEmailAddress($subscriberListId, $currentEmailAddress, $newEmailAddress) {
+		$url = "/api/setuser1";
+		$postData = array("email" => $currentEmailAddress, "newemail" => $newEmailAddress, "sub" => $subscriberListId,
+			"aid" => $this->affiliateId);
 
-	function removeFromList($email) {
-		if (strlen($this->cookie) < 1) {
-			$this->login();
-		}
-		$response = $this->networkControl->getData($this->host, "/api/setuser1?email={$email}&aid={$this->aid}&unsub={$this->livesub}", 80, "Cookie: " . $this->cookie);
-		return $response;
+		$this->httpRequest
+			->setUrl($this->host . $url)
+			->setPostData($postData);
+
+		$this->parseResponse($this->httpRequest->send()->body);
+
+		return $this;
 	}
 
 	/**
+	 * Remove an email address from a subscriber list
 	 *
-	 * @param $emailAddress
-	 * @return unknown_type
+	 * @param integer $subscriberListId
+	 * @param string $emailAddress
+	 *
+	 * @return CheetahmailAdaptor
+	 */
+	function removeFromList($subscriberListId, $emailAddress) {
+		$url = "/api/setuser1";
+		$postData = array("email" => $emailAddress, "unsub" => $subscriberListId,
+			"aid" => $this->affiliateId);
+
+		$this->httpRequest
+			->setUrl($this->host . $url)
+			->setPostData($postData);
+
+		$this->parseResponse($this->httpRequest->send()->body);
+
+		return $this;
+	}
+
+	/**
+	 * @param string $emailAddress
+	 *
+	 * @return array User data
 	 */
 	public function getUser($emailAddress) {
 		$this->httpRequest->setUrl($this->host . "/api/getuser1?email={$emailAddress}");
