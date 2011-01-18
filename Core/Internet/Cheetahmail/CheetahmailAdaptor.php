@@ -44,11 +44,11 @@ class CheetahmailAdaptor {
 		$url = "/api/setuser1";
 		$postData = array("email" => $emailAddress, "sub" => $subscriberListId);
 		$postData = array_merge($postData, $data);
-		
+
 		$this->httpRequest
 			->setUrl($this->host . $url)
 			->setPostData($postData);
-			
+
 		$this->parseResponse($this->httpRequest->send()->body);
 		return $this;
 	}
@@ -69,15 +69,27 @@ class CheetahmailAdaptor {
 		return $response;
 	}
 
-	function getUser($emailAddress) {
+	/**
+	 *
+	 * @param $emailAddress
+	 * @return unknown_type
+	 */
+	public function getUser($emailAddress) {
 		$this->httpRequest->setUrl($this->host . "/api/getuser1?email={$emailAddress}");
 		$response = $this->httpRequest->send()->body;
 		$this->parseResponse($response);
 		return $this->parseUserData($response);
 	}
-	
+
+	/**
+	 * Parses the raw Cheetahmail user data.
+	 *
+	 * @param string $data The raw response from Cheetahmail
+	 *
+	 * @return array An associative array of the processed user data.
+	 */
 	protected function parseUserData($data) {
-			
+
 		$data = explode("\n", $data);
 		$returnData = array();
 		foreach ($data as $row) {
@@ -88,7 +100,7 @@ class CheetahmailAdaptor {
 	}
 
 	/**
-	 * Processed the response from the Cheetahmail webservice and throws an exception if there is a problem.
+	 * Processed the response from Cheetahmail and throws an exception if there is a problem.
 	 * @param $response
 	 * @return boolean True if response is OK
 	 */
@@ -98,7 +110,7 @@ class CheetahmailAdaptor {
 			return true;
 		}
 		$responseCode = trim(array_pop($responseCode));
-		
+
 		switch ($responseCode) {
 			case "err:email:missing":
 				throw new Exception("No email address entered");
