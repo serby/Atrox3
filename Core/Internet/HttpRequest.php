@@ -79,7 +79,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return HttpRequest
 	 */
 	public function reset() {
@@ -91,7 +91,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return unknown_type
 	 */
 	public function send() {
@@ -140,11 +140,14 @@ class HttpRequest {
 			$response->status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 		}
 
+		$application = CoreFactory::getApplication();
+		$application->log($response, "HttpRequest");
+
 		return $response;
 	}
 
 	/**
-	 * 
+	 *
 	 * @return HttpRequest
 	 */
 	public function close() {
@@ -184,7 +187,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param $oauthHeaders
 	 * @return HttpRequest
 	 */
@@ -216,7 +219,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param int $timeout
 	 * @return HttpRequest
 	 */
@@ -226,7 +229,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return string The current URL
 	 */
 	public function getUrl() {
@@ -234,7 +237,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param $url
 	 * @return HttpRequest
 	 */
@@ -244,7 +247,7 @@ class HttpRequest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param $value
 	 * @return HttpRequest
 	 */
