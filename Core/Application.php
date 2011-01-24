@@ -621,6 +621,10 @@ class Application {
 			if (!(file_exists($this->registry->get("Log/Path")))) {
 				mkdir($this->registry->get("Log/Path"), null, true);
 			}
+
+			if (is_object($string)) {
+				$string = json_encode($string);
+			}
 			error_log(date("Y-m-d H:i:s") . (isset($_SESSION["Alias"]) ?  " - " . $_SESSION["Alias"] : "") . $string, 3, $this->registry->get("Log/Path") . "/" . $type . ".log");
 		}
 	}
