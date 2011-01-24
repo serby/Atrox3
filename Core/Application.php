@@ -614,7 +614,7 @@ class Application {
 				@include_once("FirePHPCore/FirePHP.class.php");
 				if (class_exists("FirePHP", false)) {
 					$firephp = FirePHP::getInstance(true);
-					$firephp->log($type, $string);
+					$firephp->log($string, $type);
 				}
 			}
 
