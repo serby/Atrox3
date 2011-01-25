@@ -120,6 +120,20 @@ class UrlBuilder {
 	}
 
 	/**
+	 * Remove the query string parameter $key
+	 * @param $key
+	 * @throws OutOfBoundsException
+	 * @return UrlBuilder
+	 */
+	 public function removeQueryStringParameters($key) {
+	 	if (!isset($this->queryStringParameters[$key])) {
+	 		throw new OutOfBoundsException("No such querystring parameter {$key}");
+	 	}
+		unset($this->queryStringParameters[$key]);
+		return $this;
+	}
+
+	/**
 	 * Gets $queryStringParameters
 	 * @return
 	 */
