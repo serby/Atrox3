@@ -87,7 +87,8 @@ class UrlBuilder {
 		$this->password = isset($urlParts["password"]) ? $urlParts["password"] : "";
 		$this->path = isset($urlParts["path"]) ? $urlParts["path"] : "";
 		if (isset($urlParts["query"])) {
-			$this->queryStringParameters = parse_str($urlParts["query"]);
+			parse_str($urlParts["query"], $queryParameters);
+			$this->queryStringParameters = $queryParameters;
 		}
 	}
 
@@ -115,7 +116,9 @@ class UrlBuilder {
 	 * @return UrlBuilder
 	 */
 	 public function setQueryStringParameters($queryStringParameters) {
-		$this->queryStringParameters = parse_str($queryStringParameters);
+	 	parse_str($queryStringParameters, $queryParameters);
+
+		$this->queryStringParameters = $queryParameters;
 		return $this;
 	}
 
@@ -129,7 +132,8 @@ class UrlBuilder {
 	 	if (!isset($this->queryStringParameters[$key])) {
 	 		throw new OutOfBoundsException("No such querystring parameter {$key}");
 	 	}
-		unset($this->queryStringParameters[$key]);
+
+	 	unset($this->queryStringParameters[$key]);
 		return $this;
 	}
 
@@ -139,6 +143,15 @@ class UrlBuilder {
 	 */
 	public function getQueryStringParameters() {
 		return http_build_query($this->queryStringParameters);
+	}
+
+	/**
+	 * Is query-string parameter set
+	 * @param string $parameter
+	 * @return boolean True if set, false otherwise
+	 */
+	public function isQueryStringParameterSet($parameter) {
+		return isset($this->queryStringParameters[$parameter]);
 	}
 
 	/**
