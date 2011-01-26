@@ -29,13 +29,6 @@ class ErrorControl {
 	var $errorList;
 
 	/**
-	 * Has there been errors
-	 * @access private
-	 * @var Boolean
-	 */
-	var $hasErrors = false;
-
-	/**
 	 * Creates a clear ErrorControl object.
 	 * @return void
 	 */
@@ -50,11 +43,22 @@ class ErrorControl {
 	 * @return void
 	 */
 	function addError($value, $key = null) {
-		$this->hasErrors = true;
 		if ($key) {
 			$this->errorList[$key] = $value;
 		} else {
 			$this->errorList[] = $value;
+		}
+	}
+
+	/**
+	 * Add Errors
+	 *
+	 * @param array $errors
+	 *
+	 */
+	public function addErrors(array $errors) {
+		foreach ($errors as $key => $error) {
+			$this->addError($error);
 		}
 	}
 
@@ -65,7 +69,6 @@ class ErrorControl {
 	function clear() {
 		$this->cause = null;
 		$this->errorList = array();
-		$this->hasErrors = false;
 	}
 
 	/**
@@ -73,7 +76,7 @@ class ErrorControl {
 	 * @return Boolean True if there have been errors
 	 */
 	function hasErrors() {
-		return $this->hasErrors;
+		return (count($this->errorList) != 0);
 	}
 
 	/**
