@@ -301,9 +301,6 @@ GRANT EXECUTE ON FUNCTION ts_rank(tsvector, tsquery) TO public;
 				$whereSql .= ")";
 			}
 		}
-		if (!$firstItem) {
-			$whereSql = $whereSql;
-		}
 		if ($whereSql != null) {
 			return "WHERE $whereSql";
 		}
