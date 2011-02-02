@@ -1054,7 +1054,6 @@ class Application {
 		}
 
 		/*$fileDetails = highlight_string("<?php\n$fileDetails?>", true);*/
-		$fileDetails = $fileDetails;
 
 
 		if ($application->contentType == "text/html") {
