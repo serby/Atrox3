@@ -141,12 +141,7 @@ class HttpRequest {
 		}
 
 		$application = CoreFactory::getApplication();
-
-		$responseBody = $response->body;
-		if ($responseObject = json_decode($responseBody)) {
-			$responseBody = $responseObject;
-		}
-		$application->log($responseBody, "HttpRequest");
+		$application->log($response, "HttpRequest");
 
 		return $response;
 	}
