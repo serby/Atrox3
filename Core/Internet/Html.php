@@ -295,6 +295,47 @@ class HtmlControl {
 		return $imageDimension;
 	}
 
+/**
+	 * Create a img tag for a particular binary. Unlike shopImageBinary if you do not specify a dimension, that
+	 * dimension will be scaled according to the aspect ratio of the original image and in relation to the other dimension.
+	 *
+	 * If no dimensions are provided the image will be shown at original size.
+	 *
+	 * This should be used when you have a fixed height or width and the images you have are different aspect ratios.
+	 *
+	 * Images shouldnt be distored or stretched using this method.
+	 *
+	 * Original Image: 100px(w) x 50px(h)
+	 * New Image: 50px(w) x .....px(h)
+	 * Result: 50px / aspect ratio(100 / 50) = 25px(h)
+	 *
+	 * Original Image: 300px(w) x 200px(h)
+	 * New image: ....px(w) x 150px(h)
+	 * Result: 150px * aspect ration(300 / 200) = 225px(W)
+	 *
+	 * @param DataEntity $binary
+	 * @param String $alt
+	 * @param integer $width
+	 * @param integer $height
+	 * @param string $class
+	 * @param boolean $crop
+	 * @param boolean $watermark
+	 */
+	function showScaledImageBinary($binary, $alt = null, $width = null, $height = null, $class = null, $crop = true,
+		$watermark = false) {
+
+		$dimensions = $this->getImageDimensions($binary);
+		$aspectRatio = $dimensions["width"] / $dimensions["height"];
+
+		if ($width != null && $height == null) {
+			$height = ceil($width / $aspectRatio);
+		} else if ($width == null && $height != null) {
+			$width = ceil($height * $aspectRatio);
+		}
+
+		return $this->showImageBinary($binary, $alt, $width, $height, $class, $crop, $watermark);
+	}
+
 	function showImageBinary($binary, $alt = null, $width = null, $height = null, $class = null, $crop = true,
 		$watermark = false, $wOffset = null, $hOffset = null, $srcWidth = null, $srcHeight = null) {
 
