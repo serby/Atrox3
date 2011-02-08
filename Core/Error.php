@@ -58,7 +58,7 @@ class ErrorControl {
 	 */
 	public function addErrors(array $errors) {
 		foreach ($errors as $key => $error) {
-			$this->addError($error);
+			$this->addError($error, $key);
 		}
 	}
 
