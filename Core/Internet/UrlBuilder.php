@@ -1,5 +1,8 @@
 <?php
 /**
+ * Builds and deconstructs URLs. This is useful when you need to add a parameter to a url querystring
+ * and it may or may not be already present.
+ *
  * @author Paul Serby <paul.serby@clock.co.uk>
  * @copyright Clock Limited 2011
  * @version 3.2 - $Revision: 777 $ - $Date: 2008-10-30 12:49:04 +0000 (Thu, 30 Oct 2008) $
@@ -31,7 +34,6 @@ class UrlBuilder {
 	/**
 	 * @var string
 	 */
-
 	protected $password;
 
 	/**
