@@ -136,9 +136,14 @@ class HttpRequest {
 			list($response->header,
 			$response->body) =
 			explode("\r\n\r\n", $responseText);
-
-			$response->status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+		} else {
+			if ($curlError = curl_error($this->curl)) {
+				throw new Exception($curlError);
+			}
 		}
+
+
+		$response->status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
 		$application = CoreFactory::getApplication();
 		$application->log($response, "HttpRequest");
