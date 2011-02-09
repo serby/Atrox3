@@ -107,7 +107,6 @@ class HttpRequest {
 		curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($this->curl, CURLOPT_SSL_VERIFYHOST, false);
 
-
 		if ($this->username) {
 			curl_setopt($this->curl, CURLOPT_USERPWD, $this->username . ":" . $this->password);
 		}
@@ -116,6 +115,10 @@ class HttpRequest {
 			curl_setopt($this->curl, CURLOPT_POST, true);
 			curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->postData);
 		}
+
+		$application = CoreFactory::getApplication();
+		$application->log($this->postData, "HttpRequest");
+
 
 		if ($this->userAgent) {
 			curl_setopt($this->curl, CURLOPT_USERAGENT, $this->userAgent);
@@ -145,7 +148,7 @@ class HttpRequest {
 
 		$response->status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
-		$application = CoreFactory::getApplication();
+
 		$application->log($response, "HttpRequest");
 
 		return $response;
