@@ -146,6 +146,22 @@ class CoreFactory {
 		return $singleton;
 	}
 
+
+	/**
+	 * Returns a CheetahmailServiceAdaptor
+	 *
+	 * @return CheetahmailServiceAdaptor
+	 */
+	static function getCheetahmailServiceAdaptor($userName, $password, $affiliateId = null,
+		$host = "ebm.cheetahmail.com", $port = 80) {
+
+		require_once "Internet/Cheetahmail/CheetahmailServiceAdaptor.php";
+		$object = new CheetahmailServiceAdaptor($userName, $password, $affiliateId = null, $host, $port);
+		return $object;
+	}
+
+
+
 	/**
 	 * Returns a Js Resource Aggregator
 	 *

@@ -7,7 +7,7 @@
  * @version 3.2 - $Revision: 1329 $ - $Date: 2010-02-24 22:41:33 +0000 (Wed, 24 Feb 2010) $
  * @package Core
  */
-class CheetahmailAdaptor {
+class CheetahmailServiceAdaptor {
 
 	protected $autheticationCookie;
 
