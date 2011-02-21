@@ -45,7 +45,7 @@ class CheetahmailAdaptor {
 	/**
 	 * @param string $userName
 	 * @param string $password
-	 * @param unknown_type $affiliateId
+	 * @param string $affiliateId
 	 * @param string $host
 	 * @param integer $port
 	 */
