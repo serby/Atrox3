@@ -94,6 +94,14 @@ class CheetahmailServiceAdaptor {
 		return $this;
 	}
 
+	public function formatDate($date) {
+		if ($date != "") {
+			return date("d-M-Y", strtotime($date));
+		} else {
+			return null;
+		}
+	}
+
 	/**
 	 * A special function is used to change the email address on a pre-registered User
 	 *
@@ -103,7 +111,7 @@ class CheetahmailServiceAdaptor {
 	 *
 	 * @return CheetahmailAdaptor
 	 */
-	function updateEmailAddress($subscriberListId, $currentEmailAddress, $newEmailAddress) {
+	public function updateEmailAddress($subscriberListId, $currentEmailAddress, $newEmailAddress) {
 		$url = "/api/setuser1";
 		$postData = array("email" => $currentEmailAddress, "newemail" => $newEmailAddress, "sub" => $subscriberListId,
 			"aid" => $this->affiliateId);
@@ -125,7 +133,7 @@ class CheetahmailServiceAdaptor {
 	 *
 	 * @return CheetahmailAdaptor
 	 */
-	function removeFromList($subscriberListId, $emailAddress) {
+	public function removeFromList($subscriberListId, $emailAddress) {
 		$url = "/api/setuser1";
 		$postData = array("email" => $emailAddress, "unsub" => $subscriberListId,
 			"aid" => $this->affiliateId);
