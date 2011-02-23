@@ -49,14 +49,16 @@ class CheetahmailServiceAdaptor {
 	 * @param string $host
 	 * @param integer $port
 	 */
-	public function __construct($userName, $password, $affiliateId = null, $host = "ebm.cheetahmail.com", $port = 80) {
+	public function __construct($userName, $password, $affiliateId = null,
+		HttpRequest $request, $host = "ebm.cheetahmail.com", $port = 80) {
+
 		$this->userName = $userName;
 		$this->password = $password;
 		$this->affiliateId = $affiliateId;
 		$this->host = $host;
 		$this->port = $port;
 
-		$this->httpRequest = CoreFactory::getHttpRequest();
+		$this->httpRequest = $request;
 		$this->httpRequest->enableCookies(true);
 	}
 

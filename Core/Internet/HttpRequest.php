@@ -119,7 +119,6 @@ class HttpRequest {
 		$application = CoreFactory::getApplication();
 		$application->log($this->postData, "HttpRequest");
 
-
 		if ($this->userAgent) {
 			curl_setopt($this->curl, CURLOPT_USERAGENT, $this->userAgent);
 		}
