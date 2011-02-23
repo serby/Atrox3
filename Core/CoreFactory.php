@@ -153,9 +153,8 @@ class CoreFactory {
 	 * @return CheetahmailServiceAdaptor
 	 */
 	static function getCheetahmailServiceAdaptor($userName, $password, $affiliateId = null,
-		$host = "ebm.cheetahmail.com", $port = 80) {
+			HttpRequest $request, $host = "ebm.cheetahmail.com", $port = 80) {
 
-		require_once "Internet/Cheetahmail/CheetahmailServiceAdaptor.php";
 		$object = new CheetahmailServiceAdaptor($userName, $password, $affiliateId = null, $host, $port);
 		return $object;
 	}
@@ -289,6 +288,16 @@ class CoreFactory {
 	static function getHttpRequest() {
 		require_once("Internet/HttpRequest.php");
 		$obj = new HttpRequest();
+		return $obj;
+	}
+
+	/**
+	 * Returns a MockHttpRequest
+	 * @return MockHttpRequest
+	 */
+	static function getMockHttpRequest() {
+		require_once("Internet/MockHttpRequest.php");
+		$obj = new MockHttpRequest();
 		return $obj;
 	}
 
