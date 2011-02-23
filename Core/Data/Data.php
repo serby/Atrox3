@@ -670,6 +670,7 @@ class DataControl {
 			return true;
 		}
 
+
 		// Paul Serby swapped these two ifs around - 2008-02-11
 		// If custom validation is provided then use that
 		if ($this->fieldMeta[$fieldName]->validation != null) {
