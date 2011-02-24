@@ -82,7 +82,7 @@ class UrlBuilder {
 
 	public function setUrl($url) {
 		$urlParts = parse_url($url);
-		$this->protocol = isset($urlParts["scheme"]) ? $urlParts["scheme"] : "http";
+		$this->protocol = isset($urlParts["scheme"]) ? $urlParts["scheme"] : "";
 		$this->hostname = isset($urlParts["host"]) ? $urlParts["host"] : "";
 		$this->port = isset($urlParts["port"]) ? $urlParts["port"] : "";
 		$this->user = isset($urlParts["user"]) ? $urlParts["user"] : "";
