@@ -956,7 +956,8 @@ class Application {
 					256 =>  "User Error",
 					512 =>  "User Warning",
 					1024=>  "User Notice",
-					2048=>  "Extra"
+					2048=>  "Extra",
+					8192=>  "Strict"
 					);
 
 		// Create a new Template
