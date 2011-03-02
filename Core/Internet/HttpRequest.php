@@ -167,8 +167,12 @@ class HttpRequest {
 	 * @param array $data
 	 * @return HttpRequest
 	 */
-	public function setPostData(array $data) {
-		$this->postData = http_build_query($data);
+	public function setPostData(array $data = null) {
+		if ($data !== null) {
+			$this->postData = http_build_query($data);
+		} else {
+			$this->postData = null;
+		}
 		return $this;
 	}
 
