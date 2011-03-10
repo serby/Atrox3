@@ -1503,4 +1503,12 @@ class CoreFactory {
 		require_once("Ftp/Ftp.php");
 		return new Ftp($host, $username, $password);
 	}
+
+	/**
+	 * @return SitemapGenerator
+	 */
+	static function getSitemapGenerator() {
+		require_once "Internet/SitemapGenerator.php";
+		return new SitemapGenerator();
+	}
 }
