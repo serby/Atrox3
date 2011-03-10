@@ -620,7 +620,8 @@ class PrettyUrlFormatter extends FieldFormatter {
 		$formatterStack = CoreFactory::getFormatterStack();
 		$formatterStack->addFormatter(CoreFactory::getDasherizeFormatter());
 		$formatterStack->addFormatter(CoreFactory::getStringLowerEncoder());
-		$value = $formatterStack->format(html_entity_decode($value));
+		//Iconv convers multibyte chars to 7big ascii
+		$value = $formatterStack->format(html_entity_decode(iconv("utf-8", "ascii//TRANSLIT", $value)));
 		// Reserved and Unsafe Characters from:
 		// http://www.blooberry.com/indexdot/html/topics/urlencoding.htm
 		$unsafeCharacters = array("&", "%", "'", "\"", ";", ":", "=", "$", "\\", "+", ",", "?", "@", "<", ">", "#", "{",
