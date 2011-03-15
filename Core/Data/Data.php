@@ -479,6 +479,10 @@ class DataControl {
 	function update(&$dataEntity, $triggerCallback = true) {
 		$this->initControl();
 
+		if ($triggerCallback) {
+			$this->beforeUpdate($dataEntity);
+		}
+
 		$sql = "";
 		foreach($this->fieldMeta as $k => $v) {
 			if (($v->required != FM_STORE_DONTSTORE) &&
@@ -496,14 +500,11 @@ class DataControl {
 		// Crop the last comma
 		$sql = mb_substr($sql, 0,-2);
 		$id = $dataEntity->get($this->key);
-		$this->beforeUpdate($dataEntity);
+
 		$sql = "UPDATE $this->fullTable SET $sql WHERE $this->fullKey = $id;";
 
 		$this->cacheData[$id] = $dataEntity;
 
-		if ($triggerCallback) {
-			$this->beforeUpdate($dataEntity);
-		}
 		if ($this->databaseControl->query($sql)) {
 			if ($triggerCallback) {
 				$this->afterUpdate($dataEntity);
