@@ -331,6 +331,15 @@ class CoreFactory {
 	}
 
 	/**
+	 * @return OpenGraph
+	 */
+	static function getOpenGraph() {
+		require_once "Internet/Facebook/OpenGraph.php";
+		$obj = new OpenGraph();
+		return $obj;
+	}
+
+	/**
 	 * Returns a Mime
 	 * @return Mime
 	 */
