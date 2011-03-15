@@ -181,6 +181,16 @@ class CoreFactory {
 	}
 
 	/**
+	 * Returns a Routing
+	 * @return Router
+	 */
+	static function getRouter() {
+		require_once("Routing/Router.php");
+		$obj = new Router();
+		return $obj;
+	}
+
+	/**
 	 * Returns a MathControl
 	 * @return MathControl
 	 */
