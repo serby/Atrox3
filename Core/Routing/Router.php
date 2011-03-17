@@ -122,8 +122,7 @@ class Router {
 
 			$i = 0;
 			$parameters = array();
-
-			while (isset($routePaths[$i]) && isset($path[$i]) && (($routePaths[$i] == $path[$i]) || ($routePaths[$i] == "*") ||
+						while (isset($routePaths[$i]) && isset($path[$i]) && (($routePaths[$i] == $path[$i]) || ($routePaths[$i] == "*") ||
 				(preg_match("/{[-a-zA-Z]+?}/", $routePaths[$i])))) {
 
 				$parameters[] = $path[$i];
@@ -136,13 +135,14 @@ class Router {
 				$i++;
 			}
 
-			if ($found || ($i == count($routePaths))) {
+			if ($found || ((count($path) == $i) && (count($path) == count($routePaths)))) {
 				if (call_user_func_array($route->function, $parameters) === true) {
+			echo $route->route;
 					return true;
 				}
 			}
 		}
-
+		echo "Jim";
 		header("HTTP/1.1 404 Page Not Found");
 		header("Status: 404 Page Not Found");
 		echo "404 - " . $urlPath;
