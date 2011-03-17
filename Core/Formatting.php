@@ -625,8 +625,10 @@ class PrettyUrlFormatter extends FieldFormatter {
 		// Reserved and Unsafe Characters from:
 		// http://www.blooberry.com/indexdot/html/topics/urlencoding.htm
 		$unsafeCharacters = array("&", "%", "'", "\"", ";", ":", "=", "$", "\\", "+", ",", "?", "@", "<", ">", "#", "{",
-			"}", "|", "^", "~", "[", "]", "`");
+			"}", "|", "^", "~", "[", "]", "`", "/");
 		$safeCharacters = array("and", "percent");
+
+
 		$value = str_replace($unsafeCharacters, $safeCharacters, trim($value));
 		return $value;
 	}
