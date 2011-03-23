@@ -123,9 +123,7 @@ class Router {
 			$i = 0;
 			$parameters = array();
 						while (isset($routePaths[$i]) && isset($path[$i]) && (($routePaths[$i] == $path[$i]) || ($routePaths[$i] == "*") ||
-				(preg_match("/{[-a-zA-Z]+?}/", $routePaths[$i])))) {
-
-				$parameters[] = $path[$i];
+				(preg_match("/{[-a-zA-Z]+?}/", $routePaths[$i]) && $parameters[] = $path[$i]))) {
 
 				if ($routePaths[$i] == "*") {
 					$found = true;
