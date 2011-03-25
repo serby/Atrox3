@@ -295,9 +295,9 @@ class CoreFactory {
 	 * Returns a HttpRequest
 	 * @return HttpRequest
 	 */
-	static function getHttpRequest() {
+	static function getHttpRequest($url = null) {
 		require_once("Internet/HttpRequest.php");
-		$obj = new HttpRequest();
+		$obj = new HttpRequest($url);
 		return $obj;
 	}
 
