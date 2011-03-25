@@ -527,6 +527,10 @@ class DataControl {
 
 		$this->initControl();
 
+		if ($triggerCallback) {
+			$this->beforeUpdate($dataEntity);
+		}
+
 		if ($value === null) {
 			$sql = $this->databaseControl->parseField("$fieldName") . " = NULL";
 		} else {
@@ -536,9 +540,7 @@ class DataControl {
 		$id = $dataEntity->get($this->key);
 
 		$sql = "UPDATE $this->fullTable SET $sql WHERE $this->fullKey = $id;";
-		if ($triggerCallback) {
-			$this->beforeUpdate($dataEntity);
-		}
+
 		if ($this->databaseControl->query($sql)) {
 			if ($triggerCallback) {
 				$this->afterUpdate($dataEntity);
@@ -560,6 +562,9 @@ class DataControl {
 		}
 
 		$this->initControl();
+		if ($triggerCallback) {
+			$this->beforeUpdate($dataEntity);
+		}
 
 		$sql = $this->databaseControl->parseField("$fieldName");
 		$sql .= " = " . $sql . " + " . $value;
@@ -567,9 +572,7 @@ class DataControl {
 		$id = $dataEntity->get($this->key);
 
 		$sql = "UPDATE $this->fullTable SET $sql WHERE $this->fullKey = $id;";
-		if ($triggerCallback) {
-			$this->beforeUpdate($dataEntity);
-		}
+
 		if ($this->databaseControl->query($sql)) {
 			if ($triggerCallback) {
 				$this->afterUpdate($dataEntity);
@@ -610,6 +613,9 @@ class DataControl {
 		}
 
 		$this->initControl();
+		if ($triggerCallback) {
+			$this->beforeUpdate($dataEntity);
+		}
 
 		$sql = "";
 		for ($i = 0; $i < $arrayLen; $i++) {
@@ -621,9 +627,6 @@ class DataControl {
 
 		$sql = "UPDATE $this->fullTable SET $sql WHERE $this->fullKey = $id;";
 
-		if ($triggerCallback) {
-			$this->beforeUpdate($dataEntity);
-		}
 		if ($this->databaseControl->query($sql)) {
 			if ($triggerCallback) {
 				$this->afterUpdate($dataEntity);
