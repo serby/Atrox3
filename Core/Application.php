@@ -468,7 +468,7 @@ class Application {
 	 * Goto given page
 	 * @param $url
 	 */
-	function redirect($url = "") {
+	function redirect($url = "", $permanently = false) {
 		//TODO: This should be in a web package
 		if ($url == "") {
 			if ((isset($_SESSION["GotoPage"])) && ($_SESSION["GotoPage"] != "")) {
@@ -477,6 +477,11 @@ class Application {
 				Application::gotoLastPage();
 			}
 		}
+
+		if ($permanently === true) {
+			header("HTTP/1.1 301 Moved Permanently");
+		}
+
 		header("Location: $url");
 		$_SESSION["GotoPage"] = $url;
 		exit;
