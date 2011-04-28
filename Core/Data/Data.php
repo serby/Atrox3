@@ -1742,6 +1742,26 @@ class DataControl {
 		}
 		return $output;
 	}
+
+	public function dumpAsCsv() {
+
+		$this->init();
+
+		$value = array_map(function($value) {
+			return $value->description;
+		}, $this->fieldMeta);
+
+		// Header
+		echo implode(",", $value) . "\n";
+
+		while ($member = $this->getNext()) {
+			$row = array();
+			foreach ($value as $field => $description) {
+				$row[] = $member->get($field);
+			}
+			echo '"' . implode('","', $row) . '"' . "\n";
+		}
+	}
 }
 
 
