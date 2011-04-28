@@ -1748,9 +1748,13 @@ class DataControl {
 		$this->init();
 
 		if ($fields === false) {
-			$fields = array_map(function($value) {
-				return $value->description;
-			}, $this->fieldMeta);
+			
+			$fields = array();
+			
+			foreach ($this->fieldMeta as $fieldName => &$value) {
+				$fields[$fieldName] = $value->description;
+			}
+
 		} else if (is_array($fields)) {
 			$fields = array_flip($fields);
 			foreach ($fields as $key => &$value) {
