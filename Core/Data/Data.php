@@ -1743,20 +1743,29 @@ class DataControl {
 		return $output;
 	}
 
-	public function dumpAsCsv() {
+	public function dumpAsCsv($fields = false) {
 
 		$this->init();
 
-		$value = array_map(function($value) {
-			return $value->description;
-		}, $this->fieldMeta);
+		if ($fields === false) {
+			$fields = array_map(function($value) {
+				return $value->description;
+			}, $this->fieldMeta);
+		} else if (is_array($fields)) {
+			$fields = array_flip($fields);
+			foreach ($fields as $key => &$value) {
+				$value = $this->fieldMeta[$key]->description;
+			}
+		} else {
+			throw new Exception("Array of fields or false expected");
+		}
 
 		// Header
-		echo implode(",", $value) . "\n";
+		echo '"' . implode('","', $fields) . '"' . "\n";
 
 		while ($member = $this->getNext()) {
 			$row = array();
-			foreach ($value as $field => $description) {
+			foreach ($fields as $field => $description) {
 				$row[] = $member->get($field);
 			}
 			echo '"' . implode('","', $row) . '"' . "\n";
