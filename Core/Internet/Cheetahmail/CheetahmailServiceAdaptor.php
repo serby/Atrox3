@@ -42,6 +42,12 @@ class CheetahmailServiceAdaptor {
 	 */
 	protected $httpRequest;
 
+
+	/**
+	 * Has a Cheetahmail auth been made.
+	 */
+	protected $authenticated = false;
+
 	/**
 	 * @param string $userName
 	 * @param string $password
@@ -68,8 +74,11 @@ class CheetahmailServiceAdaptor {
 	 * @return CheetahmailAdaptor
 	 */
 	public function authenticate() {
-		$this->httpRequest->setUrl($this->host . "/api/login1?name={$this->userName}&amp;cleartext={$this->password}");
-		$this->parseResponse($this->httpRequest->send()->body);
+		if ($this->authenticated === false) {
+			$this->httpRequest->setUrl($this->host . "/api/login1?name={$this->userName}&amp;cleartext={$this->password}");
+			$this->parseResponse($this->httpRequest->send()->body);
+			$this->authenticated = true;
+		}
 		return $this;
 	}
 
