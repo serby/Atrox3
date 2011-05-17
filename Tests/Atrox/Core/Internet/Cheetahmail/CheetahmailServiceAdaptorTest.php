@@ -97,7 +97,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress,
 			array("FNAME" => "Pauly", "LNAME" => "Serby", "GENDER" => "M", "DATE_OF_BIRTH" => "01-May-1978"));
 		$user = $this->cheetahmailServiceAdaptor->getUser($emailAddress);
-		$this->assertEquals("Paul", $user["FNAME"]);
+		$this->assertEquals("Pauly", $user["FNAME"]);
 
 	}
 
@@ -115,7 +115,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("Pauly", $user["FNAME"]);
 	}
 
-	public function testAddingNewUserWithInvaildEmailAddress() {
+	public function testAddingNewUserWithInvaildEmailAddressThrowsException() {
 		$this->cheetahmailServiceAdaptor->authenticate();
 		$this->setExpectedException("Exception");
 		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, "abc");

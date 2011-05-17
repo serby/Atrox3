@@ -179,13 +179,31 @@ class CheetahmailServiceAdaptor {
 	 */
 	protected function parseUserData($data) {
 
-		$data = explode("\n", $data);
+		$data = explode("\r\n", $data);
 		$returnData = array();
 		foreach ($data as $row) {
+
 			$keyValuePair = explode("=", $row);
-			$returnData[$keyValuePair[0]] = trim($keyValuePair[1]);
+
+			if (count($keyValuePair) === 2) {
+				$key = $keyValuePair[0];
+				$value = trim($keyValuePair[1]);
+				$returnData[$key] = $value;
+			} else {
+				parse_str($row, $output);
+				if (!isset($returnData["subs"])) {
+					$returnData["subs"] = array();
+				}
+				$returnData["subs"][] = $output;
+			}
+
 		}
 		return $returnData;
+	}
+
+	protected function parseRowData($data) {
+
+		// code...
 	}
 
 	/**
