@@ -14,3 +14,7 @@ require_once("Clock/Factory.php");
 
 // Application object is the root of basic Website functions.
 $application = CoreFactory::getApplication();
+$application->setDebug(true);
+$application->setContentType("text/plain");
+restore_error_handler();
+restore_exception_handler();

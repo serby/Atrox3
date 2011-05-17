@@ -27,19 +27,67 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 	 * @var array
 	 */
 	protected $validSubscribedUser = array(
-		"email" => "genuine-user@clock.co.uk",
-		"HTML" => null,
-		"BEHAVIOR_3" => null,
-		"INCOME" => null,
-		"DATE_OF_BIRTH" => "19780501000000",
-		"BEHAVIOR_2" => null,
-		"MOBILE_PHONE" => null,
-		"HOME_POSTCODE" => null,
-		"BEHAVIOR_1" => null,
-		"GENDER" => "M",
-		"WORK_POSTCODE" => "Genuine",
-		"LNAME" => "User",
-		"sub" => "2086316516&aid"
+  'email' => 'genuine-user@clock.co.uk',
+  'PASSION_CINEMA' => '',
+  'OPT_IN' => '',
+  'PASSION_GADGETS' => '',
+  'REGION_BIRMINGHAM' => '',
+  'PASSION_HOLIDAYS' => '',
+  'REGION_LEEDS' => '',
+  'HOL_END' => '',
+  'DATE_OF_BIRTH' => '19780501000000',
+  'BEHAVIOR_2' => '',
+  'PASSION_TECHNOLOGY' => '',
+  'UNSUBSCRIBED_DATE' => '',
+  'REGION_MANCHESTER' => '',
+  'BEHAVIOR_1' => '',
+  'FREQ_MON' => '',
+  'PASSION_ARTS' => '',
+  'WORK_POSTCODE' => '',
+  'FNAME' => 'Genuine',
+  'PASSION_FOOD' => '',
+  'ES_REG' => '',
+  'FREQ_WED' => '',
+  'REGION_GLAS_ED' => '',  'PASSION_BARS' => '',
+  'SOURCE_TEST' => '',  'PASSION_ENT' => '',
+  'PASSION_SHOES' => '',  'PASSION_TRAVEL' => '',
+  'FREQ_THU' => '',
+  'LNAME' => 'User',
+  'PASSION_ENTREPRENEURSHIP' => '',
+  'HOL_START' => '',
+  'REGION_LONDON' => '',
+  'PASSION_BEAUTY' => '',
+  'FREQ_TUE' => '',
+  'MOBILE_PHONE' => '',
+		'GENDER' => 'M',
+		'PASSION_FASHION' => '',
+		'FREQ_FRI' => '',
+		'CUSTOM_1' => '',
+		'PASSION_INTERIORS' => '',
+		'DATE_CREATED' => '',
+		'HTML' => '',
+		'BEHAVIOR_3' => '',
+		'INCOME' => '',
+		'FREQ_SUN' => '',
+		'COUNTRY_RESIDENCE' => '',
+		'ACQ_POINT' => '',
+		'PASSION_BAGS' => '',
+		'HOME_POSTCODE' => '',
+		'AUTH_HASH' => '',
+		'PASSION_BOOKS' => '',
+		'PASSION_CAREERS' => '',
+		'PASSION_TELEVISION' => '',
+		'FREQ_SAT' => '',
+		'subs' =>
+		array (
+			0 =>
+			array (
+				'sub' => '2086316516',
+				'aid' => '2086472001',
+				'date' => '20110118060948',
+				'rcode' => '',
+			),
+		),
 	);
 
 	protected function setup() {
@@ -81,20 +129,20 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$emailAddress = $this->getRandomEmailAddress();
 
 		$this->cheetahmailServiceAdaptor->authenticate();
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress,
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress,
 			array("FNAME" => "Paul", "LNAME" => "Serby", "GENDER" => "M", "DATE_OF_BIRTH" => "01-May-1978"));
 		$user = $this->cheetahmailServiceAdaptor->getUser($emailAddress);
 		$this->assertEquals("Paul", $user["FNAME"]);
 	}
 
-	public function testRegisterFollowedByUpdateWithOneAuthenticateSucceed() {
+	public function testSetUserFollowedByUpdateWithOneAuthenticateSucceed() {
 
 		$this->cheetahmailServiceAdaptor->authenticate();
 		$emailAddress = $this->getRandomEmailAddress();
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress,
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress,
 			array("FNAME" => "Paul", "LNAME" => "Serby", "GENDER" => "M", "DATE_OF_BIRTH" => "01-May-1978"));
 
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress,
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress,
 			array("FNAME" => "Pauly", "LNAME" => "Serby", "GENDER" => "M", "DATE_OF_BIRTH" => "01-May-1978"));
 		$user = $this->cheetahmailServiceAdaptor->getUser($emailAddress);
 		$this->assertEquals("Pauly", $user["FNAME"]);
@@ -105,11 +153,11 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 
 		$this->cheetahmailServiceAdaptor->authenticate();
 		$emailAddress = $this->getRandomEmailAddress();
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress,
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress,
 			array("FNAME" => "Paul", "LNAME" => "Serby", "GENDER" => "M", "DATE_OF_BIRTH" => "01-May-1978"));
 
 		$this->cheetahmailServiceAdaptor->authenticate();
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress,
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress,
 			array("FNAME" => "Pauly", "LNAME" => "Serby", "GENDER" => "M", "DATE_OF_BIRTH" => "01-May-1978"));
 		$user = $this->cheetahmailServiceAdaptor->getUser($emailAddress);
 		$this->assertEquals("Pauly", $user["FNAME"]);
@@ -118,7 +166,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 	public function testAddingNewUserWithInvaildEmailAddressThrowsException() {
 		$this->cheetahmailServiceAdaptor->authenticate();
 		$this->setExpectedException("Exception");
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, "abc");
+		$this->cheetahmailServiceAdaptor->setUser("abc");
 	}
 
 	public function testUpdatingEmailAddressSuccess() {
@@ -126,7 +174,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$newEmailAddress = $this->getRandomEmailAddress();
 
 		$this->cheetahmailServiceAdaptor->authenticate();
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress, array("FNAME" => "ChangeAddress"));
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress, array("FNAME" => "ChangeAddress"), $this->subscriberListId);
 		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->updateEmailAddress(
 			$this->subscriberListId, $emailAddress, $newEmailAddress);
 
@@ -137,9 +185,9 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$emailAddress = $this->getRandomEmailAddress();
 
 		$this->cheetahmailServiceAdaptor->authenticate();
-		$this->cheetahmailServiceAdaptor->setUser($this->subscriberListId, $emailAddress, array("FNAME" => "Unsubscribe"));
+		$this->cheetahmailServiceAdaptor->setUser($emailAddress, array("FNAME" => "Unsubscribe"), $this->subscriberListId);
 		$user = $this->cheetahmailServiceAdaptor->getUser($emailAddress);
-		$this->assertEquals($this->subscriberListId . "&aid", $user["sub"]);
+		$this->assertEquals($this->subscriberListId, $user["subs"][0]["sub"]);
 
 		$this->cheetahmailServiceAdaptor->removeFromList($this->subscriberListId, $emailAddress);
 		$user = $this->cheetahmailServiceAdaptor->getUser($emailAddress);

@@ -91,11 +91,15 @@ class CheetahmailServiceAdaptor {
 	 *
 	 * @return CheetahmailAdaptor
 	 */
-	public function setUser($subscriberListId, $emailAddress, array $data = array()) {
+	public function setUser($emailAddress, array $postData = array(), $subscriberListId = null) {
 
 		$url = "/api/setuser1";
-		$postData = array("email" => $emailAddress, "sub" => $subscriberListId);
-		$postData = array_merge($postData, $data);
+
+		$postData["email"] = $emailAddress;
+
+		if ($subscriberListId !== null) {
+			$postData["sub"] = $subscriberListId;
+		}
 
 		$this->httpRequest
 			->setUrl($this->host . $url)
