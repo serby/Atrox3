@@ -117,6 +117,7 @@ class HttpRequest {
 		}
 
 		$application = CoreFactory::getApplication();
+		$application->log($this->url, "HttpRequest");
 		$application->log($this->postData, "HttpRequest");
 
 		if ($this->userAgent) {
