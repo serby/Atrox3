@@ -195,6 +195,41 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse(isset($user["sub"]));
 	}
 
+	public function testSendingEmailUsingValidEventIdAndValidEmailAddress() {
+		$emailAddress = $this->getRandomEmailAddress();
+		$this->cheetahmailServiceAdaptor->authenticate();
+		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress);
+		$this->assertInstanceOf("cheetahmailServiceAdaptor", $cheetahmailServiceAdaptor);
+	}
+
+	public function testSendingEmailUsingInvalidEventIdAndValidEmailAddressThrowsException() {
+		$emailAddress = $this->getRandomEmailAddress();
+		$this->cheetahmailServiceAdaptor->authenticate();
+		$this->setExpectedException("Exception");
+		$this->cheetahmailServiceAdaptor->triggerEmail("123456789", $emailAddress);
+	}
+
+	public function testSendingEmailWithValidAuthHash() {
+		$emailAddress = $this->getRandomEmailAddress();
+		$this->cheetahmailServiceAdaptor->authenticate();
+		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress, array("AUTH_HASH" => "123456789"));
+		$this->assertInstanceOf("cheetahmailServiceAdaptor", $cheetahmailServiceAdaptor);
+	}
+
+	public function testSendingEmailWithValidDynamicRegionKey() {
+		$emailAddress = $this->getRandomEmailAddress();
+		$this->cheetahmailServiceAdaptor->authenticate();
+		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress, array("REGION_KEY" => "5"));
+		$this->assertInstanceOf("cheetahmailServiceAdaptor", $cheetahmailServiceAdaptor);
+	}
+
+	public function testSendingEmailWithInvalidDynamicRegionKey() {
+		$emailAddress = $this->getRandomEmailAddress();
+		$this->cheetahmailServiceAdaptor->authenticate();
+		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress, array("REGION_KEY" => "invalid-key"));
+		$this->assertInstanceOf("cheetahmailServiceAdaptor", $cheetahmailServiceAdaptor);
+	}
+
 	protected function getRandomEmailAddress() {
 		return uniqid() . "-test@clock.co.uk";
 	}
