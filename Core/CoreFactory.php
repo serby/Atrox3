@@ -155,7 +155,7 @@ class CoreFactory {
 	static function getCheetahmailServiceAdaptor($userName, $password, $affiliateId = null,
 			HttpRequest $request, $host = "ebm.cheetahmail.com", $port = 80) {
 		require_once "Internet/Cheetahmail/CheetahmailServiceAdaptor.php";
-		$object = new CheetahmailServiceAdaptor($userName, $password, $affiliateId = null, $request,p $host, $port);
+		$object = new CheetahmailServiceAdaptor($userName, $password, $affiliateId = null, $request, $host, $port);
 		return $object;
 	}
 
