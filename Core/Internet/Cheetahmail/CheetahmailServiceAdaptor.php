@@ -174,6 +174,28 @@ class CheetahmailServiceAdaptor {
 		return $this->parseUserData($response);
 	}
 
+
+	/**
+	 * @param string $eventId
+	 * @param array $personalisationFields
+	 *
+	 * @return CheetahmailAdaptor
+	 */
+	public function triggerEmail($eventId, $emailAddress, $personalisationFields) {
+		$url = "/ebm/ebmtrigger1";
+		$postData = array("email" => $emailAddress, "aid" => $this->affiliateId,
+			"eid" => $eventId);
+		$postData = array_merge($postData, $personalisationFields);
+		$this->httpRequest
+			->setUrl($this->host . $url)
+			->setPostData($postData);
+		$response = $this->httpRequest->send()->body;
+		$this->parseResponse($response);
+		return $this;
+	}
+
+
+
 	/**
 	 * Parses the raw Cheetahmail user data.
 	 *
@@ -244,6 +266,7 @@ class CheetahmailServiceAdaptor {
 			case "err:p:too short":
 			case "err:email:noexist":
 			case "err:e:illegal":
+			case "err:eid:illegal":
 			case "err:field:name:illegal":
 			case "err:field:missing":
 			case "err:field:modifier:illegal":
