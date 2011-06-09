@@ -198,7 +198,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 	public function testSendingEmailUsingValidEventIdAndValidEmailAddress() {
 		$emailAddress = $this->getRandomEmailAddress();
 		$this->cheetahmailServiceAdaptor->authenticate();
-		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress);
+		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress, array());
 		$this->assertInstanceOf("cheetahmailServiceAdaptor", $cheetahmailServiceAdaptor);
 	}
 
@@ -206,7 +206,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 		$emailAddress = $this->getRandomEmailAddress();
 		$this->cheetahmailServiceAdaptor->authenticate();
 		$this->setExpectedException("Exception");
-		$this->cheetahmailServiceAdaptor->triggerEmail("123456789", $emailAddress);
+		$this->cheetahmailServiceAdaptor->triggerEmail("123456789", $emailAddress, array());
 	}
 
 	public function testSendingEmailWithValidAuthHash() {
@@ -219,7 +219,7 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 	public function testSendingEmailWithValidDynamicRegion() {
 		$emailAddress = $this->getRandomEmailAddress();
 		$this->cheetahmailServiceAdaptor->authenticate();
-		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", "test-tom.gallacher@clock.co.uk", array("REGION_KEY" => "5"));
+		$cheetahmailServiceAdaptor = $this->cheetahmailServiceAdaptor->triggerEmail("161546", $emailAddress, array("REGION_KEY" => "5"));
 		$this->assertInstanceOf("cheetahmailServiceAdaptor", $cheetahmailServiceAdaptor);
 	}
 
