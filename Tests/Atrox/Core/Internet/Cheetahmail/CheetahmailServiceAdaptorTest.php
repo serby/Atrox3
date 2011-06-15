@@ -11,12 +11,12 @@ class CheetahmailServiceAdaptorTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var string
 	 */
-	protected $userName = "sl_tom";
+	protected $userName = "clock_ems";
 
 	/**
 	 * @var string
 	 */
-	protected $password = "Bolivia2";
+	protected $password = "Shortlist01";
 
 	/**
 	 * @var integer
