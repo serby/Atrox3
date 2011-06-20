@@ -39,7 +39,6 @@ class Layout {
 	 * @param string $templateFilename
 	 */
 	public function getCurrentSectionName() {
-		// ding
 		return $this->currentSection;
 	}
 
