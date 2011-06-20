@@ -34,7 +34,14 @@ class Layout {
 	public function __construct($templateFilename) {
 		$this->templateFilename = $templateFilename;
 	}
-
+	
+	/**
+	 * @param string $templateFilename
+	 */
+	public function getCurrentSectionName() {
+		// ding
+		return $this->currentSection;
+	}
 
 	/**
 	 * Sets or overwrites the $section with $content.
