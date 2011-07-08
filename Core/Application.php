@@ -798,8 +798,8 @@ class Application {
 		return $date->format("%Y-%m-%d %H:%M:%S");
 	}
 
-	function getCurrentUtcDateTime() {
-		return $this->formatDBDateTime($this->getCurrentDateTime());
+	function getCurrentUtcDateTime($offset = 0) {
+		return $this->formatDBDateTime($this->getCurrentDateTime($offset));
 	}
 
 	function getFormattedCurrentDate() {
