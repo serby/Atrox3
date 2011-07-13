@@ -753,10 +753,10 @@ class DataControl {
 				case FM_TYPE_BOOLEAN:
 					break;
 				case FM_TYPE_EMAILADDRESS:
-					if (!mb_eregi("^[_a-z0-9-]+([\.\'][_a-z0-9-]+)*@[a-z0-9][a-z0-9-]+(\.[a-z0-9][a-z0-9-]*)*(\.[a-z]{2,4})$", $value)) {
+					if (!preg_match("/^[_A-Za-z0-9-+']+(\.[_A-Za-z0-9-+']+)*@([A-Za-z0-9]+)(([\.\-]*[a-zA-Z0-9]+)*)(\.[A-Za-z]{2,})$/", $value)) {
 						$this->errorControl->addError("'" .
-						$this->fieldMeta[$fieldName]->description
-						. "' must be a valid e-mail address.", $fieldName);
+							$this->fieldMeta[$fieldName]->description
+							. "' must be a valid e-mail address.", $fieldName);
 					}
 					break;
 				case FM_TYPE_PASSWORD:
@@ -1748,9 +1748,9 @@ class DataControl {
 		$this->init();
 
 		if ($fields === false) {
-			
+
 			$fields = array();
-			
+
 			foreach ($this->fieldMeta as $fieldName => &$value) {
 				$fields[$fieldName] = $value->description;
 			}

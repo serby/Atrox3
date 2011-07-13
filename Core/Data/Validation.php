@@ -399,18 +399,18 @@ class Validation {
 	 * @param Boolean $allowName Whether or not to allow a name
 	 * @return Boolean True/False
 	 */
-	static function emailAddress($value, $allowName = false) {
+  static function emailAddress($value, $allowName = false) {
 		// Unsure whether our regexp covers all addressed (as per the RFCs);
 		// http://uk.php.net/eregi#52458
 
 		$value = trim($value);
-		$emailRegexp = "[_a-z0-9-]+([\.\'][_a-z0-9-]+)*@[a-z0-9][a-z0-9-]+(\.[a-z0-9][a-z0-9-]*)*(\.[a-z]{2,4})";
+		$emailRegexp = "[_A-Za-z0-9-+']+(\.[_A-Za-z0-9-+']+)*@([A-Za-z0-9]+)(([\.\-]*[a-zA-Z0-9]+)*)(\.[A-Za-z]{2,})";
 		if ($allowName) {
-			return mb_eregi("^[^<>]*\s+<" .
-				$emailRegexp . ">$", $value) ||
-				mb_eregi("^" . $emailRegexp . "$", $value);
+			return preg_match("/^[^<>]*\s+<" .
+				$emailRegexp . ">$/", $value) ||
+				preg_match("/^" . $emailRegexp . "$/", $value);
 		}
-		return mb_eregi("^" . $emailRegexp . "$", $value);
+		return preg_match("/^" . $emailRegexp . "$/", $value);
 	}
 
 	/**
