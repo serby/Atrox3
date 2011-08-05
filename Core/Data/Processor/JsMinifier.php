@@ -1,5 +1,5 @@
 <?php
-	require_once("Atrox/Core/Data/IProcessor.php");
+	require_once("Atrox/3.0/Core/Data/IProcessor.php");
 /**
  * Minifies JavaScript.
  *
@@ -11,6 +11,8 @@
  */
 class JsMinifier implements IProcessor {
 	public function process($value) {
-		return $value;
+		CoreFactory::getJsMin();
+		$js = JSMin::minify($value);
+		return $js;
 	}
 }

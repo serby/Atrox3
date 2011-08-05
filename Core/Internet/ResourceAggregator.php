@@ -142,9 +142,17 @@ class ResourceAggregator {
 		foreach ($this->resources as $resourceGroup) {
 			$processed = "";
 			$filename = $resourceGroup->name . "." . $this->delegate->getFileExtension();
-			$cachedFilePath = $this->cachePath . "/" . $filename;
-			//if (!file_exists($cachedFilePath)) {
-
+			$oldFilename = $this->getCachedFileName($resourceGroup->name, $this->delegate->getFileExtension());
+			$cachedFilePath = $this->cachePath . "/" . $oldFilename;
+			$hashes = $this->getResourceHashes($oldFilename, $resourceGroup->items);
+			$oldHash = $hashes['oldHash'];
+			$currentHash = $hashes['currentHash'];
+			if (!file_exists($cachedFilePath) || $oldHash != $currentHash) {
+				if (file_exists($cachedFilePath)) {
+					unlink($cachedFilePath);
+				}
+				$filename = $resourceGroup->name . "_" . $currentHash . "." . $this->delegate->getFileExtension();
+				$cachedFilePath = $this->cachePath . "/" . $filename;
 				foreach ($resourceGroup->items as $item) {
 					switch ($item->type) {
 						case "resource":
@@ -157,13 +165,63 @@ class ResourceAggregator {
 					}
 				}
 				file_put_contents($cachedFilePath, $processed);
-			//}
+				$filename = $resourceGroup->name . "." . $this->delegate->getFileExtension();
+				$actualFilePath = $this->cachePath . "/" . $filename;
+				copy($cachedFilePath, $actualFilePath);
+			}
 			$response .= $this->delegate->makeHtml($this->cacheUrl . "/" . $filename . $postfix, $resourceGroup);
 		}
 
 		unset($this->resources);
 		$this->resources = array();
 		return $response;
+	}
+	
+	/**
+	 * 
+	 * Returns the currently cached file name if it exists
+	 * @author Adam Duncan <adam.duncan@clock.co.uk>
+	 * @param string $name Name of the File
+	 * @param string $ext Extension of the File
+	 */
+	protected function getCachedFileName($name, $ext) {
+		$dirHandle = opendir($this->cachePath);
+		while (false !== ($file = readdir($dirHandle))) {
+			$reg = '/^' . $name . '_.*.' . $ext . '/';
+			if (preg_match($reg, $file) > 0) {
+				return $file;
+			}
+	    }
+		closedir($dirHandle);
+		return $name . "." . $ext;
+	}
+	
+	/**
+	 * 
+	 * Works out the hash of the old file and creates a hash for this file.
+	 * @author Adam Duncan <adam.duncan@clock.co.uk>
+	 * @param string $cacheFile Name of Current Cache File
+	 * @param StdClass $resources Resources to Cache
+	 * @return array Array containing old hash and new hash
+	 */
+	protected function getResourceHashes($cacheFile, $resources) {
+		if (strpos($cacheFile, "_") > 0) {
+			$cacheDateParts = explode("_", $cacheFile);
+			$cacheDateParts2 = explode(".", $cacheDateParts[1]);
+			$cacheHash = $cacheDateParts2[0];
+		} else {
+			$cacheHash = "";
+		}
+		
+		clearstatcache();
+		$files = "";
+		foreach ($resources AS $res) {
+			$lastModified = filemtime($this->sitePath . "/" . $res->value);
+			$files += $res->value;
+			$files += $lastModified;
+		}
+		$currentHash = sha1($files);
+		return array("oldHash" => $cacheHash, "currentHash" => $currentHash);
 	}
 
 	/**
