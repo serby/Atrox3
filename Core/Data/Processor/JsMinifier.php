@@ -11,6 +11,8 @@
  */
 class JsMinifier implements IProcessor {
 	public function process($value) {
-		return $value;
+		CoreFactory::getJsMin();
+		$js = JSMin::minify($value);
+		return $js;
 	}
 }
