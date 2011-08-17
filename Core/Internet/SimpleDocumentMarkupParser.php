@@ -40,15 +40,17 @@ class SimpleDocumentMarkupParser {
 	}
 
 	function parseMarkup($text) {
-
+		
+		$text = preg_replace_callback("'\[\[image:([^|]+)(?:(\|(frame))?(\|(left|centre|right))?(\|([^]]*))?)\]\]'is",
+			array($this, 'parseStaticImageMarkup'), $text);
+		
 		$text = preg_replace_callback("'\[\[dynamic-image:([^|]*)(?:\|([0-9]+)\|([0-9]+))(?:\|(left|right|centre|none))(?:\|([^]]*))?\]\]'is",
 			array($this, 'parseDynamicImageMarkup'), $text);
+
 		$searchArray = array (
 			"'\'\'\'\'\'(.*?)\'\'\'\'\''is",
 			"'\'\'\'(.*?)\'\'\''is",
 			"'\'\'(.*?)\'\''is",
-			"'\[\[image:([^|]*?)((\|(frame))|(\|(left|right))){0,2}\]\]'is",
-			"'\[\[image:([^|]*?)((\|(frame))|(\|(left|right))){0,2}(\|(.*?))?\]\]'is",
 
 			"'\[\[\[(http(s?)://.*?)(\s)(.*?)\]\]\]'i",
 			"'\[\[\[(http(s?)://\S*?)\]\]\]'i",
@@ -71,8 +73,6 @@ class SimpleDocumentMarkupParser {
 			"<em><strong>$1</strong></em>",
 			"<em>$1</em>",
 			"<strong>$1</strong>",
-			"<img src=\"$1\" class=\"image-type$4$6\" title=\"Linked Image (\"$1\")\" alt=\"Linked Image (\"$1\")\" />",
-			"<img src=\"$1\" class=\"image-type$4$6\" title=\"$8\" alt=\"$8\" />",
 
 			"<a href=\"$1\" target=\"_blank\" class=\"link-external\">$4</a>",
 			"<a href=\"$1\" target=\"_blank\" class=\"link-external\">$1</a>",
@@ -95,6 +95,40 @@ class SimpleDocumentMarkupParser {
 //			$text = "&nbsp;";
 //		}
 		return trim($text);
+	}
+	
+	/**
+	 * Parses image markup and generates an HTML image tag.
+	 *
+	 * The following optional parameters may be passed, in this order:
+	 * frame
+	 * 	If set, draws a border around the image.
+	 * alignment (left|right|centre)
+	 * 	If set, floats the image to the horizontal alignment specified.
+	 * altText
+	 * 	If set, replaces the default alt text of "Linked Image" with what has been supplied.
+	 * 	All characters except a right square brace may be used.
+	 *
+	 * @param array Array containing regex matches (@see this#parseMarkup)
+	 */
+	protected function parseStaticImageMarkup($matches) {
+		$src = $matches[1];
+		$hasFrame = ((isset($matches[3]) && $matches[3] !== "") ? true : null);
+		$alignment = ((isset($matches[5]) && $matches[5] !== "") ? $matches[5] : null);
+		$altText = ((isset($matches[7]) && $matches[7] !== "") ? $matches[7] : "Linked Image");
+		
+		$cssClass = "";
+		if ($hasFrame || $alignment) {
+			$cssClass = "class=\"";
+			if ($hasFrame) {
+				$cssClass .= "image-type-frame ";
+			}
+			if ($alignment) {
+				$cssClass .= "image-type-" . $alignment;
+			}
+			$cssClass .= "\"";
+		}
+		return "<img src=\"" . $src . "\"" . $cssClass . " title=\"" . $altText . "\" alt=\"" . $altText . "\" />";
 	}
 
 	/**
