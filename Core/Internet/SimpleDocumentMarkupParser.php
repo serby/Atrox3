@@ -106,7 +106,7 @@ class SimpleDocumentMarkupParser {
 	 * alignment (left|right|centre)
 	 * 	If set, floats the image to the horizontal alignment specified.
 	 * altText
-	 * 	If set, replaces the default alt text of "Linked Image" with what has been supplied.
+	 * 	If set, replaces the default alt text of "" with what has been supplied.
 	 * 	All characters except a right square brace may be used.
 	 *
 	 * @param array Array containing regex matches (@see this#parseMarkup)
@@ -115,7 +115,7 @@ class SimpleDocumentMarkupParser {
 		$src = $matches[1];
 		$hasFrame = ((isset($matches[3]) && $matches[3] !== "") ? true : null);
 		$alignment = ((isset($matches[5]) && $matches[5] !== "") ? $matches[5] : null);
-		$altText = ((isset($matches[7]) && $matches[7] !== "") ? $matches[7] : "Linked Image");
+		$altText = ((isset($matches[7]) && $matches[7] !== "") ? $matches[7] : "");
 		
 		$cssClass = "";
 		if ($hasFrame || $alignment) {
