@@ -1530,4 +1530,70 @@ class CoreFactory {
 		require_once "Internet/SitemapGenerator.php";
 		return new SitemapGenerator();
 	}
+	
+	/**
+	 * Returns a CssCollector
+	 *
+	 * @return ResourceAggregator
+	 */
+	static function getCssAggregator($sitePath, $cachePath, $cacheUrl = null) {
+		static $singleton;
+		if (!isset($singleton)) {
+			require_once("Internet/ResourceAggregator.php");
+			require_once("Internet/CssResourceAggregator.php");
+
+			$delegate = new CssResourceAggregator();
+			$minifier = CoreFactory::getCssMinifier();
+
+			$singleton = new ResourceAggregator($sitePath, $cachePath, $cacheUrl, $delegate, $minifier);
+		}
+		return $singleton;
+	}
+	
+	/**
+	 * Returns a Js Resource Aggregator
+	 *
+	 * @return ResourceAggregator
+	 */
+	static function getJsAggregator($sitePath, $cachePath, $cacheUrl = null) {
+		static $singleton;
+		if (!isset($singleton)) {
+			require_once("Internet/ResourceAggregator.php");
+			require_once("Internet/JsResourceAggregator.php");
+
+			$delegate = new JsResourceAggregator();
+			$minifier = CoreFactory::getJsMinifier();
+
+			$singleton = new ResourceAggregator($sitePath, $cachePath, $cacheUrl, $delegate, $minifier);
+		}
+		return $singleton;
+	}
+	
+	/**
+	 * Returns a CSS Minifier processor
+	 * @return CssMinifier
+	 */
+	static function getCssMinifier() {
+		require_once("Data/Processor/CssMinifier.php");
+		$obj = new CssMinifier();
+		return $obj;
+	}
+	
+	/**
+	 * Returns a JS Minifier processor
+	 * @return JsMinifier
+	 */
+	static function getJsMinifier() {
+		require_once("Data/Processor/JsMinifier.php");
+		$obj = new JsMinifier();
+		return $obj;
+	}
+	
+	/**
+	 * Includes JS Min
+	 * @return JsMinifier
+	 */
+	static function getJsMin() {
+		require_once("Data/Processor/JsMin.php");
+	}
 }
