@@ -2,19 +2,18 @@
 
 Atrox is Clock framework project that started back in 2003. 
 
-## Adding as a submodule to a git project
+## Installing
 
-     cd /usr/share/php
-     sudo git clone git://github.com/PabloSerbo/maiden.git
-     cd maiden
-     sudo git submodule init
-     sudo git submodule update
-     sudo ./maiden install
+The most likely usecase for Atrox 3 is as a git submodule within your project.
+
+     git submodule git://github.com/PabloSerbo/Atrox3.git Application/Atrox
+     git submodule init
 
 ## Credits
-[Paul Serby](https://github.com/PabloSerbo/)
-[Tom Smith] (https://github.com/iamsmith/)
-[Luke Wilde] (https://github.com/lukewilde/)
+* [Paul Serby](https://github.com/PabloSerbo/)
+* [Tom Smith] (https://github.com/iamsmith/)
+* [Luke Wilde] (https://github.com/lukewilde/)
+* Robert Noake
 
 ## Licence
 Licenced under the [New BSD License](http://opensource.org/licenses/bsd-license.php)
