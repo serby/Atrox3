@@ -614,7 +614,7 @@ class Application {
 	}
 
 	function log($string, $type) {
-		if ($this->isDebug() && $this->registry->get("Log/Path")) {
+		if ($this->registry->get("Log/FirePHP") && $this->isDebug() && $this->registry->get("Log/Path")) {
 			if (strpos(php_sapi_name(), "cli") === false) {
 				@include_once("FirePHPCore/FirePHP.class.php");
 				if (class_exists("FirePHP", false) && ob_get_length() !== false) {
