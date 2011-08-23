@@ -41,7 +41,7 @@ class SimpleDocumentMarkupParser {
 
 	function parseMarkup($text) {
 		
-		$text = preg_replace_callback("'\[\[image:([^|]+)(?:(\|(frame))?(\|(left|centre|right))?(\|([^]]*))?)\]\]'is",
+		$text = preg_replace_callback("'\[\[image:([^\|\]]+)(?:(\|(frame))?(\|(left|centre|right))?(\|([^\]]*))?)\]\]'is",
 			array($this, 'parseStaticImageMarkup'), $text);
 		
 		$text = preg_replace_callback("'\[\[dynamic-image:([^|]*)(?:\|([0-9]+)\|([0-9]+))(?:\|(left|right|centre|none))(?:\|([^]]*))?\]\]'is",
