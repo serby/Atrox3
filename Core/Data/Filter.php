@@ -151,7 +151,7 @@ GRANT EXECUTE ON FUNCTION ts_rank(tsvector, tsquery) TO public;
 	 */
 	function addFreeTextCondition($table, $field, $value, $logicalOperator = "AND") {
 		if ($value != "") {
-			$value = preg_replace(array("/\s+\or\s+/", "/[^\d\w\s\|\']/", "/\b\s\s*\b/", "/\'/"), array("|","", "&", "&"), mb_strtolower(trim($value)));
+			$value = preg_replace(array("/\s+\or\s+/", "/[^\d\w\s\|\']/", "/\b\s\s*\b/", "/\'/"), array("|","", "&", ""), mb_strtolower(trim($value)));
 			// Stop if word is too short
 			if (($logicalOperator == "ILIKE") || ($logicalOperator == "NOT ILIKE")) {
 				$newCondition["FullField"] = $this->databaseControl->parseField($field) . "::text";
