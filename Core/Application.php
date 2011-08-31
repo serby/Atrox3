@@ -950,19 +950,21 @@ class Application {
 		// in reality the only entries we should
 		// consider are 2, 8, 256, 512 and 1024
 		$errorType = array (
-					1   =>  "Error",
-					2   =>  "Warning",
-					4   =>  "Parsing Error",
-					8   =>  "Notice",
-					16  =>  "Core Error",
-					32  =>  "Core Warning",
-					64  =>  "Compile Error",
-					128 =>  "Compile Warning",
-					256 =>  "User Error",
-					512 =>  "User Warning",
-					1024=>  "User Notice",
-					2048=>  "Extra",
-					8192=>  "Strict"
+					1    =>  "Error",
+					2    =>  "Warning",
+					4    =>  "Parsing Error",
+					8    =>  "Notice",
+					16   =>  "Core Error",
+					32   =>  "Core Warning",
+					64   =>  "Compile Error",
+					128  =>  "Compile Warning",
+					256  =>  "User Error",
+					512  =>  "User Warning",
+					1024 =>  "User Notice",
+					2048 =>  "Strict",
+					4096 =>  "Recoverable Error",
+					8192 =>  "Deprecated",
+					16384=>  "User Deprecated"
 					);
 
 		// Create a new Template
