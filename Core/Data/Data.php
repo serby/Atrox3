@@ -1775,6 +1775,11 @@ class DataControl {
 			echo '"' . implode('","', $row) . '"' . "\n";
 		}
 	}
+	
+	public function setFieldRequired($field, $required = true) {
+		$this->initControl();
+		$this->fieldMeta[$field]->allowNull = !$required;
+	}
 }
 
 
