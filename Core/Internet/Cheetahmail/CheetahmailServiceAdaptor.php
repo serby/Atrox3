@@ -1,5 +1,7 @@
 <?php
 
+require_once("Date.php"); // Load PEAR Date for format conversion
+
 /**
  * Implemetation of the Cheetahmail API
  * @author Paul Serby <paul.serby@clock.co.uk>
@@ -47,6 +49,8 @@ class CheetahmailServiceAdaptor {
 	 * Has a Cheetahmail auth been made.
 	 */
 	protected $authenticated = false;
+	
+	protected $application;
 
 	/**
 	 * @param string $userName
@@ -66,6 +70,8 @@ class CheetahmailServiceAdaptor {
 
 		$this->httpRequest = $request;
 		$this->httpRequest->enableCookies(true);
+		
+		$this->application = &CoreFactory::getApplication();
 	}
 
 	/**
@@ -110,8 +116,12 @@ class CheetahmailServiceAdaptor {
 	}
 
 	public function formatDate($date) {
+		
 		if ($date != "") {
-			return date("d-M-Y", strtotime($date));
+			$date = new Date($date);
+			$date->setTZbyID("UTC");
+			$date->convertTZbyID($this->application->getCurrentTimeZoneId());
+			return $date->format("%d-%b-%Y");
 		} else {
 			return null;
 		}
@@ -228,7 +238,6 @@ class CheetahmailServiceAdaptor {
 	}
 
 	protected function parseRowData($data) {
-
 		// code...
 	}
 
