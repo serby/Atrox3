@@ -551,6 +551,30 @@ class DataControl {
 		}
 	}
 
+	/**
+	 * Maps binary data and updates a single binary field, similar to updateField.
+	 * @param $dataEntity SiteManagerDataEntity The entity to be updated
+	 * @param $fieldName string The field to be updated
+	 * @param $requestData array The array of post data for the given field
+	 */
+	public function updateBinaryField($dataEntity, $fieldName, $requestData) {
+		if ($requestData["FileInfo"]["Remove"] === false && $requestData["FileInfo"]["Size"] === 0) {
+			return true;
+		}
+		$dataEntity->setBinary($fieldName, $requestData["CurrentId"], $requestData["FileInfo"]);
+		if (is_array($dataEntity->binaries) && isset($dataEntity->binaries[$fieldName])) {
+			$binary = $dataEntity->binaries[$fieldName];
+			if($binaryId = $binary->save()) {
+				$this->updateField($dataEntity, $fieldName, $binaryId);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			$this->updateField($dataEntity, $fieldName, null);
+		}
+	}
+
 	function incrementField(&$dataEntity, $fieldName, $value = 1, $triggerCallback = true) {
 
 		if (($value === "") || ($value === null)) {
